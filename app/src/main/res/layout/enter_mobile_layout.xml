@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+  <include layout="@layout/base_toolbar"/>
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:background="@color/white">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:padding="17dp">
+
+
+      <TextView
+        android:id="@+id/fragment_enter_mob_mob_Verify_mobile_number_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:drawablePadding="9dp"
+        android:text=""
+        android:textColor="@color/grey"
+        android:textSize="12sp"/>
+
+      <FrameLayout
+        android:id="@+id/fragment_enter_mob_no_frmLyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_enter_mob_mob_Verify_mobile_number_txt">
+
+        <EditText
+          android:id="@+id/fragment_enter_mob_no_edtTxt"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:hint="@string/lbl_mob_no"
+          android:imeOptions="actionDone"
+          android:inputType="number"
+          android:maxLength="10"
+          android:paddingLeft="40dp"
+          android:singleLine="true"
+          android:textColor="@color/flight_review_black"
+          android:textColorHint="@color/otp_edtbox_hint_color"
+          android:textSize="30sp"/>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="25dp"
+          android:text="+91"
+          android:textColor="@color/otp_edtbox_hint_color"
+          android:textSize="18sp"/>
+      </FrameLayout>
+
+
+      <TextView
+        android:id="@+id/fragment_enter_mob_mob_hint_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_enter_mob_no_frmLyt"
+        android:layout_marginLeft="5dp"
+        android:drawablePadding="9dp"
+        android:text=""
+        android:textColor="@color/shade_grey"
+        android:textSize="12sp"/>
+
+      <TextView
+        android:id="@+id/fragment_enter_mob_mob_terms_condtions_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_enter_mob_mob_hint_txt"
+        android:layout_marginLeft="5dp"
+        android:drawablePadding="9dp"
+        android:text=""
+        android:textColor="@color/shade_grey"
+        android:textSize="12sp"/>
+
+
+    </RelativeLayout>
+  </ScrollView>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+    <Button
+      android:id="@+id/fragment_enter_mob_no_verify_Btn"
+      android:layout_width="wrap_content"
+      android:layout_height="30dp"
+      android:layout_alignParentRight="true"
+      android:layout_gravity="center"
+      android:background="@drawable/translucent_ripple"
+      android:text="@string/lbl_verify"
+      android:textAllCaps="false"
+      android:textColor="@color/white"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+</LinearLayout>

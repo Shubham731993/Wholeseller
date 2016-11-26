@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+  android:id="@+id/toolbar"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@color/signup_blue"
+  android:minHeight="?attr/actionBarSize"
+  android:theme="@style/Theme.WholeMart.Toolbar"
+  app:layout_scrollFlags="scroll|enterAlways"
+  app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+  <ProgressBar
+    android:id="@+id/toolbar_progressbar"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_gravity="right"
+    android:indeterminate="true"
+    android:padding="5dp"
+    android:visibility="gone"/>
+
+  <LinearLayout
+    android:id="@+id/toolbar_custom_title_subtitle_combo_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <TextView
+      android:id="@+id/toolbar_custom_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="@android:color/white"
+      android:textSize="16sp"/>
+
+    <TextView
+      android:id="@+id/toolbar_custom_sub_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="@color/base_toolbar_subtitle"
+      android:textSize="12sp"/>
+  </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

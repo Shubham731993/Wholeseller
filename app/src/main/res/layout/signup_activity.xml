@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:scrollbars="none">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="10dp">
+
+      <LinearLayout
+        android:id="@+id/webveiw_page_lyt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <WebView
+          android:id="@+id/webviewPayPage"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:focusable="true"/>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/l_grey">
+
+          <ProgressBar
+            android:id="@+id/progressLoading"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"/>
+
+          <TextView
+            android:id="@+id/textLoadingURL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+        </LinearLayout>
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:textSize="32sp"
+        android:visibility="gone"/>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
+      <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <EditText
+          android:id="@+id/first_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/lbl_fullname"
+          android:imeOptions="actionNext"
+          android:typeface="monospace"
+          android:inputType="textPostalAddress|textCapWords"
+          android:padding="8dp"
+          android:selectAllOnFocus="true"
+          android:singleLine="true"
+          android:textColor="@color/flight_review_black"
+          android:textColorHint="@color/shade_grey"
+          android:textSize="16sp"/>
+      </android.support.design.widget.TextInputLayout>
+
+      <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:hintTextAppearance="@android:style/TextAppearance.Small"
+          >
+
+          <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lbl_mob_no"
+            android:imeOptions="actionNext"
+            android:inputType="none"
+            android:maxLength="10"
+            android:typeface="monospace"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textColor="@color/flight_review_black"
+            android:textColorHint="@color/shade_grey"
+            android:textSize="16sp"/>
+        </android.support.design.widget.TextInputLayout>
+
+      </FrameLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <AutoCompleteTextView
+          android:id="@+id/email_id"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/login_emailid"
+          android:imeOptions="actionNext"
+          android:inputType="textEmailAddress"
+          android:padding="8dp"
+          android:singleLine="true"
+          android:typeface="monospace"
+          android:textColor="@color/flight_review_black"
+          android:textColorHint="@color/shade_grey"
+          android:textSize="16sp"/>
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:hintTextAppearance="@android:style/TextAppearance.Small"
+        >
+
+        <EditText
+          android:id="@+id/password"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/login_Password"
+          android:imeOptions="actionNext"
+          android:inputType="textPassword"
+          android:padding="8dp"
+          android:singleLine="true"
+          android:typeface="monospace"
+          android:textColor="@color/flight_review_black"
+          android:textColorHint="@color/shade_grey"
+          android:textSize="16sp"/>
+      </android.support.design.widget.TextInputLayout>
+
+
+      <TextView
+        android:id="@+id/button_create_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:typeface="monospace"
+        android:background="@drawable/translucent_ripple"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/lbl_create_account"
+        android:textColor="@color/l_grey"
+        android:textSize="20sp"/>
+
+    </LinearLayout>
+  </ScrollView>
+
+</LinearLayout>

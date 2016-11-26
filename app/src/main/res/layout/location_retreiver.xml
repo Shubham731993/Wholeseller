@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".location.WholeMartLocationActivity">
+
+  <include layout="@layout/base_toolbar"/>
+
+  <ImageView
+    android:layout_centerHorizontal="true"
+    android:layout_above="@+id/current_location_text"
+    android:id="@+id/location_icon"
+    android:layout_marginBottom="30dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_location_on_light_blue_900_48dp"/>
+
+  <TextView
+    android:layout_centerInParent="true"
+    android:id="@+id/current_location_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/shade_grey"
+    android:text="@string/your_current_location"
+    android:typeface="monospace"
+    />
+
+  <TextView
+    android:id="@+id/current_location"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/current_location_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/shade_grey"
+    android:text="@string/unknown"
+    android:textStyle="bold"
+    android:typeface="monospace"
+    android:layout_marginTop="10dp"
+    />
+
+  <TextView
+    android:id="@+id/use_current_location"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/current_location"
+    android:layout_marginTop="25dp"
+    android:background="@drawable/translucent_ripple"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="@string/use_current_location"
+    android:textColor="@color/white"
+    android:typeface="monospace"/>
+
+  <TextView
+    android:id="@+id/or_text"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/use_current_location"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/shade_grey"
+    android:text="@string/or"
+    android:textStyle="bold"
+    android:typeface="monospace"
+    android:layout_marginTop="20dp"
+    />
+
+  <TextView
+    android:id="@+id/enter_manual_location"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/or_text"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/translucent_ripple"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="@string/enter_location_manually"
+    android:textColor="@color/white"
+    android:typeface="monospace"/>
+
+  <TextView
+    android:id="@+id/skip"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/enter_manual_location"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/signup_blue"
+    android:text="@string/skip_for_now"
+    android:textStyle="bold"
+    android:typeface="monospace"
+    android:layout_marginTop="30dp"
+    />
+
+</RelativeLayout>

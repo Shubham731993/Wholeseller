@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/email_id_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+
+    android:layout_marginTop="30dp">
+
+    <EditText
+      android:id="@+id/email_id"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/email"
+      android:textStyle="bold"
+      android:imeOptions="actionNext"
+      android:inputType="textEmailAddress"
+      android:selectAllOnFocus="true"
+      android:textColor="@color/flight_review_black"
+      android:typeface="monospace"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/password_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/email_id_layout"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="30dp">
+
+    <EditText
+      android:id="@+id/old_pass"
+      android:textStyle="bold"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/password"
+      android:imeOptions="actionNext"
+      android:inputType="textPassword"
+      android:typeface="monospace"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <TextView
+    android:id="@+id/login_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/password_layout"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/translucent_ripple"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="@string/login"
+    android:textColor="@color/white"
+    android:typeface="monospace"/>
+
+
+  <com.google.android.gms.common.SignInButton
+    android:id="@+id/gmail_login"
+    android:layout_width="match_parent"
+    android:layout_below="@id/login_button"
+    android:layout_marginTop="20dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal" />
+
+
+<!--  <TextView
+    android:id="@+id/facebook_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/gmail_login"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/translucent_ripple"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="@string/login_with_facebook"
+    android:textColor="@color/white"
+    android:textSize="20sp"
+    android:typeface="monospace"/>-->
+
+  <TextView
+    android:id="@+id/need_an_account"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/gmail_login"
+    android:layout_marginTop="60dp"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="@string/need_an_account"
+    android:textColor="@color/signup_blue"
+    android:textSize="20sp"
+    android:typeface="monospace"/>
+
+  <TextView
+    android:id="@+id/sign_up"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/need_an_account"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/translucent_ripple"
+    android:gravity="center"
+    android:padding="10dp"
+    android:text="@string/sign_up_now"
+    android:textColor="@color/white"
+    android:typeface="monospace"/>
+
+
+</RelativeLayout>

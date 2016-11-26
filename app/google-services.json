@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "849763543984",
+    "project_id": "wholemart-1470437007087"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849763543984:android:5cfd8b37c1c3ad91",
+        "android_client_info": {
+          "package_name": "abominable.com.wholeseller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849763543984-61eop1olmtujhoi29pt7l6ee8fn2t1bg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "abominable.com.wholeseller",
+            "certificate_hash": "6D6B5C67059995879F7BCFBD91B9B4B9BA1593CC"
+          }
+        },
+        {
+          "client_id": "849763543984-dfut86cuas7k3fe6a0v7cismk6kquib0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKS3AizluLNciv950zUMjywwO_0dIDghE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

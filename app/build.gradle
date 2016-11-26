@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
+android {
+    compileSdkVersion Integer.parseInt(project.MOBILE_SDK_VERSION)
+    buildToolsVersion project.MOBILE_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId "abominable.com.wholeseller"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.194:8080/wholemart-1367/webapi\""
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.194:8080/wholemart-1367/webapi\""
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:${MOBILE_SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:design:${MOBILE_SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:cardview-v7:${MOBILE_SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:recyclerview-v7:${MOBILE_SUPPORT_LIBRARY_VERSION}"
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {
+        transitive = true;
+    }
+    compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.android.gms:play-services-ads:9.4.0'
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
+    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+}

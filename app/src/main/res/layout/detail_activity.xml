@@ -1,0 +1,42 @@
+<android.support.design.widget.CoordinatorLayout
+  android:id="@+id/coordinatorLayout"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/base_toolbar"/>
+
+    <android.support.design.widget.TabLayout
+      android:id="@+id/tab_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/signup_blue"
+      app:tabGravity="center"
+      app:tabMode="fixed"
+      style="@style/Widget.Goibibo.HotelHomeTabLayout"
+      android:minHeight="?attr/actionBarSize"/>
+  </android.support.design.widget.AppBarLayout>
+
+  <android.support.v4.view.ViewPager
+    android:id="@+id/view_pager"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+  <Button
+    android:id="@+id/checkout_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:layout_gravity="bottom"
+    android:text="Checkout(0)"
+    android:background="@color/signup_blue"
+    android:layout_alignParentBottom="true"/>
+
+</android.support.design.widget.CoordinatorLayout>

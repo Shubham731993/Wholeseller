@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:orientation="vertical">
+
+  <android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:contentPadding="10dp">
+
+
+    <LinearLayout android:id="@+id/holder"
+                  xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@drawable/ripple"
+                  android:orientation="vertical"
+                  android:padding="10dp">
+
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingEnd="7dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingStart="7dp">
+
+        <RelativeLayout
+          android:id="@+id/image_holder"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="#DDDDDD">
+
+          <ImageView
+            android:id="@+id/hotel_image"
+            android:layout_width="87dp"
+            android:layout_height="87dp"
+            android:scaleType="centerCrop"
+            android:visibility="visible"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+          android:id="@+id/location_layout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="false"
+          android:layout_marginLeft="9dp"
+          android:layout_toRightOf="@+id/image_holder"
+          android:orientation="vertical">
+
+          <RelativeLayout
+            android:id="@+id/starRatingrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+              android:id="@+id/starRatingLyt"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_centerVertical="true"
+              android:orientation="horizontal"
+              android:visibility="gone"/>
+
+          </RelativeLayout>
+
+          <TextView
+            android:id="@+id/hotel_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:text="Pulses"
+            android:textColor="#8a000000"
+            android:textSize="10sp"
+            android:visibility="visible"/>
+
+
+          <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/dummy_resource_name"
+            android:textColor="@color/flight_review_black"
+            android:textSize="16sp"/>
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+              android:id="@+id/textUserToHotelDistance"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
+              android:singleLine="true"
+              android:text="subtext"
+              android:textSize="12sp"
+              android:visibility="visible"/>
+
+
+          </LinearLayout>
+
+
+          <RelativeLayout
+            android:id="@+id/sold_out_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+              android:id="@+id/item_number"
+              android:layout_width="wrap_content"
+              android:layout_marginTop="5dp"
+              android:layout_height="wrap_content"
+              android:text="Click to add to cart"
+              android:textColor="@color/signup_blue"
+              android:textSize="15sp"/>
+
+
+            <TextView
+              android:id="@+id/scratched_price"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_gravity="end"
+              android:text="\u20B9140"
+              android:textColor="#000000"
+              android:textSize="16.7sp"/>
+          </RelativeLayout>
+        </LinearLayout>
+      </RelativeLayout>
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
+</LinearLayout>

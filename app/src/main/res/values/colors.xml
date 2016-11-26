@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+  <color name="l_grey">#d8dede</color>
+  <color name="flight_review_black">#de000000</color>
+  <color name="shade_grey">#8a000000</color>
+  <color name="transparent">#00000000</color>
+  <color name="signup_blue">#2f68ad</color>
+  <color name="otp_edtbox_hint_color">#c7c7cd</color>
+  <color name="grey">#999999</color>
+  <color name="flight_home_grey">#8a8a8a</color>
+  <color name="white">#fff</color>
+  <color name="toolbar_color">#FFA000</color>
+  <color name="google">#dd4b39</color>
+  <color name="dark_blue">#1A237E</color>
+  <color name="base_toolbar_subtitle">#8affffff</color>
+  <color name="tab_color">#80CBC4</color>
+  <color name="grey_less">#EEEEEE</color>
+  <color name="half_transparentWhite">#50FFFFFF</color>
+  <color name="back_blue">#E0F7FA</color>
+
+</resources>

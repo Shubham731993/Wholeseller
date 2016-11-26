@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@color/l_grey"
+  android:orientation="vertical"
+  android:padding="20dp">
+
+  <android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardElevation="5dp">
+
+
+    <TextView
+      android:id="@+id/title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:fontFamily="sans-serif-medium"
+      android:gravity="center"
+      android:padding="10dp"
+      android:text="Arhar ki Daal"
+      android:textColor="@color/signup_blue"
+      android:textSize="20sp"
+      android:textStyle="bold"/>
+  </android.support.v7.widget.CardView>
+
+
+  <RelativeLayout
+    android:id="@+id/sold_out_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/card_view"
+    android:layout_marginTop="10dp">
+
+
+    <EditText
+      android:id="@+id/editText"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:hint="Enter number of kgs"
+      android:imeOptions="actionDone"
+      android:inputType="number"
+      android:maxLength="10"
+      android:paddingRight="40dp"
+      android:singleLine="true"
+      android:textColor="@color/flight_review_black"
+      android:textColorHint="@color/otp_edtbox_hint_color"
+      android:textSize="20sp"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_marginTop="20dp"
+      android:text="kgs"
+      android:textColor="@color/otp_edtbox_hint_color"
+      android:textSize="18sp"/>
+
+  </RelativeLayout>
+
+  <LinearLayout
+    android:id="@+id/buttons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/sold_out_ll"
+    android:layout_marginTop="10dp"
+    android:weightSum="4">
+
+    <Button
+      android:id="@+id/hundred"
+      android:layout_width="wrap_content"
+      android:layout_height="40dp"
+      android:layout_weight="1"
+      android:background="@drawable/destination_button_selector"
+      android:text="+100"
+      android:textColor="@drawable/button_text_color"
+      android:textSize="15sp"/>
+
+    <Button
+      android:id="@+id/fifty"
+      android:layout_width="wrap_content"
+      android:layout_height="40dp"
+      android:layout_marginLeft="5dp"
+      android:layout_toRightOf="@+id/hundred"
+      android:layout_weight="1"
+      android:background="@drawable/destination_button_selector"
+      android:gravity="center"
+      android:text="+50"
+      android:textColor="@drawable/button_text_color"
+      android:textSize="15sp"/>
+
+    <Button
+      android:id="@+id/twentyfive"
+      android:layout_width="wrap_content"
+      android:layout_height="40dp"
+      android:layout_marginLeft="5dp"
+      android:layout_toRightOf="@+id/fifty"
+      android:layout_weight="1"
+      android:background="@drawable/destination_button_selector"
+      android:text="+25"
+      android:textColor="@drawable/button_text_color"
+      android:textSize="15sp"/>
+
+    <Button
+      android:id="@+id/ten"
+      android:layout_width="wrap_content"
+      android:layout_height="40dp"
+      android:layout_marginLeft="5dp"
+      android:layout_toRightOf="@+id/twentyfive"
+      android:layout_weight="1"
+      android:background="@drawable/destination_button_selector"
+      android:text="+10"
+      android:textColor="@drawable/button_text_color"
+      android:textSize="15sp"/>
+
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/buttons"
+    android:layout_marginTop="20dp"
+    android:weightSum="2">
+
+    <Button
+      android:id="@+id/dismiss"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="50dp"
+      android:layout_weight="1"
+      android:background="@drawable/destination_button_selector"
+      android:text="CANCEL"
+      android:textColor="@drawable/button_text_color"/>
+
+    <Button
+      android:id="@+id/done"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="10dp"
+      android:layout_weight="1"
+      android:background="@drawable/destination_button_selector"
+      android:text="DONE"
+      android:textColor="@drawable/button_text_color"/>
+  </LinearLayout>
+
+
+</RelativeLayout>
