@@ -26,8 +26,8 @@ public class DetailObject implements Parcelable {
        if(jsonObject.has("price")){
          price=jsonObject.getString("price");
        }
-       if(jsonObject.has("id")){
-         id=jsonObject.getString("id");
+       if(jsonObject.has("_id")){
+         id=jsonObject.getString("_id");
        }
      }catch (JSONException e){
        Utility.reportException(e);

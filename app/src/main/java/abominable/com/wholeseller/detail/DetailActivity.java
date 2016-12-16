@@ -18,9 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
@@ -35,14 +32,13 @@ import abominable.com.wholeseller.common.WholesellerHttpClient;
 /**
  * Created by shubham.srivastava on 15/07/16.
  */
-public class DetailActivity extends BaseActivity implements DetailFragment.DataInterface, AddToCartFragment.PassData{
+public class DetailActivity extends BaseActivity implements AddToCartFragment.PassData{
   private ViewPager viewPager;
   private DetailPagerAdapter detailPagerAdapter;
   private TabLayout tabLayout;
-  private HashMap<String,ArrayList<DetailObject>> mapOfObjects;
-  private ArrayList<String> genresIdList;
   private String orderId="";
   private Button checkOut;
+  private JSONArray tabsList;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,20 +71,19 @@ public class DetailActivity extends BaseActivity implements DetailFragment.DataI
     });
     getSupportActionBar().setTitle("Items");
     callGenresApi();
-    mapOfObjects=new HashMap<>();
-    genresIdList=new ArrayList<>();
   }
 
   private void callGenresApi() {
     showProgress("Please Wait",false);
-    WholesellerHttpClient wholesellerHttpClient=new WholesellerHttpClient("/list_of_genres", RequestMethod.GET);
+    WholesellerHttpClient wholesellerHttpClient=new WholesellerHttpClient("/get_all_genres", RequestMethod.GET);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if(status==200){
           try {
             hideBlockingProgress();
-            ArrayList<String> tabNamesList=new ArrayList<>();
+            tabsList = new JSONArray(response);
+            /*ArrayList<String> tabNamesList=new ArrayList<>();
             JSONObject jsonObject=new JSONObject(response);
             JSONArray genresArray=jsonObject.getJSONArray(Constants.DetailContants.GENRES);
             for (int i=0;i<genresArray.length();i++){
@@ -103,8 +98,9 @@ public class DetailActivity extends BaseActivity implements DetailFragment.DataI
                 detailObjects.add(detailObject);
               }
               mapOfObjects.put(genresIdList.get(i),detailObjects);
-            }
-            setTabNames(tabNamesList);
+            }*/
+            setTabNames(tabsList);
+            viewPager.setOffscreenPageLimit(tabsList.length());
           } catch (JSONException e) {
             Utility.reportException(e);
             hideBlockingProgress();
@@ -122,9 +118,13 @@ public class DetailActivity extends BaseActivity implements DetailFragment.DataI
     wholesellerHttpClient.executeAsync();
   }
 
-  private void setTabNames(ArrayList<String> tabNamesList) {
-    for(int i=0;i<tabNamesList.size();i++){
-      tabLayout.addTab(tabLayout.newTab().setText(tabNamesList.get(i)));
+  private void setTabNames(JSONArray tabsList) {
+    for(int i=0;i<tabsList.length();i++){
+      try {
+        tabLayout.addTab(tabLayout.newTab().setText(tabsList.getString(i)));
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
     }
     tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     detailPagerAdapter=new DetailPagerAdapter(getSupportFragmentManager());
@@ -146,11 +146,6 @@ public class DetailActivity extends BaseActivity implements DetailFragment.DataI
 
       }
     });
-  }
-
-  @Override
-  public ArrayList<DetailObject> getDetailItems(String id) {
-    return mapOfObjects.get(id);
   }
 
   @Override
@@ -248,7 +243,13 @@ public class DetailActivity extends BaseActivity implements DetailFragment.DataI
 
     @Override
     public Fragment getItem(int position) {
-      return DetailFragment.newInstance(genresIdList.get(position));
+      try {
+        return DetailFragment.newInstance((String) tabsList.get(position));
+      } catch (JSONException e) {
+        Utility.reportException(e);
+        e.printStackTrace();
+      }
+      return null;
     }
 
     @Override
