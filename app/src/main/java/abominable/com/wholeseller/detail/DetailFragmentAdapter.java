@@ -54,15 +54,17 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
     return detailItemList.size();
   }
 
-  private class DetailItemHolder extends RecyclerView.ViewHolder {
-    private TextView itemName;
-    private TextView price;
-    private CardView cardView;
+  public class DetailItemHolder extends RecyclerView.ViewHolder {
+    public TextView itemName;
+    public TextView price;
+    public TextView itemNumber;
+    public CardView cardView;
     public DetailItemHolder(View itemLayoutView) {
       super(itemLayoutView);
       itemName = (TextView) itemLayoutView.findViewById(R.id.item_name);
       price = (TextView) itemLayoutView.findViewById(R.id.scratched_price);
       cardView = (CardView) itemLayoutView.findViewById(R.id.card_view);
+      itemNumber = (TextView) itemLayoutView.findViewById(R.id.item_number);
     }
   }
 }

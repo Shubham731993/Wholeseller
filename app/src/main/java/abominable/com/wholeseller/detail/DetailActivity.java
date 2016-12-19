@@ -10,13 +10,17 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.ref.WeakReference;
 
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
@@ -38,7 +42,9 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
   private TabLayout tabLayout;
   private String orderId="";
   private Button checkOut;
+  private int selectedTabPosition;
   private JSONArray tabsList;
+  private int currentItemPosition;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     tabLayout = (TabLayout) findViewById(R.id.tab_layout);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     checkOut = (Button) findViewById(R.id.checkout_button);
+    orderId=WholeMartApplication.getValue(Constants.CURRENT_ORDER_ID,"");
     checkOut.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -83,22 +90,6 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
           try {
             hideBlockingProgress();
             tabsList = new JSONArray(response);
-            /*ArrayList<String> tabNamesList=new ArrayList<>();
-            JSONObject jsonObject=new JSONObject(response);
-            JSONArray genresArray=jsonObject.getJSONArray(Constants.DetailContants.GENRES);
-            for (int i=0;i<genresArray.length();i++){
-              ArrayList<DetailObject> detailObjects=new ArrayList<>();
-              JSONObject jsonObject1=genresArray.getJSONObject(i);
-              String id=jsonObject1.getString("id");
-              genresIdList.add(id);
-              tabNamesList.add(jsonObject1.getString("name"));
-              JSONArray detailArray=jsonObject1.getJSONArray("itemsInGenre");
-              for(int j=0;j<detailArray.length();j++){
-                DetailObject detailObject=new DetailObject(detailArray.getJSONObject(j));
-                detailObjects.add(detailObject);
-              }
-              mapOfObjects.put(genresIdList.get(i),detailObjects);
-            }*/
             setTabNames(tabsList);
             viewPager.setOffscreenPageLimit(tabsList.length());
           } catch (JSONException e) {
@@ -130,10 +121,11 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     detailPagerAdapter=new DetailPagerAdapter(getSupportFragmentManager());
     viewPager.setAdapter(detailPagerAdapter);
     viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-    tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+    tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
       @Override
       public void onTabSelected(TabLayout.Tab tab) {
         viewPager.setCurrentItem(tab.getPosition());
+        selectedTabPosition=tab.getPosition();
       }
 
       @Override
@@ -149,26 +141,28 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
   }
 
   @Override
-  public void passNoOfKgs(String val, String id) {
+  public void passNoOfKgs(String val, String id,int itemPosition,String itemName,double price) {
+    currentItemPosition=itemPosition;
     if(TextUtils.isEmpty(orderId)) {
-      getOrderId(val,id);
+      getOrderId(val,id,itemName,price);
     }else {
-      addToCart(val,id);
+      addToCart(val,id,itemName,price);
     }
   }
 
-  private void addToCart(String val,String id) {
+  private void addToCart(String val,String id,String itemName,double price) {
     JSONObject jsonObject = new JSONObject();
     try {
       jsonObject.put(Constants.PARAMS_ITEM_ID, id);
+      jsonObject.put(Constants.PARAMS_ITEM_NAME, itemName);
       jsonObject.put(Constants.PARAMS_QUANTITY, val);
-      jsonObject.put(Constants.PARAMS_DAYS, "");
-      jsonObject.put(Constants.PARAMS_SHAKEY, WholeMartApplication.getValue(Constants.UserConstants.AUTH_KEY,""));
+      jsonObject.put(Constants.PARAMS_DAYS, "1");
+      jsonObject.put(Constants.PRICE,price);
     } catch (Exception e) {
       Utility.reportException(e);
     }
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_items_in_cart/"+ orderId,jsonObject.toString(), RequestMethod.PUT);
+    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/"+ orderId+"/query?itemId="+id,jsonObject.toString(), RequestMethod.PUT);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
@@ -176,7 +170,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
           try {
             hideBlockingProgress();
             JSONObject jsonObject = new JSONObject(response);
-
+            updateData(jsonObject.getInt("quantity"));
           } catch (JSONException e) {
             Utility.reportException(e);
             hideBlockingProgress();
@@ -194,18 +188,26 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     wholesellerHttpClient.executeAsync();
   }
 
-  public void getOrderId(String val,String id){
+  private void updateData(int quantity) {
+    Fragment fragment=((DetailPagerAdapter)viewPager.getAdapter()).getRegisteredFragment(selectedTabPosition);
+    if(fragment instanceof DetailFragment){
+      ((DetailFragment)fragment).updateItem(currentItemPosition,quantity);
+    }
+  }
+
+  public void getOrderId(String val,String id,String itemName,double price){
     JSONObject jsonObject = new JSONObject();
     try {
       jsonObject.put(Constants.PARAMS_ITEM_ID, id);
       jsonObject.put(Constants.PARAMS_QUANTITY, val);
-      jsonObject.put(Constants.PARAMS_DAYS, "");
-      jsonObject.put(Constants.PARAMS_SHAKEY, WholeMartApplication.getValue(Constants.UserConstants.AUTH_KEY,""));
+      jsonObject.put(Constants.PARAMS_DAYS, "1");
+      jsonObject.put(Constants.PARAMS_ITEM_NAME,itemName);
+      jsonObject.put(Constants.PRICE,price);
     } catch (JSONException e) {
       Utility.reportException(e);
     }
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_items_in_cart",jsonObject.toString(), RequestMethod.POST);
+    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart",jsonObject.toString(), RequestMethod.POST);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
@@ -213,10 +215,14 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
           try {
             hideBlockingProgress();
             JSONObject jsonObject = new JSONObject(response);
-            if(jsonObject.has("orderId")){
-              orderId=jsonObject.getString("orderId");
+            if(jsonObject.has("_id")){
+              orderId=jsonObject.getString("_id");
+              WholeMartApplication.setValue(Constants.CURRENT_ORDER_ID,"");
             }
-
+            if(jsonObject.has("itemsInOrder")){
+              JSONArray jsonArray=jsonObject.getJSONArray("itemsInOrder");
+              updateData(jsonArray.getJSONObject(0).getInt("quantity"));
+            }
           } catch (JSONException e) {
             Utility.reportException(e);
             hideBlockingProgress();
@@ -236,6 +242,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
   }
 
   public class DetailPagerAdapter extends FragmentStatePagerAdapter{
+    private final SparseArray<WeakReference<Fragment>> registeredFragments = new SparseArray<>();
 
     public DetailPagerAdapter(FragmentManager fm) {
       super(fm);
@@ -255,6 +262,29 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     @Override
     public int getCount() {
       return tabLayout.getTabCount();
+    }
+
+    @Nullable
+    public Fragment getRegisteredFragment(final int position) {
+      final WeakReference<Fragment> wr = registeredFragments.get(position);
+      if (wr != null) {
+        return wr.get();
+      } else {
+        return null;
+      }
+    }
+
+    @Override
+    public Object instantiateItem(final ViewGroup container, final int position) {
+      final Fragment fragment = (Fragment) super.instantiateItem(container, position);
+      registeredFragments.put(position, new WeakReference<>(fragment));
+      return fragment;
+    }
+
+    @Override
+    public void destroyItem(final ViewGroup container, final int position, final Object object) {
+      registeredFragments.remove(position);
+      super.destroyItem(container, position, object);
     }
   }
 

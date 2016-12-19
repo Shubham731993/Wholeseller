@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +27,6 @@ import abominable.com.wholeseller.common.WholesellerHttpClient;
 public class CheckoutActivity extends BaseActivity {
 
   RecyclerView recyclerView;
-  ProgressBar progressBar;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +41,7 @@ public class CheckoutActivity extends BaseActivity {
 
   private void callCheckoutApi(String orderId) {
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_items_in_cart/"+orderId,RequestMethod.GET);
+    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/"+orderId,RequestMethod.GET);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
@@ -71,10 +69,8 @@ public class CheckoutActivity extends BaseActivity {
 
   private void prepareCheckOutItems(JSONObject jsonObject) {
     ArrayList<CheckOutItem> checkOutItemArrayList=new ArrayList<>();
-
-    if(jsonObject.has("cart")){
-      try {
-        JSONArray jsonArray=jsonObject.getJSONArray("cart");
+    try {
+        JSONArray jsonArray=jsonObject.getJSONArray("itemsInOrder");
         for(int i=0;i<jsonArray.length();i++) {
           JSONObject jsonObject1=jsonArray.getJSONObject(i);
           CheckOutItem checkOutItem = new CheckOutItem(jsonObject1);
@@ -83,7 +79,7 @@ public class CheckoutActivity extends BaseActivity {
       } catch (JSONException e) {
         e.printStackTrace();
       }
-    }
+
     hideBlockingProgress();
     CheckOutAdapter checkOutAdapter=new CheckOutAdapter(checkOutItemArrayList);
     recyclerView.setAdapter(checkOutAdapter);

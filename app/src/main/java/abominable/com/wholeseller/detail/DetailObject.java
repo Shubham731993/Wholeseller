@@ -14,7 +14,7 @@ import abominable.com.wholeseller.common.Utility;
 public class DetailObject implements Parcelable {
 
 
-  private String price;
+  private Double price;
   private String name;
   private String id;
 
@@ -24,7 +24,7 @@ public class DetailObject implements Parcelable {
          name=jsonObject.getString("name");
        }
        if(jsonObject.has("price")){
-         price=jsonObject.getString("price");
+         price=jsonObject.getDouble("price");
        }
        if(jsonObject.has("_id")){
          id=jsonObject.getString("_id");
@@ -35,8 +35,8 @@ public class DetailObject implements Parcelable {
   }
 
   protected DetailObject(Parcel in) {
-    price = in.readString();
     name = in.readString();
+    price = in.readDouble();
     id = in.readString();
   }
 
@@ -56,7 +56,7 @@ public class DetailObject implements Parcelable {
     return id;
   }
 
-  public String getPrice() {
+  public Double getPrice() {
     return price;
   }
 
@@ -71,8 +71,8 @@ public class DetailObject implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(price);
     dest.writeString(name);
+    dest.writeDouble(price);
     dest.writeString(id);
   }
 }

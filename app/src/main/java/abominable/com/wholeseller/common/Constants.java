@@ -13,8 +13,9 @@ public class Constants {
   public static final String PARAMS_PHONE = "number";
   public static final String PARAMS_TYPE = "type";
   public static final String PARAMS_ITEM_ID = "itemId";
+  public static final String PARAMS_ITEM_NAME = "itemName";
   public static final String PARAMS_QUANTITY = "quantity";
-  public static final String PARAMS_DAYS = "numOfDays";
+  public static final String PARAMS_DAYS = "numOfdays";
   public static final String PARAMS_USERNAME = "username";
   public static final String PARAMS_SHAKEY = "shaKey";
   public static final String PACKAGE_NAME =
@@ -29,6 +30,8 @@ public class Constants {
   public static final String ORDER_ID = "orderId";
   public static final String AUTH_KEY = "authKey";
   public static final String MESSAGE="message";
+  public static final String CURRENT_ORDER_ID="currentOrderId";
+  public static final String PRICE = "itemPrice";
 
   public static class DetailContants{
     public static final String GENRES="genres";

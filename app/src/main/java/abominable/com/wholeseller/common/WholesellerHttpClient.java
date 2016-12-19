@@ -14,6 +14,7 @@ import java.util.zip.GZIPInputStream;
 import javax.net.ssl.HttpsURLConnection;
 
 import abominable.com.wholeseller.BuildConfig;
+import abominable.com.wholeseller.WholeMartApplication;
 
 /**
  * Created by shubham.srivastava on 10/07/16.
@@ -65,6 +66,7 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
     mlastRequest = this;
       Log.i(WholesellerHttpClient.TAG, "Request URL: " + mHttpProtocol + mHttpHost + mBaseUrl);
       Log.i(WholesellerHttpClient.TAG, "Request Method: " + mRequestMethod);
+      Log.i(WholesellerHttpClient.TAG, "Request Data: " + mData);
 
     String result = "";
     switch (mRequestMethod) {
@@ -252,6 +254,7 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
     connection.addRequestProperty("Content-type", "application/json");
     connection.setRequestProperty(WholesellerHttpClient.ACCEPT_HEADER, "application/json");
     connection.setRequestProperty(WholesellerHttpClient.ACCEPT_ENCODING, "gzip");
+    connection.setRequestProperty(WholesellerHttpClient.AUTH_HEADER, WholeMartApplication.getValue(Constants.AUTH_KEY,""));
   }
 
 

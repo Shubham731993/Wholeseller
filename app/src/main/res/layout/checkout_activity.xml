@@ -13,6 +13,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 
+  <Button
+    android:id="@+id/checkout_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:layout_gravity="bottom"
+    android:text="Proceed To Pay (18000) >"
+    android:background="@color/signup_blue"
+    android:layout_alignParentBottom="true"/>
+
 
 
 </RelativeLayout>

@@ -34,6 +34,7 @@ public class DetailFragment extends Fragment {
   private LinearLayoutManager mLayoutManager;
   private DetailFragmentAdapter qnaCityAdapter;
   private ArrayList<DetailObject> genresList;
+  private RecyclerView detailListView;
 
   @Override
   public void onAttach(Context context) {
@@ -53,7 +54,7 @@ public class DetailFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.detail_fragment, container, false);
-    RecyclerView detailListView = (RecyclerView) view.findViewById(R.id.recycler_view);
+    detailListView = (RecyclerView) view.findViewById(R.id.recycler_view);
     genresList=new ArrayList<>();
     mLayoutManager = new LinearLayoutManager(context);
     detailListView.setLayoutManager(mLayoutManager);
@@ -101,5 +102,12 @@ public class DetailFragment extends Fragment {
     wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
     wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
     wholesellerHttpClient.executeAsync();
+  }
+
+  public void updateItem(int position,int orderItemValue){
+   RecyclerView.ViewHolder holder=detailListView.findViewHolderForAdapterPosition(position);
+    if(holder instanceof DetailFragmentAdapter.DetailItemHolder){
+      ((DetailFragmentAdapter.DetailItemHolder)holder).itemNumber.setText(orderItemValue+"kgs");
+    }
   }
 }

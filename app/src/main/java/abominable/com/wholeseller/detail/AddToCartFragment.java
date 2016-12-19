@@ -48,7 +48,7 @@ public class AddToCartFragment extends DialogFragment {
   @Override
   public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.dialog_add_to_cart, container);
-    TextView itemText = (TextView) view.findViewById(R.id.title);
+    final TextView itemText = (TextView) view.findViewById(R.id.title);
     final EditText editText = (EditText) view.findViewById(R.id.editText);
     CardView cardView = (CardView) view.findViewById(R.id.card_view);
     Button hundred = (Button) view.findViewById(R.id.hundred);
@@ -90,7 +90,7 @@ public class AddToCartFragment extends DialogFragment {
       @Override
       public void onClick(View v) {
         if (!TextUtils.isEmpty(editText.getText().toString())) {
-          mCallback.passNoOfKgs(editText.getText().toString(), detailObject.getId());
+          mCallback.passNoOfKgs(editText.getText().toString(), detailObject.getId(),position,detailObject.getName(),detailObject.getPrice());
           dismiss();
         } else {
           editText.setError("Please enter value");
@@ -120,6 +120,6 @@ public class AddToCartFragment extends DialogFragment {
   }
 
   public interface PassData {
-    void passNoOfKgs(String val, String id);
+    void passNoOfKgs(String val, String id,int itemPosition,String itemName,double price);
   }
 }
