@@ -47,7 +47,7 @@ public class HomeRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
       public void onClick(View v) {
         final Intent homeIntent = new Intent(context, DetailActivity.class);
         context.startActivity(homeIntent);
-        ((WholeSellerHomeActivity) context).overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
+        ((HomeActivity) context).overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
       }
     });
   }

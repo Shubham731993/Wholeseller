@@ -13,7 +13,7 @@ import android.widget.Toast;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
 import abominable.com.wholeseller.common.Constants;
-import abominable.com.wholeseller.home.WholeSellerHomeActivity;
+import abominable.com.wholeseller.home.HomeActivity;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
 
@@ -78,7 +78,7 @@ public class WholeMartFetchLocationActivity extends WholeMartLocationActivity im
       overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
       finish();
     } else {
-      Intent intent = new Intent(WholeMartFetchLocationActivity.this, WholeSellerHomeActivity.class);
+      Intent intent = new Intent(WholeMartFetchLocationActivity.this, HomeActivity.class);
       intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(intent);
       finish();

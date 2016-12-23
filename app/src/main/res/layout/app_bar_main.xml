@@ -7,7 +7,7 @@
   android:layout_height="match_parent"
   android:background="@color/otp_edtbox_hint_color"
   android:fitsSystemWindows="true"
-  tools:context=".home.WholeSellerHomeActivity">
+  tools:context=".home.HomeActivity">
 
   <RelativeLayout
     android:layout_width="match_parent"

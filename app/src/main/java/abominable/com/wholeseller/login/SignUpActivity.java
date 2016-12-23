@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
-import abominable.com.wholeseller.home.WholeSellerHomeActivity;
+import abominable.com.wholeseller.home.HomeActivity;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
@@ -73,7 +73,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             JSONObject jsonObject = new JSONObject(response);
             if(jsonObject.has(Constants.AUTH_KEY)){
               WholeMartApplication.setValue(Constants.UserConstants.AUTH_KEY, jsonObject.get(Constants.AUTH_KEY).toString());
-              Intent intent = new Intent(SignUpActivity.this, WholeSellerHomeActivity.class);
+              Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
               startActivity(intent);
               finish();
               overridePendingTransition(R.anim.show_info, R.anim.fade_out);

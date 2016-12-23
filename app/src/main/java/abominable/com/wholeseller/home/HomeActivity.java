@@ -32,7 +32,7 @@ import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholesellerHttpClient;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
-public class WholeSellerHomeActivity extends BaseActivity
+public class HomeActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
   private RecyclerView recyclerView;
@@ -82,7 +82,7 @@ public class WholeSellerHomeActivity extends BaseActivity
           hideBlockingProgress();
           try {
             JSONArray jsonArray = new JSONArray(response);
-            HomeRecyclerView homeRecyclerView = new HomeRecyclerView(WholeSellerHomeActivity.this, jsonArray);
+            HomeRecyclerView homeRecyclerView = new HomeRecyclerView(HomeActivity.this, jsonArray);
             recyclerView.setAdapter(homeRecyclerView);
           } catch (JSONException e) {
             e.printStackTrace();
@@ -168,8 +168,8 @@ public class WholeSellerHomeActivity extends BaseActivity
               String returnValue = jsonObject.getString(Constants.MESSAGE);
               if (returnValue.equalsIgnoreCase("LOGOUT SUCCESSFUL") || returnValue.equalsIgnoreCase("ALREADY LOGGED OUT")) {
                 WholeMartApplication.setValue(Constants.UserConstants.AUTH_KEY, "");
-                Toast.makeText(WholeSellerHomeActivity.this, "You have been logged out successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(WholeSellerHomeActivity.this, WholeMartLoginActivity.class);
+                Toast.makeText(HomeActivity.this, "You have been logged out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeActivity.this, WholeMartLoginActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.show_info, R.anim.fade_out);

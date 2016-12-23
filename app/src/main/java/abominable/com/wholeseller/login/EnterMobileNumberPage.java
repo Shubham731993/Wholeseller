@@ -22,7 +22,7 @@ import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholesellerHttpClient;
-import abominable.com.wholeseller.home.WholeSellerHomeActivity;
+import abominable.com.wholeseller.home.HomeActivity;
 
 /**
  * Created by shubham.srivastava on 14/08/16.
@@ -94,7 +94,7 @@ public class EnterMobileNumberPage extends BaseActivity {
             JSONObject jsonObject = new JSONObject(response);
             if (jsonObject.has(Constants.AUTH_KEY)) {
               WholeMartApplication.setValue(Constants.UserConstants.AUTH_KEY, jsonObject.get(Constants.AUTH_KEY).toString());
-              Intent intent = new Intent(EnterMobileNumberPage.this, WholeSellerHomeActivity.class);
+              Intent intent = new Intent(EnterMobileNumberPage.this, HomeActivity.class);
               startActivity(intent);
               finish();
               overridePendingTransition(R.anim.show_info, R.anim.fade_out);

@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import abominable.com.wholeseller.common.Constants;
-import abominable.com.wholeseller.home.WholeSellerHomeActivity;
+import abominable.com.wholeseller.home.HomeActivity;
 import abominable.com.wholeseller.location.WholeMartFetchLocationActivity;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
@@ -67,7 +67,7 @@ public class SplashScreen extends Activity {
       overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
       finish();
     }else {
-      final Intent homeIntent = new Intent(SplashScreen.this, WholeSellerHomeActivity.class);
+      final Intent homeIntent = new Intent(SplashScreen.this, HomeActivity.class);
       homeIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(homeIntent);
       overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
