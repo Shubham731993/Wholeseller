@@ -37,7 +37,7 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
   public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
     DetailItemHolder detailItemHolder=(DetailItemHolder)holder;
     detailItemHolder.itemName.setText(detailItemList.get(position).getName());
-    detailItemHolder.price.setText(context.getResources().getString(R.string.detail_price,detailItemList.get(position).getPrice()));
+    detailItemHolder.price.setText(context.getResources().getString(R.string.detail_price,String.valueOf(detailItemList.get(position).getPrice())));
     detailItemHolder.cardView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {

@@ -225,7 +225,7 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
 //      setHeaders(delete);
 
       URL url = new URL(mHttpProtocol + mHttpHost + mBaseUrl);
-      HttpsURLConnection deleteConn = (HttpsURLConnection) url.openConnection();
+      HttpURLConnection deleteConn = (HttpURLConnection) url.openConnection();
       deleteConn.setRequestMethod("DELETE");
       setHeaders(deleteConn);
 

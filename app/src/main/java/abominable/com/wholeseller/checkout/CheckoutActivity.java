@@ -1,5 +1,6 @@
 package abominable.com.wholeseller.checkout;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,19 +28,24 @@ import abominable.com.wholeseller.common.WholesellerHttpClient;
 public class CheckoutActivity extends BaseActivity {
 
   RecyclerView recyclerView;
+  private Typeface fontAwesomeFont;
+  private ArrayList<CheckOutItem> checkOutItemArrayList;
+  private CheckOutAdapter checkOutAdapter;
+  private String orderId;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.checkout_activity);
-    String orderId=getIntent().getStringExtra(Constants.ORDER_ID);
+    orderId=getIntent().getStringExtra(Constants.ORDER_ID);
     recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-    callCheckoutApi(orderId);
+    callCheckoutApi();
     LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(mLayoutManager);
+    fontAwesomeFont = Typeface.createFromAsset(getAssets(), "wholeseller-fonts.woff");
   }
 
-  private void callCheckoutApi(String orderId) {
+  private void callCheckoutApi() {
     showProgress("Please Wait", false);
     WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/"+orderId,RequestMethod.GET);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
@@ -68,7 +74,7 @@ public class CheckoutActivity extends BaseActivity {
   }
 
   private void prepareCheckOutItems(JSONObject jsonObject) {
-    ArrayList<CheckOutItem> checkOutItemArrayList=new ArrayList<>();
+    checkOutItemArrayList=new ArrayList<>();
     try {
         JSONArray jsonArray=jsonObject.getJSONArray("itemsInOrder");
         for(int i=0;i<jsonArray.length();i++) {
@@ -81,7 +87,46 @@ public class CheckoutActivity extends BaseActivity {
       }
 
     hideBlockingProgress();
-    CheckOutAdapter checkOutAdapter=new CheckOutAdapter(checkOutItemArrayList);
+    checkOutAdapter=new CheckOutAdapter(this,checkOutItemArrayList,fontAwesomeFont);
     recyclerView.setAdapter(checkOutAdapter);
+  }
+
+
+  public void onItemRemove(int position) {
+    if(checkOutAdapter!=null && checkOutItemArrayList!=null){
+      checkOutItemArrayList.remove(position);
+      checkOutAdapter.notifyItemRemoved(position);
+    }
+  }
+
+  public void callDeleteApi(CheckOutItem checkOutItem,final int position) {
+    JSONObject jsonObject = new JSONObject();
+    try {
+      jsonObject.put(Constants.PARAMS_ITEM_ID, checkOutItem.getId());
+      jsonObject.put(Constants.PARAMS_QUANTITY, checkOutItem.getQuantity());
+      jsonObject.put(Constants.PARAMS_DAYS, "1");
+      jsonObject.put(Constants.PARAMS_ITEM_NAME,checkOutItem.getName());
+      jsonObject.put(Constants.PRICE,checkOutItem.getItemPrice());
+    } catch (Exception e) {
+      Utility.reportException(e);
+    }
+    showProgress("Please Wait", false);
+    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/"+orderId+"/query?itemId="+checkOutItem.getId(),RequestMethod.DELETE);
+    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+      @Override
+      public void onResponse(int status, String response) {
+        hideBlockingProgress();
+        if (status == 200) {
+          onItemRemove(position);
+        } else {
+          showErrorDialog(null, getResources().getString(R.string.error));
+        }
+
+      }
+    });
+    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholesellerHttpClient.executeAsync();
+
   }
 }

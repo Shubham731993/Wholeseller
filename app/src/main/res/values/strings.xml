@@ -49,4 +49,5 @@
   <string name="name_validation_error_firstname_and_lastName_shouldnt_be_same">Firstname and Lastname should not be same</string>
   <string name="name_validation_error_firstname_min_2_chars">Provide firstname of min 2 characters</string>
   <string name="rupee_string">\u20B9%1$s</string>
+  <string name="close_icon">&#xe07f;</string>
 </resources>
