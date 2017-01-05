@@ -8,10 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
 
 
@@ -47,6 +51,8 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
 
       }
     });
+    String imagePath= BuildConfig.IMAGE_BUCKET_HOST+detailItemList.get(position).getImagePath()+".jpg";
+    Picasso.with(context).load(imagePath).into(detailItemHolder.itemImage);
   }
 
   @Override
@@ -58,6 +64,7 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
     public TextView itemName;
     public TextView price;
     public TextView itemNumber;
+    public ImageView itemImage;
     public CardView cardView;
     public DetailItemHolder(View itemLayoutView) {
       super(itemLayoutView);
@@ -65,6 +72,7 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
       price = (TextView) itemLayoutView.findViewById(R.id.scratched_price);
       cardView = (CardView) itemLayoutView.findViewById(R.id.card_view);
       itemNumber = (TextView) itemLayoutView.findViewById(R.id.item_number);
+      itemImage = (ImageView) itemLayoutView.findViewById(R.id.image_view);
     }
   }
 }

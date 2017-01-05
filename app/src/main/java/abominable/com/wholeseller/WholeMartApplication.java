@@ -128,6 +128,7 @@ public class WholeMartApplication extends Application {
     super.onCreate();
     WholeMartApplication.context = getApplicationContext();
     WholeMartApplication.prefs = PreferenceManager.getDefaultSharedPreferences(WholeMartApplication.context.getApplicationContext());
+    instance = this;
     Fabric.with(this, new Crashlytics());
   }
 }

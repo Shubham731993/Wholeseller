@@ -63,6 +63,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
   private void callSignUpApi(JSONObject jsonObject) {
     showProgress("Please Wait", false);
+    WholeMartApplication.setValue(Constants.UserConstants.PHONE,phoneNumber.getText().toString());
     WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/signup", jsonObject.toString(), RequestMethod.POST);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override

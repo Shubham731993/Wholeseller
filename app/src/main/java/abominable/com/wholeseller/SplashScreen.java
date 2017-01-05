@@ -2,9 +2,11 @@ package abominable.com.wholeseller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,7 +27,9 @@ public class SplashScreen extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.splash_screen);
 
-
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+      AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
     final Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
     final Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
 

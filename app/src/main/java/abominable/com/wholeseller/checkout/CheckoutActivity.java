@@ -1,10 +1,13 @@
 package abominable.com.wholeseller.checkout;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
+import abominable.com.wholeseller.address.FinalAddressActivity;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
@@ -39,6 +43,15 @@ public class CheckoutActivity extends BaseActivity {
     setContentView(R.layout.checkout_activity);
     orderId=getIntent().getStringExtra(Constants.ORDER_ID);
     recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
+    Button checkOut= (Button) findViewById(R.id.checkout_button);
+    checkOut.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent=new Intent(CheckoutActivity.this, FinalAddressActivity.class);
+        intent.putExtra(Constants.ORDER_ID,orderId);
+        startActivity(intent);
+      }
+    });
     callCheckoutApi();
     LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(mLayoutManager);

@@ -69,6 +69,17 @@
       android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
       android:windowSoftInputMode="stateHidden"/>
 
+    <activity
+      android:name=".address.FinalAddressActivity"
+      android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
+      android:windowSoftInputMode="stateHidden"/>
+
+
+    <activity
+      android:name=".address.FetchAddressActivity"
+      android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
+      android:windowSoftInputMode="stateHidden"/>
+
     <service
       android:name=".location.FetchAddressIntentService"
       android:exported="false"/>
@@ -78,4 +89,5 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

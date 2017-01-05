@@ -74,6 +74,7 @@ public class EnterMobileNumberPage extends BaseActivity {
   }
 
   private void callLoginApi() {
+    WholeMartApplication.setValue(Constants.UserConstants.PHONE, phoneNumber.getText().toString());
     JSONObject jsonObject = new JSONObject();
     try {
       jsonObject.put(Constants.PARAMS_FULLNAME, WholeMartApplication.getValue(Constants.UserConstants.USERNAME, ""));
