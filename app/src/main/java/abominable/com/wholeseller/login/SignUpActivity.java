@@ -77,7 +77,6 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
               Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
               startActivity(intent);
               finish();
-              overridePendingTransition(R.anim.show_info, R.anim.fade_out);
             }else {
               showInfoDialog(null, getResources().getString(R.string.error));
             }

@@ -33,6 +33,7 @@ public class Constants {
   public static final String CURRENT_ORDER_ID="currentOrderId";
   public static final String PRICE = "itemPrice";
   public static final int REQUEST_ADDRESS = 101;
+  public static final String FETCH_ADDRESS_FLOW = "fetchAddressFlow";
 
   public static class DetailContants{
     public static final String GENRES="genres";
@@ -57,6 +58,12 @@ public class Constants {
     public static final String PHONE="phNum";
     public static final String PAYMENT_TYPE="paymentType";
     public static final String ORDER_ID="orderId";
+  }
+
+  public static class AddressFlow{
+    public static final String CHECKOUT_ADDRESS="checkOutAddress";
+    public static final String CHECKOUT_NO_ADDRESS="checkOutNoAddress";
+
   }
 
 }

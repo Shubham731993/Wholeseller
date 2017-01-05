@@ -168,7 +168,6 @@ public class HomeActivity extends BaseActivity
                 Intent intent = new Intent(HomeActivity.this, WholeMartLoginActivity.class);
                 startActivity(intent);
                 finish();
-                overridePendingTransition(R.anim.show_info, R.anim.fade_out);
               } else {
                 showInfoDialog(null, getResources().getString(R.string.error));
               }

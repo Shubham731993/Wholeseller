@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
+import abominable.com.wholeseller.WholeMartApplication;
+import abominable.com.wholeseller.address.FetchAddressActivity;
 import abominable.com.wholeseller.address.FinalAddressActivity;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
@@ -47,8 +50,14 @@ public class CheckoutActivity extends BaseActivity {
     checkOut.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent=new Intent(CheckoutActivity.this, FinalAddressActivity.class);
-        intent.putExtra(Constants.ORDER_ID,orderId);
+        Intent intent;
+        if(!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""))) {
+           intent = new Intent(CheckoutActivity.this, FinalAddressActivity.class);
+        }else {
+          intent = new Intent(CheckoutActivity.this, FetchAddressActivity.class);
+          intent.putExtra(Constants.FETCH_ADDRESS_FLOW,Constants.AddressFlow.CHECKOUT_NO_ADDRESS);
+        }
+        intent.putExtra(Constants.ORDER_ID, orderId);
         startActivity(intent);
       }
     });
