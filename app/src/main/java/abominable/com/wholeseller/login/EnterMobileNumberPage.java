@@ -98,7 +98,6 @@ public class EnterMobileNumberPage extends BaseActivity {
               Intent intent = new Intent(EnterMobileNumberPage.this, HomeActivity.class);
               startActivity(intent);
               finish();
-              overridePendingTransition(R.anim.show_info, R.anim.fade_out);
             } else {
               showInfoDialog(null, getResources().getString(R.string.error));
             }

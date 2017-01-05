@@ -143,7 +143,6 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
                 Intent intent = new Intent(WholeMartLoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
-                overridePendingTransition(R.anim.show_info, R.anim.fade_out);
               } else {
                 showInfoDialog(null, getString(R.string.error));
               }
@@ -202,7 +201,6 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
           WholeMartApplication.setValue(Constants.UserConstants.USER_PHOTO_URL, acct.getPhotoUrl().toString());
         }
         startActivity(intent);
-        overridePendingTransition(R.anim.show_info, R.anim.fade_out);
         finish();
       }
     } else {

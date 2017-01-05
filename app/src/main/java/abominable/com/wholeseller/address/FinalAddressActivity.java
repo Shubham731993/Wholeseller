@@ -35,9 +35,9 @@ import static abominable.com.wholeseller.R.id.email_id;
 public class FinalAddressActivity extends BaseActivity implements View.OnClickListener {
 
   private int step = 1;
-  private TextView address,emailId,emailTitle;
-  private String orderId;
-  private boolean isAddressSet=false;
+  private TextView address, emailId, emailTitle;
+  private String orderId, addressValue;
+  private boolean isAddressSet = false;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,19 +48,23 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
     address = (TextView) findViewById(R.id.address);
     emailId = (TextView) findViewById(email_id);
     emailTitle = (TextView) findViewById(email);
-    orderId=getIntent().getStringExtra(Constants.ORDER_ID);
-    if(!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""))){
-      address.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""));
-      isAddressSet=true;
-    }else {
-      isAddressSet=false;
+    orderId = getIntent().getStringExtra(Constants.ORDER_ID);
+    if (getIntent().hasExtra(Constants.AddressConstants.ADDRESS)) {
+      addressValue = getIntent().getStringExtra(Constants.AddressConstants.ADDRESS);
+      address.setText(addressValue);
+      isAddressSet = true;
+    } else if (!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION, ""))) {
+      address.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION, ""));
+      isAddressSet = true;
+    } else {
+      isAddressSet = false;
       address.setText("No address found.Please tap on edit button to fill address");
     }
 
-    if(!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_EMAIL,""))){
+    if (!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_EMAIL, ""))) {
       emailTitle.setVisibility(View.VISIBLE);
-      emailId.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_EMAIL,""));
-    }else {
+      emailId.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_EMAIL, ""));
+    } else {
       emailTitle.setVisibility(View.GONE);
     }
     continueButton.setOnClickListener(this);
@@ -104,25 +108,25 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
     switch (view.getId()) {
       case R.id.continueButton:
         if (step == 1) {
-          if(isAddressSet) {
+          if (isAddressSet) {
             step = 2;
             resetStepsLayout();
-          }else {
-            Toast.makeText(FinalAddressActivity.this,"Please fill the address",Toast.LENGTH_SHORT).show();
+          } else {
+            Toast.makeText(FinalAddressActivity.this, "Please fill the address", Toast.LENGTH_SHORT).show();
           }
         } else if (step == 2) {
           step = 3;
-          JSONObject jsonObject=new JSONObject();
+          JSONObject jsonObject = new JSONObject();
           try {
-            jsonObject.put(Constants.AddressConstants.ADDRESS,WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""));
-            jsonObject.put(Constants.AddressConstants.DELIVERY_TYPE,"single");
-            jsonObject.put(Constants.AddressConstants.ADDRESS_LINE_ONE,WholeMartApplication.getValue(Constants.AddressConstants.ADDRESS_LINE_ONE,""));
-            jsonObject.put(Constants.AddressConstants.ADDRESS_LINE_TWO,WholeMartApplication.getValue(Constants.AddressConstants.ADDRESS_LINE_TWO,""));
-            jsonObject.put(Constants.AddressConstants.CITY,WholeMartApplication.getValue(Constants.AddressConstants.CITY,""));
-            jsonObject.put(Constants.AddressConstants.COMPANY,WholeMartApplication.getValue(Constants.AddressConstants.COMPANY,""));
-            jsonObject.put(Constants.AddressConstants.PHONE,WholeMartApplication.getValue(Constants.UserConstants.PHONE,""));
-            jsonObject.put(Constants.AddressConstants.PAYMENT_TYPE,"cod");
-            jsonObject.put(Constants.AddressConstants.ORDER_ID,orderId);
+            jsonObject.put(Constants.AddressConstants.ADDRESS, WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION, ""));
+            jsonObject.put(Constants.AddressConstants.DELIVERY_TYPE, "single");
+            jsonObject.put(Constants.AddressConstants.ADDRESS_LINE_ONE, WholeMartApplication.getValue(Constants.AddressConstants.ADDRESS_LINE_ONE, ""));
+            jsonObject.put(Constants.AddressConstants.ADDRESS_LINE_TWO, WholeMartApplication.getValue(Constants.AddressConstants.ADDRESS_LINE_TWO, ""));
+            jsonObject.put(Constants.AddressConstants.CITY, WholeMartApplication.getValue(Constants.AddressConstants.CITY, ""));
+            jsonObject.put(Constants.AddressConstants.COMPANY, WholeMartApplication.getValue(Constants.AddressConstants.COMPANY, ""));
+            jsonObject.put(Constants.AddressConstants.PHONE, WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""));
+            jsonObject.put(Constants.AddressConstants.PAYMENT_TYPE, "cod");
+            jsonObject.put(Constants.AddressConstants.ORDER_ID, orderId);
           } catch (JSONException e) {
             e.printStackTrace();
           }
@@ -131,22 +135,23 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
         }
         break;
       case R.id.edit_image:
-        Intent intent=new Intent(FinalAddressActivity.this,FetchAddressActivity.class);
-        startActivityForResult(intent,Constants.REQUEST_ADDRESS);
+        Intent intent = new Intent(FinalAddressActivity.this, FetchAddressActivity.class);
+        intent.putExtra(Constants.FETCH_ADDRESS_FLOW,Constants.AddressFlow.CHECKOUT_ADDRESS);
+        startActivityForResult(intent, Constants.REQUEST_ADDRESS);
         break;
 
     }
   }
 
   private void callAddressPostApi(JSONObject jsonObject) {
-    showProgress("Please Wait",false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/post_user_details",jsonObject.toString(), RequestMethod.POST);
+    showProgress("Please Wait", false);
+    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/post_user_details", jsonObject.toString(), RequestMethod.POST);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
           hideBlockingProgress();
-          Toast.makeText(FinalAddressActivity.this,"Your order has been generated",Toast.LENGTH_SHORT).show();
+          Toast.makeText(FinalAddressActivity.this, "Your order has been generated", Toast.LENGTH_SHORT).show();
         } else {
           hideBlockingProgress();
           showErrorDialog(null, getResources().getString(R.string.error));
@@ -161,15 +166,10 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if(requestCode==Constants.REQUEST_ADDRESS && resultCode==RESULT_OK){
-      if(data!=null){
-        isAddressSet=true;
-        WholeMartApplication.setValue(Constants.UserConstants.USER_LOCATION,data.getStringExtra(Constants.AddressConstants.ADDRESS));
-        address.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""));
-        WholeMartApplication.setValue(Constants.AddressConstants.CITY,data.getStringExtra(Constants.AddressConstants.CITY));
-        WholeMartApplication.setValue(Constants.AddressConstants.COMPANY,data.getStringExtra(Constants.AddressConstants.COMPANY));
-        WholeMartApplication.setValue(Constants.AddressConstants.ADDRESS_LINE_ONE,data.getStringExtra(Constants.AddressConstants.ADDRESS_LINE_ONE));
-        WholeMartApplication.setValue(Constants.AddressConstants.ADDRESS_LINE_TWO,data.getStringExtra(Constants.AddressConstants.ADDRESS_LINE_TWO));
+    if (requestCode == Constants.REQUEST_ADDRESS && resultCode == RESULT_OK) {
+      if (data != null) {
+        isAddressSet = true;
+        address.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION, ""));
       }
     }
   }

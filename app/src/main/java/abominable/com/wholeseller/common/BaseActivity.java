@@ -3,13 +3,13 @@ package abominable.com.wholeseller.common;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import abominable.com.wholeseller.R;
-import abominable.com.wholeseller.common.Utility;
 
 /**
  * Created by shubham.srivastava on 25/07/16.
@@ -95,4 +95,9 @@ public class BaseActivity extends AppCompatActivity{
     }
   }
 
+  @Override
+  public void startActivity(Intent intent) {
+    super.startActivity(intent);
+    overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
+  }
 }
