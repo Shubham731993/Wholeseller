@@ -20,5 +20,7 @@
   <color name="grey_less">#EEEEEE</color>
   <color name="half_transparentWhite">#50FFFFFF</color>
   <color name="back_blue">#E0F7FA</color>
+  <color name="disabled">#d8d8d8</color>
+  <color name="step_disabled">#999999</color>
 
 </resources>

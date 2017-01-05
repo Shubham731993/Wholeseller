@@ -13,8 +13,9 @@ public class Constants {
   public static final String PARAMS_PHONE = "number";
   public static final String PARAMS_TYPE = "type";
   public static final String PARAMS_ITEM_ID = "itemId";
+  public static final String PARAMS_ITEM_NAME = "itemName";
   public static final String PARAMS_QUANTITY = "quantity";
-  public static final String PARAMS_DAYS = "numOfDays";
+  public static final String PARAMS_DAYS = "numOfdays";
   public static final String PARAMS_USERNAME = "username";
   public static final String PARAMS_SHAKEY = "shaKey";
   public static final String PACKAGE_NAME =
@@ -29,6 +30,9 @@ public class Constants {
   public static final String ORDER_ID = "orderId";
   public static final String AUTH_KEY = "authKey";
   public static final String MESSAGE="message";
+  public static final String CURRENT_ORDER_ID="currentOrderId";
+  public static final String PRICE = "itemPrice";
+  public static final int REQUEST_ADDRESS = 101;
 
   public static class DetailContants{
     public static final String GENRES="genres";
@@ -40,5 +44,19 @@ public class Constants {
     public static final String USER_PHOTO_URL="photoUrl";
     public static final String USER_LOCATION="userLocation";
     public static final String AUTH_KEY="authKey";
+    public static final String PHONE="phone";
   }
+
+  public static class AddressConstants{
+    public static final String DELIVERY_TYPE="deliveryType";
+    public static final String ADDRESS="address";
+    public static final String ADDRESS_LINE_ONE="line1";
+    public static final String ADDRESS_LINE_TWO="line2";
+    public static final String CITY="city";
+    public static final String COMPANY="company";
+    public static final String PHONE="phNum";
+    public static final String PAYMENT_TYPE="paymentType";
+    public static final String ORDER_ID="orderId";
+  }
+
 }

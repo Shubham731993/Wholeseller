@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +27,7 @@ public class AddToCartFragment extends DialogFragment {
   PassData mCallback;
   private int position;
 
+
   public static AddToCartFragment newInstance(DetailObject detailObject, int position) {
     AddToCartFragment addToCartFragment = new AddToCartFragment();
     Bundle args = new Bundle();
@@ -48,9 +48,9 @@ public class AddToCartFragment extends DialogFragment {
   @Override
   public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.dialog_add_to_cart, container);
-    TextView itemText = (TextView) view.findViewById(R.id.title);
     final EditText editText = (EditText) view.findViewById(R.id.editText);
-    CardView cardView = (CardView) view.findViewById(R.id.card_view);
+    TextView title = (TextView) view.findViewById(R.id.title);
+    TextView price = (TextView) view.findViewById(R.id.price);
     Button hundred = (Button) view.findViewById(R.id.hundred);
     Button fifty = (Button) view.findViewById(R.id.fifty);
     Button twentyfive = (Button) view.findViewById(R.id.twentyfive);
@@ -61,7 +61,8 @@ public class AddToCartFragment extends DialogFragment {
     final Animation anim = AnimationUtils.loadAnimation(mActivity, R.anim.show_cart_item);
     anim.setFillAfter(true);
     buttonLayout.startAnimation(anim);
-    cardView.startAnimation(anim);
+    title.startAnimation(anim);
+    price.startAnimation(anim);
     hundred.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -90,7 +91,7 @@ public class AddToCartFragment extends DialogFragment {
       @Override
       public void onClick(View v) {
         if (!TextUtils.isEmpty(editText.getText().toString())) {
-          mCallback.passNoOfKgs(editText.getText().toString(), detailObject.getId());
+          mCallback.passNoOfKgs(editText.getText().toString(), detailObject.getId(),position,detailObject.getName(),detailObject.getPrice());
           dismiss();
         } else {
           editText.setError("Please enter value");
@@ -104,7 +105,8 @@ public class AddToCartFragment extends DialogFragment {
         dismiss();
       }
     });
-    itemText.setText(detailObject.getName());
+    title.setText(detailObject.getName());
+    price.setText(getResources().getString(R.string.detail_price,String.valueOf(detailObject.getPrice())));
     return view;
   }
 
@@ -120,6 +122,6 @@ public class AddToCartFragment extends DialogFragment {
   }
 
   public interface PassData {
-    void passNoOfKgs(String val, String id);
+    void passNoOfKgs(String val, String id,int itemPosition,String itemName,double price);
   }
 }

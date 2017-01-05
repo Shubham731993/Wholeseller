@@ -1,9 +1,12 @@
 package abominable.com.wholeseller.checkout;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,9 +20,13 @@ import abominable.com.wholeseller.R;
 public class CheckOutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
   private ArrayList<CheckOutItem> checkOutItems;
+  private Typeface fontAwesomeFont;
+  private Context context;
 
-  public CheckOutAdapter(ArrayList<CheckOutItem> checkOutItemArrayList){
+  public CheckOutAdapter(Context context,ArrayList<CheckOutItem> checkOutItemArrayList, Typeface fontAwesomeFont){
     this.checkOutItems=checkOutItemArrayList;
+    this.fontAwesomeFont=fontAwesomeFont;
+    this.context=context;
   }
 
   @Override
@@ -30,9 +37,15 @@ public class CheckOutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
   }
 
   @Override
-  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+  public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
     ViewHolder viewHolder=(ViewHolder) holder;
     viewHolder.itemQuantity.setText("Quantity :" +checkOutItems.get(position).getQuantity() + " kgs");
+    viewHolder.crossIcon.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        ((CheckoutActivity)context).callDeleteApi(checkOutItems.get(position),position);
+      }
+    });
   }
 
   @Override
@@ -43,10 +56,13 @@ public class CheckOutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
   private class ViewHolder extends RecyclerView.ViewHolder {
     TextView itemQuantity;
     TextView itemName;
+    ImageView crossIcon;
     public ViewHolder(View itemLayoutView) {
       super(itemLayoutView);
       itemQuantity= (TextView) itemLayoutView.findViewById(R.id.item_number);
       itemName= (TextView) itemLayoutView.findViewById(R.id.item_name);
+      crossIcon= (ImageView) itemLayoutView.findViewById(R.id.close_icon);
     }
   }
+
 }

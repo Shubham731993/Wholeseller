@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
     }
 
@@ -31,12 +32,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.194:8080/wholemart-1367/webapi\""
+            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.171:8080/wholemart-1367/webapi\""
+            buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://194.168.1.195:8080/wholemart-1367/webapi/imagebucket/\""
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.194:8080/wholemart-1367/webapi\""
+            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.195:8080/wholemart-1367/webapi\""
+            buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://194.168.1.195:8080/wholemart-1367/webapi/imagebucket/\""
         }
     }
 }
@@ -56,4 +59,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:9.4.0'
     compile 'com.google.android.gms:play-services-auth:9.4.0'
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
 }

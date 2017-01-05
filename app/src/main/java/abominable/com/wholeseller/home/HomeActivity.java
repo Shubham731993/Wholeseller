@@ -2,10 +2,9 @@ package abominable.com.wholeseller.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,8 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
+
+import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +32,11 @@ import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholesellerHttpClient;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
-public class WholeSellerHomeActivity extends BaseActivity
+public class HomeActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
   private RecyclerView recyclerView;
+  private ViewPager mVwPager;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -44,15 +45,6 @@ public class WholeSellerHomeActivity extends BaseActivity
     setContentView(R.layout.activity_main);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
-      }
-    });
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -69,6 +61,10 @@ public class WholeSellerHomeActivity extends BaseActivity
     recyclerView.setLayoutManager(layoutManager);
     int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
     recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+    mVwPager = (ViewPager) findViewById(R.id.view_pager);
+    CirclePageIndicator mPageIndicator = (CirclePageIndicator) findViewById(R.id.pager_indicator);
+    mVwPager.setAdapter(new CarousalImageAdapter(this));
+    mPageIndicator.setViewPager(mVwPager);
     callHomeApi();
   }
 
@@ -82,7 +78,7 @@ public class WholeSellerHomeActivity extends BaseActivity
           hideBlockingProgress();
           try {
             JSONArray jsonArray = new JSONArray(response);
-            HomeRecyclerView homeRecyclerView = new HomeRecyclerView(WholeSellerHomeActivity.this, jsonArray);
+            HomeRecyclerView homeRecyclerView = new HomeRecyclerView(HomeActivity.this, jsonArray);
             recyclerView.setAdapter(homeRecyclerView);
           } catch (JSONException e) {
             e.printStackTrace();
@@ -168,8 +164,8 @@ public class WholeSellerHomeActivity extends BaseActivity
               String returnValue = jsonObject.getString(Constants.MESSAGE);
               if (returnValue.equalsIgnoreCase("LOGOUT SUCCESSFUL") || returnValue.equalsIgnoreCase("ALREADY LOGGED OUT")) {
                 WholeMartApplication.setValue(Constants.UserConstants.AUTH_KEY, "");
-                Toast.makeText(WholeSellerHomeActivity.this, "You have been logged out successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(WholeSellerHomeActivity.this, WholeMartLoginActivity.class);
+                Toast.makeText(HomeActivity.this, "You have been logged out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeActivity.this, WholeMartLoginActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.show_info, R.anim.fade_out);

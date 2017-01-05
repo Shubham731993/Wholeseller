@@ -49,4 +49,13 @@
   <string name="name_validation_error_firstname_and_lastName_shouldnt_be_same">Firstname and Lastname should not be same</string>
   <string name="name_validation_error_firstname_min_2_chars">Provide firstname of min 2 characters</string>
   <string name="rupee_string">\u20B9%1$s</string>
+  <string name="close_icon">&#xe07f;</string>
+  <string name="address">Enter your full address</string>
+  <string name="city">City</string>
+  <string name="area">Area</string>
+  <string name="flat">Flat No./House No.</string>
+  <string name="apartment">Apartment/Locality/Area</string>
+  <string name="done">DONE</string>
+  <string name="company">Company</string>
+
 </resources>

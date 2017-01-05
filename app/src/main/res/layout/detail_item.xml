@@ -36,11 +36,10 @@
         <RelativeLayout
           android:id="@+id/image_holder"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="#DDDDDD">
+          android:layout_height="wrap_content">
 
           <ImageView
-            android:id="@+id/hotel_image"
+            android:id="@+id/image_view"
             android:layout_width="87dp"
             android:layout_height="87dp"
             android:scaleType="centerCrop"

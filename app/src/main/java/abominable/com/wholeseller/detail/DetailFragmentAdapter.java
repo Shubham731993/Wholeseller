@@ -8,10 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
 
 
@@ -37,7 +41,7 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
   public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
     DetailItemHolder detailItemHolder=(DetailItemHolder)holder;
     detailItemHolder.itemName.setText(detailItemList.get(position).getName());
-    detailItemHolder.price.setText(context.getResources().getString(R.string.detail_price,detailItemList.get(position).getPrice()));
+    detailItemHolder.price.setText(context.getResources().getString(R.string.detail_price,String.valueOf(detailItemList.get(position).getPrice())));
     detailItemHolder.cardView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -47,6 +51,8 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
 
       }
     });
+    String imagePath= BuildConfig.IMAGE_BUCKET_HOST+detailItemList.get(position).getImagePath()+".jpg";
+    Picasso.with(context).load(imagePath).into(detailItemHolder.itemImage);
   }
 
   @Override
@@ -54,15 +60,19 @@ public class DetailFragmentAdapter extends RecyclerView.Adapter {
     return detailItemList.size();
   }
 
-  private class DetailItemHolder extends RecyclerView.ViewHolder {
-    private TextView itemName;
-    private TextView price;
-    private CardView cardView;
+  public class DetailItemHolder extends RecyclerView.ViewHolder {
+    public TextView itemName;
+    public TextView price;
+    public TextView itemNumber;
+    public ImageView itemImage;
+    public CardView cardView;
     public DetailItemHolder(View itemLayoutView) {
       super(itemLayoutView);
       itemName = (TextView) itemLayoutView.findViewById(R.id.item_name);
       price = (TextView) itemLayoutView.findViewById(R.id.scratched_price);
       cardView = (CardView) itemLayoutView.findViewById(R.id.card_view);
+      itemNumber = (TextView) itemLayoutView.findViewById(R.id.item_number);
+      itemImage = (ImageView) itemLayoutView.findViewById(R.id.image_view);
     }
   }
 }

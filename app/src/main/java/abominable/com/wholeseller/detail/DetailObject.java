@@ -14,7 +14,8 @@ import abominable.com.wholeseller.common.Utility;
 public class DetailObject implements Parcelable {
 
 
-  private String price;
+  private String imagePath;
+  private Double price;
   private String name;
   private String id;
 
@@ -24,10 +25,13 @@ public class DetailObject implements Parcelable {
          name=jsonObject.getString("name");
        }
        if(jsonObject.has("price")){
-         price=jsonObject.getString("price");
+         price=jsonObject.getDouble("price");
        }
-       if(jsonObject.has("id")){
-         id=jsonObject.getString("id");
+       if(jsonObject.has("_id")){
+         id=jsonObject.getString("_id");
+       }
+       if(jsonObject.has("imagePath")){
+         imagePath=jsonObject.getString("imagePath");
        }
      }catch (JSONException e){
        Utility.reportException(e);
@@ -35,9 +39,10 @@ public class DetailObject implements Parcelable {
   }
 
   protected DetailObject(Parcel in) {
-    price = in.readString();
     name = in.readString();
+    price = in.readDouble();
     id = in.readString();
+    imagePath=in.readString();
   }
 
   public static final Creator<DetailObject> CREATOR = new Creator<DetailObject>() {
@@ -52,11 +57,16 @@ public class DetailObject implements Parcelable {
     }
   };
 
-  public String getId() {
-    return id;
+  public String getImagePath() {
+    return imagePath;
   }
 
-  public String getPrice() {
+  public String getId() {
+    return id;
+
+  }
+
+  public Double getPrice() {
     return price;
   }
 
@@ -71,8 +81,9 @@ public class DetailObject implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(price);
     dest.writeString(name);
+    dest.writeDouble(price);
     dest.writeString(id);
+    dest.writeString(imagePath);
   }
 }

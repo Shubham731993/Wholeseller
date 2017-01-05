@@ -5,42 +5,42 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/l_grey"
+  android:background="@color/white"
   android:orientation="vertical"
   android:padding="20dp">
 
-  <android.support.v7.widget.CardView
-    android:id="@+id/card_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true"
+
+  <TextView
+    android:id="@+id/title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="sans-serif-medium"
+    android:gravity="left"
+    android:padding="10dp"
+    android:text="Arhar ki Daal"
+    android:textColor="@color/signup_blue"
+    android:textSize="20sp"
+    android:textStyle="bold"/>
+
+  <TextView
+    android:id="@+id/price"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardElevation="5dp">
-
-
-    <TextView
-      android:id="@+id/title"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:fontFamily="sans-serif-medium"
-      android:gravity="center"
-      android:padding="10dp"
-      android:text="Arhar ki Daal"
-      android:textColor="@color/signup_blue"
-      android:textSize="20sp"
-      android:textStyle="bold"/>
-  </android.support.v7.widget.CardView>
+    android:layout_centerHorizontal="true"
+    android:fontFamily="sans-serif-medium"
+    android:gravity="right"
+    android:padding="10dp"
+    android:text="\u20b9120"
+    android:textColor="@color/signup_blue"
+    android:textSize="20sp"
+    android:textStyle="bold"/>
 
 
   <RelativeLayout
     android:id="@+id/sold_out_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/card_view"
+    android:layout_below="@+id/title"
     android:layout_marginTop="10dp">
 
 
