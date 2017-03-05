@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:padding="40dp"
                 tools:context=".SplashScreen">
 
-  <TextView
-    android:id="@+id/mart"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="WHOLE MART"
-    android:layout_centerVertical="true"
-    android:layout_centerInParent="true"
-    android:textColor="#1B5E20"
-    android:textSize="40dp"/>
-  
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+      android:layout_centerHorizontal="true"
+      android:id="@+id/logo"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:src="@drawable/ic_logo"/>
+
+    <TextView
+      android:layout_alignParentBottom="true"
+      android:layout_marginTop="10dp"
+      android:layout_centerHorizontal="true"
+      android:textColor="@color/signup_blue"
+      android:textSize="20sp"
+      android:id="@+id/wholemart"
+      android:text="WHOLEMART"
+      android:textStyle="bold"
+      android:fontFamily="sans-serif-smallcaps"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  </RelativeLayout>
 
 </RelativeLayout>

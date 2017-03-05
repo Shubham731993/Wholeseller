@@ -1,11 +1,11 @@
 package abominable.com.wholeseller.checkout;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -35,10 +35,10 @@ import abominable.com.wholeseller.common.WholesellerHttpClient;
 public class CheckoutActivity extends BaseActivity {
 
   RecyclerView recyclerView;
-  private Typeface fontAwesomeFont;
   private ArrayList<CheckOutItem> checkOutItemArrayList;
   private CheckOutAdapter checkOutAdapter;
   private String orderId;
+  private Button checkOut;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class CheckoutActivity extends BaseActivity {
     setContentView(R.layout.checkout_activity);
     orderId=getIntent().getStringExtra(Constants.ORDER_ID);
     recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-    Button checkOut= (Button) findViewById(R.id.checkout_button);
+    checkOut= (Button) findViewById(R.id.checkout_button);
     checkOut.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -61,10 +61,20 @@ public class CheckoutActivity extends BaseActivity {
         startActivity(intent);
       }
     });
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setHomeButtonEnabled(true);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        onBackPressed();
+      }
+    });
+    getSupportActionBar().setTitle("Checkout");
     callCheckoutApi();
     LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(mLayoutManager);
-    fontAwesomeFont = Typeface.createFromAsset(getAssets(), "wholeseller-fonts.woff");
   }
 
   private void callCheckoutApi() {
@@ -74,8 +84,7 @@ public class CheckoutActivity extends BaseActivity {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
-          try {
-            JSONObject jsonObject = new JSONObject(response);
+          try {JSONObject jsonObject = new JSONObject(response);
             prepareCheckOutItems(jsonObject);
           } catch (JSONException e) {
             Utility.reportException(e);
@@ -96,6 +105,11 @@ public class CheckoutActivity extends BaseActivity {
   }
 
   private void prepareCheckOutItems(JSONObject jsonObject) {
+    try {
+      checkOut.setText(getString(R.string.proceed,jsonObject.getString(Constants.TOTAL_PRICE)));
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
     checkOutItemArrayList=new ArrayList<>();
     try {
         JSONArray jsonArray=jsonObject.getJSONArray("itemsInOrder");
@@ -109,7 +123,7 @@ public class CheckoutActivity extends BaseActivity {
       }
 
     hideBlockingProgress();
-    checkOutAdapter=new CheckOutAdapter(this,checkOutItemArrayList,fontAwesomeFont);
+    checkOutAdapter=new CheckOutAdapter(this,checkOutItemArrayList);
     recyclerView.setAdapter(checkOutAdapter);
   }
 

@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Whole-Seller Market</string>
+  <string name="app_name">WholeMart</string>
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
   <string name="error">Something went wrong.Please try again later</string>
@@ -57,5 +57,8 @@
   <string name="apartment">Apartment/Locality/Area</string>
   <string name="done">DONE</string>
   <string name="company">Company</string>
+  <string name="checkout">CHECKOUT(%1$d)</string>
+  <string name="price">\u20B9 %1$s /kg</string>
+  <string name="proceed">Proceed To Pay %1$s ></string>
 
 </resources>

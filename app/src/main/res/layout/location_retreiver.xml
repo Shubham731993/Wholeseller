@@ -17,16 +17,17 @@
     android:src="@drawable/ic_location_on_light_blue_900_48dp"/>
 
   <TextView
+    android:fontFamily="sans-serif-smallcaps"
     android:layout_centerInParent="true"
     android:id="@+id/current_location_text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/shade_grey"
     android:text="@string/your_current_location"
-    android:typeface="monospace"
     />
 
   <TextView
+    android:fontFamily="sans-serif-smallcaps"
     android:id="@+id/current_location"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/current_location_text"
@@ -35,7 +36,6 @@
     android:textColor="@color/shade_grey"
     android:text="@string/unknown"
     android:textStyle="bold"
-    android:typeface="monospace"
     android:layout_marginTop="10dp"
     />
 
@@ -51,7 +51,7 @@
     android:padding="10dp"
     android:text="@string/use_current_location"
     android:textColor="@color/white"
-    android:typeface="monospace"/>
+    android:fontFamily="sans-serif-smallcaps"/>
 
   <TextView
     android:id="@+id/or_text"
@@ -62,7 +62,7 @@
     android:textColor="@color/shade_grey"
     android:text="@string/or"
     android:textStyle="bold"
-    android:typeface="monospace"
+    android:fontFamily="sans-serif-smallcaps"
     android:layout_marginTop="20dp"
     />
 
@@ -78,7 +78,7 @@
     android:padding="10dp"
     android:text="@string/enter_location_manually"
     android:textColor="@color/white"
-    android:typeface="monospace"/>
+    android:fontFamily="sans-serif-smallcaps"/>
 
   <TextView
     android:id="@+id/skip"
@@ -88,8 +88,8 @@
     android:layout_height="wrap_content"
     android:textColor="@color/signup_blue"
     android:text="@string/skip_for_now"
+    android:fontFamily="sans-serif-smallcaps"
     android:textStyle="bold"
-    android:typeface="monospace"
     android:layout_marginTop="30dp"
     />
 

@@ -11,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
@@ -38,13 +41,14 @@ import abominable.com.wholeseller.common.WholesellerHttpClient;
  */
 public class DetailActivity extends BaseActivity implements AddToCartFragment.PassData{
   private ViewPager viewPager;
-  private DetailPagerAdapter detailPagerAdapter;
   private TabLayout tabLayout;
   private String orderId="";
   private Button checkOut;
   private int selectedTabPosition;
   private JSONArray tabsList;
   private int currentItemPosition;
+  private int checkOutCounterValue=0;
+  private HashMap<String,Boolean> itemIds;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     checkOut = (Button) findViewById(R.id.checkout_button);
     orderId=WholeMartApplication.getValue(Constants.CURRENT_ORDER_ID,"");
+    itemIds=new HashMap<>();
     checkOut.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -76,7 +81,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
         onBackPressed();
       }
     });
-    getSupportActionBar().setTitle("Items");
+    getSupportActionBar().setTitle("Add to cart");
     callGenresApi();
   }
 
@@ -118,7 +123,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
       }
     }
     tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-    detailPagerAdapter=new DetailPagerAdapter(getSupportFragmentManager());
+    DetailPagerAdapter detailPagerAdapter = new DetailPagerAdapter(getSupportFragmentManager());
     viewPager.setAdapter(detailPagerAdapter);
     viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -141,16 +146,16 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
   }
 
   @Override
-  public void passNoOfKgs(String val, String id,int itemPosition,String itemName,double price) {
+  public void passNoOfKgs(String val, String id,int itemPosition,String itemName,double price,String imagePath) {
     currentItemPosition=itemPosition;
     if(TextUtils.isEmpty(orderId)) {
-      getOrderId(val,id,itemName,price);
+      getOrderId(val,id,itemName,price,imagePath);
     }else {
-      addToCart(val,id,itemName,price);
+      addToCart(val,id,itemName,price,imagePath);
     }
   }
 
-  private void addToCart(String val,String id,String itemName,double price) {
+  private void addToCart(String val,final String id,String itemName,double price,String imagePath) {
     JSONObject jsonObject = new JSONObject();
     try {
       jsonObject.put(Constants.PARAMS_ITEM_ID, id);
@@ -158,6 +163,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
       jsonObject.put(Constants.PARAMS_QUANTITY, val);
       jsonObject.put(Constants.PARAMS_DAYS, "1");
       jsonObject.put(Constants.PRICE,price);
+      jsonObject.put(Constants.IMAGE_PATH,imagePath);
     } catch (Exception e) {
       Utility.reportException(e);
     }
@@ -168,6 +174,15 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
       public void onResponse(int status, String response) {
         if (status == 200) {
           try {
+            if(itemIds.get(id)==null) {
+              itemIds.put(id,true);
+              checkOutCounterValue++;
+              checkOut.setText(getString(R.string.checkout, checkOutCounterValue));
+            }else if((itemIds.get(id)!=null && !itemIds.get(id))){
+              itemIds.put(id, true);
+              checkOutCounterValue++;
+              checkOut.setText(getString(R.string.checkout, checkOutCounterValue));
+            }
             hideBlockingProgress();
             JSONObject jsonObject = new JSONObject(response);
             updateData(jsonObject.getInt("quantity"));
@@ -195,7 +210,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     }
   }
 
-  public void getOrderId(String val,String id,String itemName,double price){
+  public void getOrderId(String val,final String id,String itemName,double price,String imagePath){
     JSONObject jsonObject = new JSONObject();
     try {
       jsonObject.put(Constants.PARAMS_ITEM_ID, id);
@@ -203,6 +218,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
       jsonObject.put(Constants.PARAMS_DAYS, "1");
       jsonObject.put(Constants.PARAMS_ITEM_NAME,itemName);
       jsonObject.put(Constants.PRICE,price);
+      jsonObject.put(Constants.IMAGE_PATH,imagePath);
     } catch (JSONException e) {
       Utility.reportException(e);
     }
@@ -213,6 +229,15 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
       public void onResponse(int status, String response) {
         if (status == 200) {
           try {
+            if(itemIds.get(id)==null) {
+              itemIds.put(id, true);
+              checkOutCounterValue++;
+              checkOut.setText(getString(R.string.checkout, checkOutCounterValue));
+            }else if((itemIds.get(id)!=null && !itemIds.get(id))){
+              itemIds.put(id, true);
+              checkOutCounterValue++;
+              checkOut.setText(getString(R.string.checkout, checkOutCounterValue));
+            }
             hideBlockingProgress();
             JSONObject jsonObject = new JSONObject(response);
             if(jsonObject.has("_id")){
@@ -288,4 +313,25 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     }
   }
 
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+    if (id == R.id.add_to_cart) {
+      if(!TextUtils.isEmpty(orderId)) {
+      Intent intent = new Intent(DetailActivity.this, CheckoutActivity.class);
+      intent.putExtra(Constants.ORDER_ID, orderId);
+      startActivity(intent);
+      }else {
+        Toast.makeText(DetailActivity.this,"Please add items to cart",Toast.LENGTH_SHORT).show();
+      }
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.detail_menu, menu);
+    return true;
+  }
 }

@@ -24,9 +24,7 @@ import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.WholesellerHttpClient;
-
-import static abominable.com.wholeseller.R.id.email;
-import static abominable.com.wholeseller.R.id.email_id;
+import abominable.com.wholeseller.login.EnterMobileNumberPage;
 
 /**
  * Created by shubham.srivastava on 26/12/16.
@@ -35,19 +33,22 @@ import static abominable.com.wholeseller.R.id.email_id;
 public class FinalAddressActivity extends BaseActivity implements View.OnClickListener {
 
   private int step = 1;
-  private TextView address, emailId, emailTitle;
+  private TextView address,phoneNumber;
   private String orderId, addressValue;
   private boolean isAddressSet = false;
+  private boolean isPhoneSet = false;
+  private RelativeLayout addressLayout;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.final_address_layout);
     Button continueButton = (Button) findViewById(R.id.continueButton);
-    ImageView editImage = (ImageView) findViewById(R.id.edit_image);
+    ImageView addressEditImage = (ImageView) findViewById(R.id.edit_image);
+    ImageView phoneEditImage = (ImageView) findViewById(R.id.edit_image_phone);
+    addressLayout = (RelativeLayout) findViewById(R.id.delivery_address);
     address = (TextView) findViewById(R.id.address);
-    emailId = (TextView) findViewById(email_id);
-    emailTitle = (TextView) findViewById(email);
+    phoneNumber = (TextView) findViewById(R.id.phone_number);
     orderId = getIntent().getStringExtra(Constants.ORDER_ID);
     if (getIntent().hasExtra(Constants.AddressConstants.ADDRESS)) {
       addressValue = getIntent().getStringExtra(Constants.AddressConstants.ADDRESS);
@@ -61,14 +62,16 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       address.setText("No address found.Please tap on edit button to fill address");
     }
 
-    if (!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_EMAIL, ""))) {
-      emailTitle.setVisibility(View.VISIBLE);
-      emailId.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_EMAIL, ""));
-    } else {
-      emailTitle.setVisibility(View.GONE);
+    if(!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""))){
+      phoneNumber.setText(WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""));
+      isPhoneSet=true;
+    }else {
+      isPhoneSet = false;
+      phoneNumber.setText("No phone number found.Please tap on edit button to fill phone number");
     }
     continueButton.setOnClickListener(this);
-    editImage.setOnClickListener(this);
+    addressEditImage.setOnClickListener(this);
+    phoneEditImage.setOnClickListener(this);
     resetStepsLayout();
   }
 
@@ -79,6 +82,7 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
     TextView step3 = (TextView) stepsLayout.findViewById(R.id.step3);
 
     if (step == 1) {
+      addressLayout.setVisibility(View.VISIBLE);
       ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.step_disabled));
@@ -86,6 +90,7 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       ((GradientDrawable) step3.getBackground()).setColor(ContextCompat.getColor(this, R.color.step_disabled));
       step3.setTextColor(ContextCompat.getColor(this, R.color.grey));
     } else if (step == 2) {
+      addressLayout.setVisibility(View.GONE);
       ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
@@ -93,6 +98,7 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       ((GradientDrawable) step3.getBackground()).setColor(ContextCompat.getColor(this, R.color.step_disabled));
       step3.setTextColor(ContextCompat.getColor(this, R.color.grey));
     } else if (step == 3) {
+      addressLayout.setVisibility(View.GONE);
       ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
@@ -108,11 +114,11 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
     switch (view.getId()) {
       case R.id.continueButton:
         if (step == 1) {
-          if (isAddressSet) {
+          if (isAddressSet && isPhoneSet) {
             step = 2;
             resetStepsLayout();
           } else {
-            Toast.makeText(FinalAddressActivity.this, "Please fill the address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FinalAddressActivity.this, "Please fill the details", Toast.LENGTH_SHORT).show();
           }
         } else if (step == 2) {
           step = 3;
@@ -138,6 +144,12 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
         Intent intent = new Intent(FinalAddressActivity.this, FetchAddressActivity.class);
         intent.putExtra(Constants.FETCH_ADDRESS_FLOW,Constants.AddressFlow.CHECKOUT_ADDRESS);
         startActivityForResult(intent, Constants.REQUEST_ADDRESS);
+        break;
+
+      case R.id.edit_image_phone:
+        Intent intent1 = new Intent(FinalAddressActivity.this, EnterMobileNumberPage.class);
+        intent1.putExtra(Constants.ENTER_NUMBER_FLOW,Constants.EnterNumberFlow.CHANGE_NUMBER_FLOW);
+        startActivityForResult(intent1, Constants.REQUEST_NUMBER);
         break;
 
     }
@@ -170,6 +182,12 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       if (data != null) {
         isAddressSet = true;
         address.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION, ""));
+      }
+    }
+    if (requestCode == Constants.REQUEST_NUMBER && resultCode == RESULT_OK) {
+      if (data != null) {
+        isPhoneSet = true;
+        phoneNumber.setText(WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""));
       }
     }
   }

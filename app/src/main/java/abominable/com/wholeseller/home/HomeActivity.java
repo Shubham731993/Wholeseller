@@ -30,6 +30,7 @@ import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.SpacesItemDecoration;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.hamburger.YourOrderActivity;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
 public class HomeActivity extends BaseActivity
@@ -132,6 +133,7 @@ public class HomeActivity extends BaseActivity
       callLogoutApi();
 
     } else if (id == R.id.nav_gallery) {
+      callOrderActivity();
 
     } else if (id == R.id.nav_slideshow) {
 
@@ -146,6 +148,11 @@ public class HomeActivity extends BaseActivity
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  private void callOrderActivity() {
+    Intent intent = new Intent(HomeActivity.this, YourOrderActivity.class);
+    startActivity(intent);
   }
 
   private void callLogoutApi() {

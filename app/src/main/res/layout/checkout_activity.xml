@@ -10,6 +10,7 @@
   <android.support.v7.widget.RecyclerView
     android:layout_below="@+id/toolbar"
     android:id="@+id/recycler_view"
+    android:layout_above="@+id/checkout_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 
@@ -19,7 +20,6 @@
     android:layout_height="wrap_content"
     android:textColor="@color/white"
     android:layout_gravity="bottom"
-    android:text="Proceed To Pay (18000) >"
     android:background="@color/signup_blue"
     android:layout_alignParentBottom="true"/>
 

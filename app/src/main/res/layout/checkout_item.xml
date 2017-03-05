@@ -49,7 +49,7 @@
           android:background="#DDDDDD">
 
           <ImageView
-            android:id="@+id/hotel_image"
+            android:id="@+id/item_image"
             android:layout_width="87dp"
             android:layout_height="87dp"
             android:scaleType="centerCrop"
@@ -88,7 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:text="Pulses"
+            android:text="PULSES"
+            android:fontFamily="sans-serif-smallcaps"
             android:textColor="#8a000000"
             android:textSize="10sp"
             android:visibility="visible"/>
@@ -99,31 +100,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-smallcaps"
             android:text="@string/dummy_resource_name"
             android:textColor="@color/flight_review_black"
             android:textSize="16sp"/>
 
-          <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-              android:id="@+id/textUserToHotelDistance"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center_vertical"
-              android:singleLine="true"
-              android:text="subtext"
-              android:textSize="12sp"
-              android:visibility="visible"/>
-
-
-          </LinearLayout>
-
 
           <RelativeLayout
+            android:layout_marginTop="20dp"
             android:id="@+id/sold_out_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -134,20 +119,32 @@
               android:layout_width="wrap_content"
               android:layout_marginTop="5dp"
               android:layout_height="wrap_content"
+              android:fontFamily="sans-serif-smallcaps"
               android:text="Quantity : 100kgs"
               android:textColor="@color/signup_blue"
-              android:textSize="15sp"/>
+              android:textSize="14sp"/>
 
-
-          <!--  <TextView
-              android:id="@+id/scratched_price"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+            <TextView
               android:layout_alignParentRight="true"
-              android:layout_gravity="end"
-              android:text="\u20B9140"
-              android:textColor="#000000"
-              android:textSize="16.7sp"/>-->
+              android:id="@+id/item_price"
+              android:layout_width="wrap_content"
+              android:layout_marginTop="5dp"
+              android:fontFamily="sans-serif-smallcaps"
+              android:layout_height="wrap_content"
+              android:text="\u20B91300/kg"
+              android:textColor="@color/signup_blue"
+              android:textSize="14sp"/>
+
+
+            <!--  <TextView
+                android:id="@+id/scratched_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="end"
+                android:text="\u20B9140"
+                android:textColor="#000000"
+                android:textSize="16.7sp"/>-->
           </RelativeLayout>
         </LinearLayout>
       </RelativeLayout>

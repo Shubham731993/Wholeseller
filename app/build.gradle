@@ -3,10 +3,6 @@ buildscript {
         mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
     }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
@@ -32,14 +28,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.171:8080/wholemart-1367/webapi\""
-            buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://194.168.1.195:8080/wholemart-1367/webapi/imagebucket/\""
+            buildConfigField "String", "APP_ENGINE_HOST", "\"52.35.72.19:8080/wholemart-1367/webapi\""
+            buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://52.35.72.19:8080/wholemart-1367/webapi/imagebucket/\""
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "APP_ENGINE_HOST", "\"194.168.1.195:8080/wholemart-1367/webapi\""
-            buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://194.168.1.195:8080/wholemart-1367/webapi/imagebucket/\""
+            buildConfigField "String", "APP_ENGINE_HOST", "\"52.35.72.19:8080/wholemart-1367/webapi\""
+            buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://52.35.72.19:8080/wholemart-1367/webapi/imagebucket/\""
         }
     }
 }

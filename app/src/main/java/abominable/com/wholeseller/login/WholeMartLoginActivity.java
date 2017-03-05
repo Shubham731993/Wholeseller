@@ -138,6 +138,8 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
             try {
               hideBlockingProgress();
               JSONObject jsonObject = new JSONObject(response);
+              if(jsonObject.has(Constants.AddressConstants.PHONE))
+                WholeMartApplication.setValue(Constants.UserConstants.PHONE,jsonObject.getString(Constants.AddressConstants.PHONE));
               if (jsonObject.has(Constants.AUTH_KEY)) {
                 WholeMartApplication.setValue(Constants.UserConstants.AUTH_KEY, jsonObject.get(Constants.AUTH_KEY).toString());
                 Intent intent = new Intent(WholeMartLoginActivity.this, HomeActivity.class);
@@ -195,6 +197,7 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
       GoogleSignInAccount acct = result.getSignInAccount();
       if (acct != null) {
         Intent intent = new Intent(WholeMartLoginActivity.this, EnterMobileNumberPage.class);
+        intent.putExtra(Constants.ENTER_NUMBER_FLOW,Constants.EnterNumberFlow.CREATE_ACCOUNT_FLOW);
         WholeMartApplication.setValue(Constants.UserConstants.USERNAME, acct.getDisplayName());
         WholeMartApplication.setValue(Constants.UserConstants.USER_EMAIL, acct.getEmail());
         if (acct.getPhotoUrl() != null) {

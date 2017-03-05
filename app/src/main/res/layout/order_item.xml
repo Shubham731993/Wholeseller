@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+  >
+
+  <RelativeLayout
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+
+    <TextView
+      android:id="@+id/order_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="sans-serif-smallcaps"
+      android:text="Your order id :"
+      android:textColor="@color/flight_review_black"
+      android:textSize="10sp"/>
+
+    <TextView
+      android:id="@+id/order_id"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_toEndOf="@+id/order_text"
+      android:layout_toRightOf="@+id/order_text"
+      android:text="100283092743972409"
+      android:textColor="@color/flight_review_black"
+      android:textSize="10sp"/>
+
+    <TextView
+      android:id="@+id/date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/order_text"
+      android:layout_marginTop="20dp"
+      android:text="20/07/2017"
+      android:textColor="@color/signup_blue"
+      android:textSize="16sp"
+      android:textStyle="bold"/>
+
+    <TextView
+      android:id="@+id/price"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_below="@+id/order_text"
+      android:layout_marginTop="20dp"
+      android:text="\u20B91500"
+      android:textColor="@color/signup_blue"
+      android:textSize="16sp"
+      android:textStyle="bold"/>
+
+
+  </RelativeLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_below="@+id/layout"
+    android:background="@color/flight_review_black"/>
+
+</RelativeLayout>

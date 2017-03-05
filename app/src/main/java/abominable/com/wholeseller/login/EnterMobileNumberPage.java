@@ -35,6 +35,16 @@ public class EnterMobileNumberPage extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.enter_mobile_layout);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    final Button button = (Button) findViewById(R.id.button);
+    final String flow=getIntent().getStringExtra(Constants.ENTER_NUMBER_FLOW);
+    switch (flow){
+      case Constants.EnterNumberFlow.CHANGE_NUMBER_FLOW:
+        button.setText("Done");
+        break;
+      case Constants.EnterNumberFlow.CREATE_ACCOUNT_FLOW:
+        button.setText("Next");
+        break;
+    }
     setSupportActionBar(toolbar);
     setTitle(getResources().getString(R.string.welcome));
     TextView textView = (TextView) findViewById(R.id.fragment_enter_mob_mob_Verify_mobile_number_txt);
@@ -42,12 +52,19 @@ public class EnterMobileNumberPage extends BaseActivity {
     textView.setText(getResources().getString(R.string.enter_mobile));
     getSupportActionBar().setHomeButtonEnabled(true);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    Button callDetailButton = (Button) findViewById(R.id.fragment_enter_mob_no_verify_Btn);
-    callDetailButton.setOnClickListener(new View.OnClickListener() {
+    button.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         if (isPhoneNumberValid(phoneNumber.getText())) {
-          callLoginApi();
+          switch (flow){
+            case Constants.EnterNumberFlow.CHANGE_NUMBER_FLOW:
+              WholeMartApplication.setValue(Constants.UserConstants.PHONE, phoneNumber.getText().toString());
+              finish();
+              break;
+            case Constants.EnterNumberFlow.CREATE_ACCOUNT_FLOW:
+              callLoginApi();
+              break;
+          }
         }
       }
     });

@@ -10,6 +10,7 @@ public class CheckOutItem {
 
   private double quantity;
   private String id;
+  private String imagePath;
 
   public double getItemPrice() {
     return itemPrice;
@@ -45,10 +46,17 @@ public class CheckOutItem {
       if (jsonObject.has("itemPrice")) {
         itemPrice = jsonObject.getDouble("itemPrice");
       }
+      if(jsonObject.has("imagePath")){
+        imagePath=jsonObject.getString("imagePath");
+      }
 
     } catch (JSONException e) {
       e.printStackTrace();
     }
 
+  }
+
+  public String getImagePath() {
+    return imagePath;
   }
 }

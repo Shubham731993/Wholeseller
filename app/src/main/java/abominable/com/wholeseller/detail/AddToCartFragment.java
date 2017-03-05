@@ -66,32 +66,56 @@ public class AddToCartFragment extends DialogFragment {
     hundred.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        editText.setText("100");
+        if(!TextUtils.isEmpty(editText.getText().toString())) {
+          int currentItem = Integer.parseInt(editText.getText().toString());
+          currentItem = currentItem + 100;
+          editText.setText(String.valueOf(currentItem));
+        }else {
+          editText.setText("100");
+        }
       }
     });
     twentyfive.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        editText.setText("25");
+        if(!TextUtils.isEmpty(editText.getText().toString())) {
+          int currentItem = Integer.parseInt(editText.getText().toString());
+          currentItem = currentItem + 25;
+          editText.setText(String.valueOf(currentItem));
+        }else {
+          editText.setText("25");
+        }
       }
     });
     fifty.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        editText.setText("50");
+        if(!TextUtils.isEmpty(editText.getText().toString())) {
+          int currentItem = Integer.parseInt(editText.getText().toString());
+          currentItem = currentItem + 50;
+          editText.setText(String.valueOf(currentItem));
+        }else {
+          editText.setText("50");
+        }
       }
     });
     ten.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        editText.setText("10");
+        if(!TextUtils.isEmpty(editText.getText().toString())) {
+          int currentItem = Integer.parseInt(editText.getText().toString());
+          currentItem = currentItem + 10;
+          editText.setText(String.valueOf(currentItem));
+        }else {
+          editText.setText("10");
+        }
       }
     });
     done.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         if (!TextUtils.isEmpty(editText.getText().toString())) {
-          mCallback.passNoOfKgs(editText.getText().toString(), detailObject.getId(),position,detailObject.getName(),detailObject.getPrice());
+          mCallback.passNoOfKgs(editText.getText().toString(), detailObject.getId(),position,detailObject.getName(),detailObject.getPrice(),detailObject.getImagePath());
           dismiss();
         } else {
           editText.setError("Please enter value");
@@ -122,6 +146,6 @@ public class AddToCartFragment extends DialogFragment {
   }
 
   public interface PassData {
-    void passNoOfKgs(String val, String id,int itemPosition,String itemName,double price);
+    void passNoOfKgs(String val, String id,int itemPosition,String itemName,double price,String imagePath);
   }
 }

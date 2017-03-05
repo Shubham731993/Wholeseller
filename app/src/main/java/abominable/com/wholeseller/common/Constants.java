@@ -32,8 +32,12 @@ public class Constants {
   public static final String MESSAGE="message";
   public static final String CURRENT_ORDER_ID="currentOrderId";
   public static final String PRICE = "itemPrice";
+  public static final String IMAGE_PATH = "imagePath";
   public static final int REQUEST_ADDRESS = 101;
+  public static final int REQUEST_NUMBER = 102;
   public static final String FETCH_ADDRESS_FLOW = "fetchAddressFlow";
+  public static final String TOTAL_PRICE = "totalPrice";
+  public static final String ENTER_NUMBER_FLOW = "numberFlow";
 
   public static class DetailContants{
     public static final String GENRES="genres";
@@ -63,6 +67,12 @@ public class Constants {
   public static class AddressFlow{
     public static final String CHECKOUT_ADDRESS="checkOutAddress";
     public static final String CHECKOUT_NO_ADDRESS="checkOutNoAddress";
+
+  }
+
+  public static class EnterNumberFlow{
+    public static final String CREATE_ACCOUNT_FLOW="createAccountFlow";
+    public static final String CHANGE_NUMBER_FLOW="changeNumberFlow";
 
   }
 
