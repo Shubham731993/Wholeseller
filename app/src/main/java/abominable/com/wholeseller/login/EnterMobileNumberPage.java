@@ -1,6 +1,7 @@
 package abominable.com.wholeseller.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -98,6 +99,9 @@ public class EnterMobileNumberPage extends BaseActivity {
       jsonObject.put(Constants.PARAMS_EMAIL, WholeMartApplication.getValue(Constants.UserConstants.USER_EMAIL, ""));
       jsonObject.put(Constants.PARAMS_PHONE, String.valueOf(phoneNumber.getText()));
       jsonObject.put(Constants.PARAMS_TYPE, "GOOGLE ACCOUNT");
+      SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.SHARED_PREF, 0);
+      String regId = pref.getString("regId", null);
+      jsonObject.put(Constants.PARAMS_TOKEN, regId);
     } catch (JSONException e) {
       Utility.reportException(e);
     }

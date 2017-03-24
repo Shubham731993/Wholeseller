@@ -39,26 +39,26 @@ public class CheckoutActivity extends BaseActivity {
   private CheckOutAdapter checkOutAdapter;
   private String orderId;
   private Button checkOut;
+  private String flow;
+  private String totalPrice;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.checkout_activity);
-    orderId=getIntent().getStringExtra(Constants.ORDER_ID);
-    recyclerView= (RecyclerView) findViewById(R.id.recycler_view);
-    checkOut= (Button) findViewById(R.id.checkout_button);
+    orderId = getIntent().getStringExtra(Constants.ORDER_ID);
+    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    checkOut = (Button) findViewById(R.id.checkout_button);
     checkOut.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent;
-        if(!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""))) {
-           intent = new Intent(CheckoutActivity.this, FinalAddressActivity.class);
-        }else {
-          intent = new Intent(CheckoutActivity.this, FetchAddressActivity.class);
-          intent.putExtra(Constants.FETCH_ADDRESS_FLOW,Constants.AddressFlow.CHECKOUT_NO_ADDRESS);
+        if (!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION, ""))) {
+          flow = Constants.AddressFlow.CHECKOUT_ADDRESS;
+          callCheckoutApi(true);
+        } else {
+          flow = Constants.AddressFlow.CHECKOUT_NO_ADDRESS;
+          callCheckoutApi(true);
         }
-        intent.putExtra(Constants.ORDER_ID, orderId);
-        startActivity(intent);
       }
     });
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,20 +72,21 @@ public class CheckoutActivity extends BaseActivity {
       }
     });
     getSupportActionBar().setTitle("Checkout");
-    callCheckoutApi();
+    callCheckoutApi(false);
     LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(mLayoutManager);
   }
 
-  private void callCheckoutApi() {
+  private void callCheckoutApi(final boolean isAddressActivityCalled) {
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/"+orderId,RequestMethod.GET);
+    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/" + orderId, RequestMethod.GET);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
-          try {JSONObject jsonObject = new JSONObject(response);
-            prepareCheckOutItems(jsonObject);
+          try {
+            JSONObject jsonObject = new JSONObject(response);
+            prepareCheckOutItems(jsonObject, isAddressActivityCalled);
           } catch (JSONException e) {
             Utility.reportException(e);
             hideBlockingProgress();
@@ -104,50 +105,67 @@ public class CheckoutActivity extends BaseActivity {
 
   }
 
-  private void prepareCheckOutItems(JSONObject jsonObject) {
+  private void prepareCheckOutItems(JSONObject jsonObject, boolean isActivityCalled) throws JSONException {
+    checkOutItemArrayList = new ArrayList<>();
+    totalPrice=jsonObject.getString(Constants.TOTAL_PRICE);
     try {
-      checkOut.setText(getString(R.string.proceed,jsonObject.getString(Constants.TOTAL_PRICE)));
+      JSONArray jsonArray = jsonObject.getJSONArray("itemsInOrder");
+      for (int i = 0; i < jsonArray.length(); i++) {
+        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+        CheckOutItem checkOutItem = new CheckOutItem(jsonObject1);
+        checkOutItemArrayList.add(checkOutItem);
+      }
     } catch (JSONException e) {
       e.printStackTrace();
     }
-    checkOutItemArrayList=new ArrayList<>();
-    try {
-        JSONArray jsonArray=jsonObject.getJSONArray("itemsInOrder");
-        for(int i=0;i<jsonArray.length();i++) {
-          JSONObject jsonObject1=jsonArray.getJSONObject(i);
-          CheckOutItem checkOutItem = new CheckOutItem(jsonObject1);
-          checkOutItemArrayList.add(checkOutItem);
-        }
-      } catch (JSONException e) {
-        e.printStackTrace();
-      }
 
     hideBlockingProgress();
-    checkOutAdapter=new CheckOutAdapter(this,checkOutItemArrayList);
-    recyclerView.setAdapter(checkOutAdapter);
+    if (isActivityCalled) {
+      Intent intent = null;
+      switch (flow) {
+        case Constants.AddressFlow.CHECKOUT_ADDRESS:
+          intent = new Intent(CheckoutActivity.this, FinalAddressActivity.class);
+          break;
+        case Constants.AddressFlow.CHECKOUT_NO_ADDRESS:
+          intent = new Intent(CheckoutActivity.this, FetchAddressActivity.class);
+          break;
+        default:
+          intent = new Intent(CheckoutActivity.this, FinalAddressActivity.class);
+          break;
+      }
+      intent.putExtra(Constants.FETCH_ADDRESS_FLOW, flow);
+      intent.putExtra(Constants.DETAIL_OBJECT, checkOutItemArrayList);
+      intent.putExtra(Constants.ORDER_ID, orderId);
+      intent.putExtra(Constants.TOTAL_PRICE, totalPrice);
+      startActivity(intent);
+
+    } else {
+      checkOutAdapter = new CheckOutAdapter(this, checkOutItemArrayList);
+      recyclerView.setAdapter(checkOutAdapter);
+    }
   }
 
 
   public void onItemRemove(int position) {
-    if(checkOutAdapter!=null && checkOutItemArrayList!=null){
+    if (checkOutAdapter != null && checkOutItemArrayList != null) {
       checkOutItemArrayList.remove(position);
       checkOutAdapter.notifyItemRemoved(position);
     }
   }
 
-  public void callDeleteApi(CheckOutItem checkOutItem,final int position) {
+  public void callDeleteApi(CheckOutItem checkOutItem, final int position) {
     JSONObject jsonObject = new JSONObject();
     try {
       jsonObject.put(Constants.PARAMS_ITEM_ID, checkOutItem.getId());
       jsonObject.put(Constants.PARAMS_QUANTITY, checkOutItem.getQuantity());
       jsonObject.put(Constants.PARAMS_DAYS, "1");
-      jsonObject.put(Constants.PARAMS_ITEM_NAME,checkOutItem.getName());
-      jsonObject.put(Constants.PRICE,checkOutItem.getItemPrice());
+      jsonObject.put(Constants.PARAMS_ITEM_NAME, checkOutItem.getName());
+      jsonObject.put(Constants.PRICE, checkOutItem.getItemPrice());
     } catch (Exception e) {
       Utility.reportException(e);
     }
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/"+orderId+"/query?itemId="+checkOutItem.getId(),RequestMethod.DELETE);
+    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/" + orderId + "/query?itemId=" + checkOutItem.getId(), RequestMethod.DELETE);
     wholesellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {

@@ -12,6 +12,7 @@ public class Constants {
   public static final String PARAMS_EMAIL = "email";
   public static final String PARAMS_PHONE = "number";
   public static final String PARAMS_TYPE = "type";
+  public static final String PARAMS_TOKEN = "deviceToken";
   public static final String PARAMS_ITEM_ID = "itemId";
   public static final String PARAMS_ITEM_NAME = "itemName";
   public static final String PARAMS_QUANTITY = "quantity";
@@ -38,6 +39,21 @@ public class Constants {
   public static final String FETCH_ADDRESS_FLOW = "fetchAddressFlow";
   public static final String TOTAL_PRICE = "totalPrice";
   public static final String ENTER_NUMBER_FLOW = "numberFlow";
+  public static final String DETAIL_OBJECT = "detailObject";
+  public static final String FONT_ROBOTO_LIGHT_TTF = "font/Roboto-Light.ttf";
+  public static final String FONT_ROBOTO_REGULAR_TTF = "font/Roboto-Regular.ttf";
+  public static final String USER = "user";
+  public static final String STATUS = "status";
+  public static final String ORDER_NBR = "order_nbr";
+  public static final String ITEMS_ORDER = "itemsInOrder";
+  public static final String ORDER = "order";
+  public static final String DATE = "date";
+  public static final String PAYLOAD = "payload";
+  public static final int NOTIFICATION_ID = 101;
+  public static final int NOTIFICATION_ID_BIG_IMAGE = 102;
+  public static final String REGISTRATION_COMPLETE = "reg_complete" ;
+  public static final String SHARED_PREF = "shared_pref";
+  public static final String PUSH_NOTIFICATION = "push";
 
   public static class DetailContants{
     public static final String GENRES="genres";

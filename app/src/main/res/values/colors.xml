@@ -25,5 +25,18 @@
   <color name="edit_text_background">#f0f0f0</color>
   <color name="text_color">#777777</color>
   <color name="sky_blue">#5686c1</color>
+  <color name="black">#000000</color>
+  <color name="order_heading">#F4F4F4</color>
+  <color name="order_text">#A3A3A3</color>
+  <color name="order_black">#4A4A4A</color>
+  <color name="order_grey">#B7B7B7</color>
+  <color name="order_light">#9B9B9B</color>
+  <color name="order_very_light_grey">#E8E8EE</color>
+  <color name="list_pressed">#EEEEEE</color>
+  <color name="list_normal">#FFFFFFFF</color>
+  <color name="list_disabled">#AAAAAA</color>
+  <color name="list_focus">#AAAAAA</color>
+  <color name="confirm">#66bb6a</color>
+  <color name="red">#d32f2f</color>
 
 </resources>

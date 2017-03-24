@@ -1,6 +1,7 @@
 package abominable.com.wholeseller.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Patterns;
@@ -14,13 +15,13 @@ import org.json.JSONObject;
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
-import abominable.com.wholeseller.home.HomeActivity;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.home.HomeActivity;
 
 /**
  * Created by shubham.srivastava on 06/08/16.
@@ -208,6 +209,9 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
       params.put(Constants.PARAMS_EMAIL, String.valueOf(email.getText()));
       params.put(Constants.PARAMS_PHONE, String.valueOf(phoneNumber.getText()));
       params.put(Constants.PARAMS_TYPE, "NORMAL ACCOUNT");
+      SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.SHARED_PREF, 0);
+      String regId = pref.getString("regId", null);
+      params.put(Constants.PARAMS_TOKEN, regId);
     } catch (JSONException e) {
       e.printStackTrace();
     }

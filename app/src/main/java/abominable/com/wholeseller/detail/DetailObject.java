@@ -18,6 +18,7 @@ public class DetailObject implements Parcelable {
   private Double price;
   private String name;
   private String id;
+  private Double marketPrice;
 
   public DetailObject(JSONObject jsonObject){
      try {
@@ -33,6 +34,9 @@ public class DetailObject implements Parcelable {
        if(jsonObject.has("imagePath")){
          imagePath=jsonObject.getString("imagePath");
        }
+       if(jsonObject.has("marketPrice")){
+         marketPrice=jsonObject.getDouble("marketPrice");
+       }
      }catch (JSONException e){
        Utility.reportException(e);
      }
@@ -43,6 +47,7 @@ public class DetailObject implements Parcelable {
     price = in.readDouble();
     id = in.readString();
     imagePath=in.readString();
+    marketPrice = in.readDouble();
   }
 
   public static final Creator<DetailObject> CREATOR = new Creator<DetailObject>() {
@@ -79,11 +84,16 @@ public class DetailObject implements Parcelable {
     return 0;
   }
 
+  public Double getMarketPrice() {
+    return marketPrice;
+  }
+
   @Override
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(name);
     dest.writeDouble(price);
     dest.writeString(id);
     dest.writeString(imagePath);
+    dest.writeDouble(marketPrice);
   }
 }

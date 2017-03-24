@@ -1,13 +1,12 @@
 package abominable.com.wholeseller.home;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
 
 import abominable.com.wholeseller.R;
 
@@ -34,7 +33,8 @@ public class CarousalImageAdapter extends PagerAdapter {
     ViewGroup layout = (ViewGroup) mLayoutInflater.inflate(R.layout.item_welcome_pager,
         container, false);
     ImageView imageView= (ImageView) layout.findViewById(R.id.image_view);
-    Picasso.with(mContext).load("http://194.168.1.171:8080/wholemart-1367/webapi/imagebucket/rice.jpg").into(imageView);
+    //Picasso.with(mContext).load("http://194.168.1.171:8080/wholemart-1367/webapi/imagebucket/rice.jpg").into(imageView);
+    imageView.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.toordal_carousel));
     container.addView(layout);
     return layout;
   }

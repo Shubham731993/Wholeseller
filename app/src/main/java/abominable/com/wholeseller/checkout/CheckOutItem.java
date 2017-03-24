@@ -1,16 +1,39 @@
 package abominable.com.wholeseller.checkout;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by shubham.srivastava on 14/10/16.
  */
-public class CheckOutItem {
+public class CheckOutItem implements Parcelable {
 
   private double quantity;
   private String id;
   private String imagePath;
+
+  protected CheckOutItem(Parcel in) {
+    quantity = in.readDouble();
+    id = in.readString();
+    imagePath = in.readString();
+    itemPrice = in.readDouble();
+    name = in.readString();
+  }
+
+  public static final Creator<CheckOutItem> CREATOR = new Creator<CheckOutItem>() {
+    @Override
+    public CheckOutItem createFromParcel(Parcel in) {
+      return new CheckOutItem(in);
+    }
+
+    @Override
+    public CheckOutItem[] newArray(int size) {
+      return new CheckOutItem[size];
+    }
+  };
 
   public double getItemPrice() {
     return itemPrice;
@@ -58,5 +81,19 @@ public class CheckOutItem {
 
   public String getImagePath() {
     return imagePath;
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeDouble(quantity);
+    dest.writeString(id);
+    dest.writeString(imagePath);
+    dest.writeDouble(itemPrice);
+    dest.writeString(name);
   }
 }

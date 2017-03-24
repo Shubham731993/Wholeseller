@@ -1,14 +1,18 @@
 package abominable.com.wholeseller.address;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,15 +20,21 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import abominable.com.wholeseller.BuildConfig;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
+import abominable.com.wholeseller.checkout.CheckOutItem;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
+import abominable.com.wholeseller.common.SpacesItemDecoration;
 import abominable.com.wholeseller.common.WholesellerHttpClient;
 import abominable.com.wholeseller.login.EnterMobileNumberPage;
+import abominable.com.wholeseller.ticket.DisplayOrder;
+import abominable.com.wholeseller.ticket.OrderTicketActivity;
 
 /**
  * Created by shubham.srivastava on 26/12/16.
@@ -33,21 +43,33 @@ import abominable.com.wholeseller.login.EnterMobileNumberPage;
 public class FinalAddressActivity extends BaseActivity implements View.OnClickListener {
 
   private int step = 1;
-  private TextView address,phoneNumber;
-  private String orderId, addressValue;
+  private TextView address, phoneNumber;
+  private String orderId, addressValue, totalPrice;
   private boolean isAddressSet = false;
   private boolean isPhoneSet = false;
-  private RelativeLayout addressLayout;
+  private RelativeLayout addressLayout, confirmOrder, placeOrder;
+  private Button continueButton;
+  private ArrayList<CheckOutItem> checkOutItemArrayList;
+  private RecyclerView recyclerView;
+  private RadioGroup paymentGroup;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.final_address_layout);
-    Button continueButton = (Button) findViewById(R.id.continueButton);
+    continueButton = (Button) findViewById(R.id.continueButton);
     ImageView addressEditImage = (ImageView) findViewById(R.id.edit_image);
     ImageView phoneEditImage = (ImageView) findViewById(R.id.edit_image_phone);
     addressLayout = (RelativeLayout) findViewById(R.id.delivery_address);
+    confirmOrder = (RelativeLayout) findViewById(R.id.confirm_order);
+    placeOrder = (RelativeLayout) findViewById(R.id.place_order);
+    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+    paymentGroup = (RadioGroup) findViewById(R.id.payment_group);
     address = (TextView) findViewById(R.id.address);
+    TextView price = (TextView) findViewById(R.id.total_price);
+    checkOutItemArrayList = getIntent().getParcelableArrayListExtra(Constants.DETAIL_OBJECT);
+    totalPrice = getIntent().getStringExtra(Constants.TOTAL_PRICE);
+    price.setText(totalPrice);
     phoneNumber = (TextView) findViewById(R.id.phone_number);
     orderId = getIntent().getStringExtra(Constants.ORDER_ID);
     if (getIntent().hasExtra(Constants.AddressConstants.ADDRESS)) {
@@ -62,16 +84,19 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       address.setText("No address found.Please tap on edit button to fill address");
     }
 
-    if(!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""))){
+    if (!TextUtils.isEmpty(WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""))) {
       phoneNumber.setText(WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""));
-      isPhoneSet=true;
-    }else {
+      isPhoneSet = true;
+    } else {
       isPhoneSet = false;
       phoneNumber.setText("No phone number found.Please tap on edit button to fill phone number");
     }
     continueButton.setOnClickListener(this);
     addressEditImage.setOnClickListener(this);
     phoneEditImage.setOnClickListener(this);
+    int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.order_spacing);
+    recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
     resetStepsLayout();
   }
 
@@ -83,6 +108,9 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
 
     if (step == 1) {
       addressLayout.setVisibility(View.VISIBLE);
+      confirmOrder.setVisibility(View.GONE);
+      placeOrder.setVisibility(View.GONE);
+      continueButton.setText("Continue");
       ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.step_disabled));
@@ -91,6 +119,10 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       step3.setTextColor(ContextCompat.getColor(this, R.color.grey));
     } else if (step == 2) {
       addressLayout.setVisibility(View.GONE);
+      confirmOrder.setVisibility(View.VISIBLE);
+      placeOrder.setVisibility(View.GONE);
+      recyclerView.setAdapter(new FinalOrderAdapter(this, checkOutItemArrayList));
+      continueButton.setText("Confirm Order");
       ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
@@ -99,6 +131,9 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       step3.setTextColor(ContextCompat.getColor(this, R.color.grey));
     } else if (step == 3) {
       addressLayout.setVisibility(View.GONE);
+      confirmOrder.setVisibility(View.GONE);
+      placeOrder.setVisibility(View.VISIBLE);
+      continueButton.setText("Place Order");
       ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
@@ -122,6 +157,8 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
           }
         } else if (step == 2) {
           step = 3;
+          resetStepsLayout();
+        } else if (step == 3) {
           JSONObject jsonObject = new JSONObject();
           try {
             jsonObject.put(Constants.AddressConstants.ADDRESS, WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION, ""));
@@ -131,7 +168,21 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
             jsonObject.put(Constants.AddressConstants.CITY, WholeMartApplication.getValue(Constants.AddressConstants.CITY, ""));
             jsonObject.put(Constants.AddressConstants.COMPANY, WholeMartApplication.getValue(Constants.AddressConstants.COMPANY, ""));
             jsonObject.put(Constants.AddressConstants.PHONE, WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""));
-            jsonObject.put(Constants.AddressConstants.PAYMENT_TYPE, "cod");
+            SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.SHARED_PREF, 0);
+            String regId = pref.getString("regId", null);
+            jsonObject.put(Constants.PARAMS_TOKEN, regId);
+            switch (paymentGroup.getCheckedRadioButtonId()) {
+              case R.id.account:
+                jsonObject.put(Constants.AddressConstants.PAYMENT_TYPE, "ACCOUNT TRANSFER ON DELIVERY");
+                break;
+              case R.id.cash:
+                jsonObject.put(Constants.AddressConstants.PAYMENT_TYPE, "CASH ON DELIVERY");
+                break;
+              case R.id.cheque:
+                jsonObject.put(Constants.AddressConstants.PAYMENT_TYPE, "CHEQUE ON DELIVERY");
+                break;
+
+            }
             jsonObject.put(Constants.AddressConstants.ORDER_ID, orderId);
           } catch (JSONException e) {
             e.printStackTrace();
@@ -142,13 +193,13 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
         break;
       case R.id.edit_image:
         Intent intent = new Intent(FinalAddressActivity.this, FetchAddressActivity.class);
-        intent.putExtra(Constants.FETCH_ADDRESS_FLOW,Constants.AddressFlow.CHECKOUT_ADDRESS);
+        intent.putExtra(Constants.FETCH_ADDRESS_FLOW, Constants.AddressFlow.CHECKOUT_ADDRESS);
         startActivityForResult(intent, Constants.REQUEST_ADDRESS);
         break;
 
       case R.id.edit_image_phone:
         Intent intent1 = new Intent(FinalAddressActivity.this, EnterMobileNumberPage.class);
-        intent1.putExtra(Constants.ENTER_NUMBER_FLOW,Constants.EnterNumberFlow.CHANGE_NUMBER_FLOW);
+        intent1.putExtra(Constants.ENTER_NUMBER_FLOW, Constants.EnterNumberFlow.CHANGE_NUMBER_FLOW);
         startActivityForResult(intent1, Constants.REQUEST_NUMBER);
         break;
 
@@ -163,7 +214,16 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       public void onResponse(int status, String response) {
         if (status == 200) {
           hideBlockingProgress();
-          Toast.makeText(FinalAddressActivity.this, "Your order has been generated", Toast.LENGTH_SHORT).show();
+          try {
+            DisplayOrder displayOrder = new DisplayOrder(new JSONObject(response));
+            Intent intent=new Intent(FinalAddressActivity.this, OrderTicketActivity.class);
+            intent.putExtra(Constants.ORDER,displayOrder);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            Toast.makeText(FinalAddressActivity.this, "Your order has been generated", Toast.LENGTH_SHORT).show();
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
         } else {
           hideBlockingProgress();
           showErrorDialog(null, getResources().getString(R.string.error));
@@ -189,6 +249,19 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
         isPhoneSet = true;
         phoneNumber.setText(WholeMartApplication.getValue(Constants.UserConstants.PHONE, ""));
       }
+    }
+  }
+
+  @Override
+  public void onBackPressed() {
+    if (step == 1) {
+      super.onBackPressed();
+    } else if (step == 2) {
+      step = 1;
+      resetStepsLayout();
+    } else if (step == 3) {
+      step = 2;
+      resetStepsLayout();
     }
   }
 }

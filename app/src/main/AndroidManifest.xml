@@ -84,6 +84,10 @@
       android:name=".hamburger.YourOrderActivity"
       android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
       android:windowSoftInputMode="stateHidden"/>
+    <activity
+    android:name=".ticket.OrderTicketActivity"
+    android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
+    android:windowSoftInputMode="stateHidden"/>
 
     <service
       android:name=".location.FetchAddressIntentService"
@@ -91,6 +95,20 @@
       <meta-data
             android:name="io.fabric.ApiKey"
             android:value="7da1d997e850df36ebb3d183be0bc9ea6df2c5d4" />
+
+    <service android:name=".notification.service.MyFirebaseMessagingService">
+      <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+      </intent-filter>
+    </service>
+
+    <service android:name=".notification.service.MyFirebaseInstanceIDService">
+      <intent-filter>
+        <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+      </intent-filter>
+    </service>
+
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

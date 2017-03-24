@@ -77,6 +77,8 @@ public class FetchAddressActivity extends BaseActivity implements View.OnClickLi
               Intent intent = new Intent(FetchAddressActivity.this, FinalAddressActivity.class);
               intent.putExtra(Constants.AddressConstants.ADDRESS, builder.toString());
               intent.putExtra(Constants.ORDER_ID, orderId);
+              intent.putExtra(Constants.DETAIL_OBJECT,getIntent().getParcelableArrayExtra(Constants.DETAIL_OBJECT));
+              intent.putExtra(Constants.TOTAL_PRICE,getIntent().getStringExtra(Constants.TOTAL_PRICE));
               startActivity(intent);
               break;
           }

@@ -7,4 +7,9 @@
   <dimen name="activity_vertical_margin">16dp</dimen>
   <dimen name="fab_margin">16dp</dimen>
   <dimen name="spacing">5dp</dimen>
+  <dimen name="order_spacing">10dp</dimen>
+  <dimen name="order_margin">10dp</dimen>
+  <dimen name="order_inner_margin">5dp</dimen>
+  <dimen name="order_content_margin">16dp</dimen>
+  <dimen name="order_content_text_margin">20dp</dimen>
 </resources>
