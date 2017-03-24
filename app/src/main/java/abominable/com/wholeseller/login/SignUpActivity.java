@@ -20,7 +20,7 @@ import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 import abominable.com.wholeseller.home.HomeActivity;
 
 /**
@@ -65,8 +65,8 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
   private void callSignUpApi(JSONObject jsonObject) {
     showProgress("Please Wait", false);
     WholeMartApplication.setValue(Constants.UserConstants.PHONE,phoneNumber.getText().toString());
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/signup", jsonObject.toString(), RequestMethod.POST);
-    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+    WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/signup", jsonObject.toString(), RequestMethod.POST);
+    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
@@ -93,9 +93,9 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         }
       }
     });
-    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholesellerHttpClient.executeAsync();
+    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholeSellerHttpClient.executeAsync();
   }
 
   private boolean isEmailValid(final EditText emailEditText) {

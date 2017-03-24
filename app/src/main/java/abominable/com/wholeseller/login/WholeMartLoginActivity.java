@@ -32,7 +32,7 @@ import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 import abominable.com.wholeseller.home.HomeActivity;
 
 /**
@@ -130,8 +130,8 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
       jsonObject.put(Constants.PARAMS_EMAIL, email.getText().toString());
       jsonObject.put(Constants.PARAMS_PASSWORD, password.getText().toString());
       showProgress("Please Wait", false);
-      WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/login", jsonObject.toString(), RequestMethod.POST);
-      wholesellerHttpClient.setResponseListner(new ResponseListener() {
+      WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/login", jsonObject.toString(), RequestMethod.POST);
+      wholeSellerHttpClient.setResponseListner(new ResponseListener() {
         @Override
         public void onResponse(int status, String response) {
           if (status == 200) {
@@ -160,9 +160,9 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
           }
         }
       });
-      wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-      wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-      wholesellerHttpClient.executeAsync();
+      wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+      wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+      wholeSellerHttpClient.executeAsync();
     } catch (JSONException e) {
       Utility.reportException(e);
       showInfoDialog(null, getString(R.string.error));

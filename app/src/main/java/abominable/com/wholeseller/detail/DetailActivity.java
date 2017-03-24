@@ -34,7 +34,7 @@ import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 
 /**
  * Created by shubham.srivastava on 15/07/16.
@@ -87,8 +87,8 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
 
   private void callGenresApi() {
     showProgress("Please Wait",false);
-    WholesellerHttpClient wholesellerHttpClient=new WholesellerHttpClient("/get_all_genres", RequestMethod.GET);
-    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+    WholeSellerHttpClient wholeSellerHttpClient =new WholeSellerHttpClient("/get_all_genres", RequestMethod.GET);
+    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if(status==200){
@@ -109,9 +109,9 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
 
       }
     });
-    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholesellerHttpClient.executeAsync();
+    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholeSellerHttpClient.executeAsync();
   }
 
   private void setTabNames(JSONArray tabsList) {
@@ -168,8 +168,8 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
       Utility.reportException(e);
     }
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart/"+ orderId+"/query?itemId="+id,jsonObject.toString(), RequestMethod.PUT);
-    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+    WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/add_to_user_cart/"+ orderId+"/query?itemId="+id,jsonObject.toString(), RequestMethod.PUT);
+    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
@@ -198,9 +198,9 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
 
       }
     });
-    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholesellerHttpClient.executeAsync();
+    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholeSellerHttpClient.executeAsync();
   }
 
   private void updateData(int quantity) {
@@ -223,8 +223,8 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
       Utility.reportException(e);
     }
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/add_to_user_cart",jsonObject.toString(), RequestMethod.POST);
-    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+    WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/add_to_user_cart",jsonObject.toString(), RequestMethod.POST);
+    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
@@ -260,9 +260,9 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
 
       }
     });
-    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholesellerHttpClient.executeAsync();
+    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholeSellerHttpClient.executeAsync();
 
   }
 

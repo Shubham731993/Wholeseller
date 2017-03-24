@@ -23,7 +23,7 @@ import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 
 /**
  * Created by shubham.srivastava on 17/07/16.
@@ -74,8 +74,8 @@ public class DetailFragment extends Fragment {
 
   private void callGenresApi(String id) {
     ((DetailActivity)context).showProgress("Please Wait",false);
-    WholesellerHttpClient wholesellerHttpClient=new WholesellerHttpClient("/get_all_genres/"+id, RequestMethod.GET);
-    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+    WholeSellerHttpClient wholeSellerHttpClient =new WholeSellerHttpClient("/get_all_genres/"+id, RequestMethod.GET);
+    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if(status==200){
@@ -99,9 +99,9 @@ public class DetailFragment extends Fragment {
 
       }
     });
-    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholesellerHttpClient.executeAsync();
+    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholeSellerHttpClient.executeAsync();
   }
 
   public void updateItem(int position,int orderItemValue){

@@ -31,7 +31,7 @@ import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.SpacesItemDecoration;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 import abominable.com.wholeseller.login.EnterMobileNumberPage;
 import abominable.com.wholeseller.ticket.DisplayOrder;
 import abominable.com.wholeseller.ticket.OrderTicketActivity;
@@ -208,8 +208,8 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
 
   private void callAddressPostApi(JSONObject jsonObject) {
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/post_user_details", jsonObject.toString(), RequestMethod.POST);
-    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+    WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/post_user_details", jsonObject.toString(), RequestMethod.POST);
+    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
@@ -230,9 +230,9 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
         }
       }
     });
-    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholesellerHttpClient.executeAsync();
+    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholeSellerHttpClient.executeAsync();
   }
 
   @Override

@@ -18,7 +18,7 @@ import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 
 /**
  * Created by shubham.srivastava on 22/02/17.
@@ -49,8 +49,8 @@ public class YourOrderActivity extends BaseActivity {
   private void callOrderApi() {
     try {
       showProgress();
-      WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/get_user_orders", RequestMethod.GET);
-      wholesellerHttpClient.setResponseListner(new ResponseListener() {
+      WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/get_user_orders", RequestMethod.GET);
+      wholeSellerHttpClient.setResponseListner(new ResponseListener() {
         @Override
         public void onResponse(int status, String response) {
           if (status == 200) {
@@ -74,9 +74,9 @@ public class YourOrderActivity extends BaseActivity {
           }
         }
       });
-      wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-      wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-      wholesellerHttpClient.executeAsync();
+      wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+      wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+      wholeSellerHttpClient.executeAsync();
     } catch (Exception e) {
       Utility.reportException(e);
       hideProgress();

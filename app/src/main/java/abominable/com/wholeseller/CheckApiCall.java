@@ -8,7 +8,7 @@ import android.widget.TextView;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 
 /**
  * Created by shubham.srivastava on 10/07/16.
@@ -25,13 +25,13 @@ public class CheckApiCall extends AppCompatActivity{
   }
 
   private void callApi() {
-    final WholesellerHttpClient client = new WholesellerHttpClient("/wholemart", RequestMethod.GET);
+    final WholeSellerHttpClient client = new WholeSellerHttpClient("/wholemart", RequestMethod.GET);
 
     client.setResponseListner(new ResponseListener() {
 
       @Override
       public void onResponse(final int status, final String response) {
-        if (status == WholesellerHttpClient.HTTP_OK) {
+        if (status == WholeSellerHttpClient.HTTP_OK) {
           try {
             textView.setText(response);
           } catch (final Exception e) {

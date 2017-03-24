@@ -29,7 +29,7 @@ import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.SpacesItemDecoration;
 import abominable.com.wholeseller.common.Utility;
-import abominable.com.wholeseller.common.WholesellerHttpClient;
+import abominable.com.wholeseller.common.WholeSellerHttpClient;
 import abominable.com.wholeseller.hamburger.YourOrderActivity;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
@@ -71,8 +71,8 @@ public class HomeActivity extends BaseActivity
 
   private void callHomeApi() {
     showProgress("Please Wait", false);
-    WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/get_all_genres", RequestMethod.GET);
-    wholesellerHttpClient.setResponseListner(new ResponseListener() {
+    WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/get_all_genres", RequestMethod.GET);
+    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
       @Override
       public void onResponse(int status, String response) {
         if (status == 200) {
@@ -93,9 +93,9 @@ public class HomeActivity extends BaseActivity
         }
       }
     });
-    wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholesellerHttpClient.executeAsync();
+    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+    wholeSellerHttpClient.executeAsync();
   }
 
   @Override
@@ -160,8 +160,8 @@ public class HomeActivity extends BaseActivity
       JSONObject jsonObject = new JSONObject();
       jsonObject.put(Constants.AUTH_KEY, WholeMartApplication.getValue(Constants.UserConstants.AUTH_KEY, ""));
       showProgress("Please Wait", false);
-      WholesellerHttpClient wholesellerHttpClient = new WholesellerHttpClient("/login/logout", jsonObject.toString(), RequestMethod.POST);
-      wholesellerHttpClient.setResponseListner(new ResponseListener() {
+      WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/login/logout", jsonObject.toString(), RequestMethod.POST);
+      wholeSellerHttpClient.setResponseListner(new ResponseListener() {
         @Override
         public void onResponse(int status, String response) {
           if (status == 200) {
@@ -189,9 +189,9 @@ public class HomeActivity extends BaseActivity
           }
         }
       });
-      wholesellerHttpClient.setmHttpProtocol(Constants.HTTP);
-      wholesellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-      wholesellerHttpClient.executeAsync();
+      wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+      wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+      wholeSellerHttpClient.executeAsync();
     } catch (JSONException e) {
       Utility.reportException(e);
       showErrorDialog("", getString(R.string.error));
