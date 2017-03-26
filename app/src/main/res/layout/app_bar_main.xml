@@ -40,7 +40,7 @@
     </FrameLayout>
 
     <ImageView
-      android:layout_marginTop="20dp"
+      android:layout_marginTop="40dp"
       android:id="@+id/quick_order_icon"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
       android:layout_height="wrap_content"
       android:layout_below="@+id/quick_order_icon"
       android:layout_centerHorizontal="true"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="20dp"
       android:tag="@string/regular"
       android:text="Quick Order"
       android:textColor="@color/flight_review_black"
@@ -63,7 +63,7 @@
 
     <android.support.v7.widget.RecyclerView
       android:id="@+id/item_list"
-      android:layout_marginTop="20dp"
+      android:layout_marginTop="40dp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_below="@+id/quick_order_text"

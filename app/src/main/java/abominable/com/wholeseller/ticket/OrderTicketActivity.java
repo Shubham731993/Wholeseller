@@ -93,4 +93,11 @@ public class OrderTicketActivity extends BaseActivity {
 
 
   }
+
+  @Override
+  public void onBackPressed() {
+    super.onBackPressed();
+    Intent intent=new Intent(OrderTicketActivity.this, HomeActivity.class);
+    startActivity(intent);
+  }
 }

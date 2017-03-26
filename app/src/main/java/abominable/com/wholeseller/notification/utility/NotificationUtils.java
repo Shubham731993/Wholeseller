@@ -55,7 +55,7 @@ public class NotificationUtils {
 
 
     // notification icon
-    final int icon = R.drawable.ic_logo;
+    final int icon = R.drawable.wholemart_logo;
 
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
     final PendingIntent resultPendingIntent =
@@ -71,7 +71,6 @@ public class NotificationUtils {
 
     final Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
         + "://" + mContext.getPackageName() + "/raw/notification");
-
     if (!TextUtils.isEmpty(imageUrl)) {
 
       if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
@@ -86,7 +85,6 @@ public class NotificationUtils {
       }
     } else {
       showSmallNotification(mBuilder, icon,  message,  resultPendingIntent, alarmSound);
-      playNotificationSound();
     }
   }
 
@@ -126,7 +124,6 @@ public class NotificationUtils {
         .setContentIntent(resultPendingIntent)
         .setSound(alarmSound)
         .setStyle(bigPictureStyle)
-        //.setWhen(getTimeMilliSec(timeStamp))
         .setSmallIcon(icon)
         .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
         .setContentText(message)

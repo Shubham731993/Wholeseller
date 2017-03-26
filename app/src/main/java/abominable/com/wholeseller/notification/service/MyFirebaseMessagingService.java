@@ -2,7 +2,6 @@ package abominable.com.wholeseller.notification.service;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -11,8 +10,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Map;
 
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.notification.utility.NotificationModel;
@@ -41,13 +38,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        }
 
         // Check if message contains a data payload.
-        if (remoteMessage.getData().size() > 0) {
-            Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
+        if (remoteMessage.getNotification() !=null) {
+            Log.e(TAG, "Data Payload: " + remoteMessage.getNotification().toString());
 
             try {
                 //JSONObject json = new JSONObject(remoteMessage.getData().toString());
 
-                handleDataMessage(remoteMessage.getData());
+                handleDataMessage(remoteMessage.getNotification());
             } catch (Exception e) {
                 Log.e(TAG, "Exception: " + e.getMessage());
             }
@@ -56,60 +53,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     }
 
-    private void handleDataMessage(Map<String, String> data) {
+    private void handleDataMessage(RemoteMessage.Notification data) {
 
         try {
-            // JSONObject data = json.getJSONObject("default");
-
-
             JSONObject notificationObject = new JSONObject();
-            notificationObject.put("tagid", data.get("tagid"));
-            notificationObject.put("message", data.get("message"));
-            JSONObject jsonObject = new JSONObject(data.get("dataobj"));
-            notificationObject.put("dataobj", jsonObject);
+            notificationObject.put("message", data.getBody());
             Gson gson = new Gson();
             NotificationModel notificationModel = gson.fromJson(String.valueOf(notificationObject), NotificationModel.class);
-//            if (notificationModel != null) {
-//                ShrofileDataSource dataSource = new ShrofileDataSource(getApplicationContext());
-//                dataSource.insertNotificationItem(notificationModel);
-//            }
-            //String title = data.getString("title");
-            String message = data.get("message");
-            //boolean isBackground = data.getBoolean("is_background");
-
-            //Log.e(TAG, "imageUrl: " + imageUrl);
-            //Log.e(TAG, "timestamp: " + timestamp);
-
-            if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
-                // app is in foreground, broadcast the push message
-//                if (data.get("tagid").equals(String.valueOf(NotificationTags.SHOW_VIDEO_ACTIVITY))) {
-                Intent pushNotification = new Intent(Constants.PUSH_NOTIFICATION);
-                pushNotification.putExtra(Constants.PAYLOAD, notificationModel);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
-
-                // play notification sound
-                NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
-                notificationUtils.playNotificationSound();
-//                } else {
-//                    setUpNotification(notificationModel, message);
-//                }
-            } else {
-
-                // app is in background, show the notification in notification tray
-       /* Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-        resultIntent.setData(Uri.parse(payload.getString("url")));*/
-
-                setUpNotification(notificationModel, message);
-                // check for image attachment
-        /*if (TextUtils.isEmpty(imageUrl)) {
-          showNotificationMessage(getApplicationContext(), message, resultIntent);
-        } else {
-          // image is present, show notification with image
-          showNotificationMessageWithBigImage(getApplicationContext(),  message,  resultIntent, imageUrl);
-        }*/
-            }
-
-            // }
+            String message = data.getBody();
+            setUpNotification(notificationModel, message);
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());
         } catch (Exception e) {
@@ -122,6 +74,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      */
     private void showNotificationMessage(Context context, String message, Intent intent) {
         notificationUtils = new NotificationUtils(context);
+        notificationUtils.playNotificationSound();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         notificationUtils.showNotificationMessage(message, intent);
     }
