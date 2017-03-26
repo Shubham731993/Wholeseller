@@ -167,17 +167,17 @@
       </android.support.design.widget.TextInputLayout>
 
 
-      <TextView
+      <abominable.com.wholeseller.common.WMTextView
         android:id="@+id/button_create_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:typeface="monospace"
+        android:tag="@string/regular"
         android:background="@drawable/translucent_ripple"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/lbl_create_account"
-        android:textColor="@color/l_grey"
+        android:textColor="@color/white"
         android:textSize="20sp"/>
 
     </LinearLayout>

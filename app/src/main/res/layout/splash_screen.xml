@@ -16,18 +16,17 @@
       android:id="@+id/logo"
       android:layout_width="100dp"
       android:layout_height="100dp"
-      android:src="@drawable/ic_logo"/>
+      android:src="@drawable/wholemart_logo"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:layout_alignParentBottom="true"
       android:layout_marginTop="10dp"
       android:layout_centerHorizontal="true"
-      android:textColor="@color/signup_blue"
+      android:textColor="@color/logo_orange"
       android:textSize="20sp"
       android:id="@+id/wholemart"
-      android:text="WHOLEMART"
-      android:textStyle="bold"
-      android:fontFamily="sans-serif-smallcaps"
+      android:text="@string/whole_mart"
+      android:tag="@string/regular"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"/>
 

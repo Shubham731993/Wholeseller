@@ -111,7 +111,7 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       confirmOrder.setVisibility(View.GONE);
       placeOrder.setVisibility(View.GONE);
       continueButton.setText("Continue");
-      ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
+      ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.logo_orange));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.step_disabled));
       step2.setTextColor(ContextCompat.getColor(this, R.color.grey));
@@ -123,9 +123,9 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       placeOrder.setVisibility(View.GONE);
       recyclerView.setAdapter(new FinalOrderAdapter(this, checkOutItemArrayList));
       continueButton.setText("Confirm Order");
-      ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
+      ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.logo_orange));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
-      ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
+      ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.logo_orange));
       step2.setTextColor(ContextCompat.getColor(this, R.color.white));
       ((GradientDrawable) step3.getBackground()).setColor(ContextCompat.getColor(this, R.color.step_disabled));
       step3.setTextColor(ContextCompat.getColor(this, R.color.grey));
@@ -134,11 +134,11 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
       confirmOrder.setVisibility(View.GONE);
       placeOrder.setVisibility(View.VISIBLE);
       continueButton.setText("Place Order");
-      ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
+      ((GradientDrawable) step1.getBackground()).setColor(ContextCompat.getColor(this, R.color.logo_orange));
       step1.setTextColor(ContextCompat.getColor(this, R.color.white));
-      ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
+      ((GradientDrawable) step2.getBackground()).setColor(ContextCompat.getColor(this, R.color.logo_orange));
       step2.setTextColor(ContextCompat.getColor(this, R.color.white));
-      ((GradientDrawable) step3.getBackground()).setColor(ContextCompat.getColor(this, R.color.signup_blue));
+      ((GradientDrawable) step3.getBackground()).setColor(ContextCompat.getColor(this, R.color.logo_orange));
       step3.setTextColor(ContextCompat.getColor(this, R.color.white));
     }
   }

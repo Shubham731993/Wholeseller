@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -27,9 +26,9 @@ import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
-import abominable.com.wholeseller.common.SpacesItemDecoration;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholeSellerHttpClient;
+import abominable.com.wholeseller.detail.DetailActivity;
 import abominable.com.wholeseller.hamburger.YourOrderActivity;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
@@ -46,6 +45,7 @@ public class HomeActivity extends BaseActivity
     setContentView(R.layout.activity_main);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+    getSupportActionBar().setTitle(R.string.home);
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,11 +57,11 @@ public class HomeActivity extends BaseActivity
     navigationView.setNavigationItemSelectedListener(this);
 
     recyclerView = (RecyclerView) findViewById(R.id.item_list);
-    GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+    GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
     layoutManager.setOrientation(GridLayoutManager.VERTICAL);
     recyclerView.setLayoutManager(layoutManager);
-    int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
-    recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+    /*int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
+    recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
     mVwPager = (ViewPager) findViewById(R.id.view_pager);
     CirclePageIndicator mPageIndicator = (CirclePageIndicator) findViewById(R.id.pager_indicator);
     mVwPager.setAdapter(new CarousalImageAdapter(this));
@@ -108,22 +108,6 @@ public class HomeActivity extends BaseActivity
     }
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.main, menu);
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    int id = item.getItemId();
-    if (id == R.id.action_settings) {
-      return true;
-    }
-
-    return super.onOptionsItemSelected(item);
-  }
-
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
@@ -135,19 +119,20 @@ public class HomeActivity extends BaseActivity
     } else if (id == R.id.nav_gallery) {
       callOrderActivity();
 
-    } else if (id == R.id.nav_slideshow) {
-
-    } else if (id == R.id.nav_manage) {
-
-    } else if (id == R.id.nav_share) {
-
-    } else if (id == R.id.nav_send) {
+    }
+    else if (id == R.id.shop) {
+      callDetailActivity();
 
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  private void callDetailActivity() {
+    Intent intent=new Intent(this, DetailActivity.class);
+    startActivity(intent);
   }
 
   private void callOrderActivity() {

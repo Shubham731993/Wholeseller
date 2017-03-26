@@ -18,7 +18,7 @@
     android:gravity="left"
     android:padding="10dp"
     android:text="Arhar ki Daal"
-    android:textColor="@color/signup_blue"
+    android:textColor="@color/logo_orange"
     android:textSize="20sp"
     android:textStyle="bold"/>
 
@@ -31,7 +31,7 @@
     android:gravity="right"
     android:padding="10dp"
     android:text="\u20b9120"
-    android:textColor="@color/signup_blue"
+    android:textColor="@color/logo_orange"
     android:textSize="20sp"
     android:textStyle="bold"/>
 

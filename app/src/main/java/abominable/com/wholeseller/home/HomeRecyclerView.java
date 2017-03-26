@@ -2,16 +2,19 @@ package abominable.com.wholeseller.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import abominable.com.wholeseller.R;
+import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.detail.DetailActivity;
 
 /**
@@ -36,12 +39,24 @@ public class HomeRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     HomeItemHolder homeItemHolder = (HomeItemHolder) holder;
-   // homeItemHolder.price.setText(context.getString(R.string.rupee_string, detailObjects.get(position).getPrice()));
     try {
-      homeItemHolder.itemName.setText(genresList.getString(0));
+      homeItemHolder.itemName.setText(genresList.getString(position));
+      switch (genresList.getString(position)){
+        case "Dal":
+          homeItemHolder.imageView.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.daal));
+          break;
+        case "Rice":
+          homeItemHolder.imageView.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.rice));
+          break;
+        case "Dry Fruits":
+          homeItemHolder.imageView.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.dry_fruits));
+          break;
+      }
     } catch (JSONException e) {
       e.printStackTrace();
+      Utility.reportException(e);
     }
+
     homeItemHolder.view.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -59,14 +74,14 @@ public class HomeRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
 
   private class HomeItemHolder extends RecyclerView.ViewHolder  {
     TextView itemName;
-    TextView price;
     View view;
+    ImageView imageView;
 
     public HomeItemHolder(View itemLayoutView) {
       super(itemLayoutView);
       view=itemLayoutView;
       itemName = (TextView) itemLayoutView.findViewById(R.id.item_name);
-      price = (TextView) itemLayoutView.findViewById(R.id.price);
+      imageView = (ImageView) itemLayoutView.findViewById(R.id.image_view);
     }
   }
 }

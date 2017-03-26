@@ -14,10 +14,10 @@
     android:layout_marginBottom="30dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/ic_location_on_light_blue_900_48dp"/>
+    android:src="@drawable/ic_location_on_orange_48dp"/>
 
-  <TextView
-    android:fontFamily="sans-serif-smallcaps"
+  <abominable.com.wholeseller.common.WMTextView
+    android:tag="@string/regular"
     android:layout_centerInParent="true"
     android:id="@+id/current_location_text"
     android:layout_width="wrap_content"
@@ -26,8 +26,8 @@
     android:text="@string/your_current_location"
     />
 
-  <TextView
-    android:fontFamily="sans-serif-smallcaps"
+  <abominable.com.wholeseller.common.WMTextView
+    android:tag="@string/medium"
     android:id="@+id/current_location"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/current_location_text"
@@ -35,11 +35,10 @@
     android:layout_height="wrap_content"
     android:textColor="@color/shade_grey"
     android:text="@string/unknown"
-    android:textStyle="bold"
     android:layout_marginTop="10dp"
     />
 
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/use_current_location"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -51,9 +50,8 @@
     android:padding="10dp"
     android:text="@string/use_current_location"
     android:textColor="@color/white"
-    android:fontFamily="sans-serif-smallcaps"/>
-
-  <TextView
+    android:tag="@string/light"/>
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/or_text"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/use_current_location"
@@ -61,12 +59,11 @@
     android:layout_height="wrap_content"
     android:textColor="@color/shade_grey"
     android:text="@string/or"
-    android:textStyle="bold"
-    android:fontFamily="sans-serif-smallcaps"
+    android:tag="@string/regular"
     android:layout_marginTop="20dp"
     />
 
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/enter_manual_location"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -78,18 +75,17 @@
     android:padding="10dp"
     android:text="@string/enter_location_manually"
     android:textColor="@color/white"
-    android:fontFamily="sans-serif-smallcaps"/>
+    android:tag="@string/light"/>
 
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/skip"
     android:layout_centerHorizontal="true"
     android:layout_below="@+id/enter_manual_location"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textColor="@color/signup_blue"
+    android:textColor="@color/logo_orange"
     android:text="@string/skip_for_now"
-    android:fontFamily="sans-serif-smallcaps"
-    android:textStyle="bold"
+    android:tag="@string/bold"
     android:layout_marginTop="30dp"
     />
 

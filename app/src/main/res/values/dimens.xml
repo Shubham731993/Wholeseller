@@ -12,4 +12,5 @@
   <dimen name="order_inner_margin">5dp</dimen>
   <dimen name="order_content_margin">16dp</dimen>
   <dimen name="order_content_text_margin">20dp</dimen>
+  <dimen name="home_icon_size">64dp</dimen>
 </resources>

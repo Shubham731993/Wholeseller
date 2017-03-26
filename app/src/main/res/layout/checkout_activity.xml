@@ -22,7 +22,7 @@
     android:layout_gravity="bottom"
     android:textStyle="bold"
     android:text="Proceed to Pay"
-    android:background="@color/signup_blue"
+    android:background="@color/logo_orange"
     android:layout_alignParentBottom="true"/>
 
 

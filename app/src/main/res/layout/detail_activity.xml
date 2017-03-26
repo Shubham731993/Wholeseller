@@ -16,7 +16,7 @@
       android:id="@+id/tab_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/signup_blue"
+      android:background="@color/logo_orange"
       app:tabGravity="center"
       app:tabMode="fixed"
       style="@style/Widget.Goibibo.HotelHomeTabLayout"
@@ -36,7 +36,7 @@
     android:textColor="@color/white"
     android:layout_gravity="bottom"
     android:text="Checkout(0)"
-    android:background="@color/signup_blue"
+    android:background="@color/logo_orange"
     android:layout_alignParentBottom="true"/>
 
 </android.support.design.widget.CoordinatorLayout>

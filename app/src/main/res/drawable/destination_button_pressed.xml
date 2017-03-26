@@ -4,6 +4,6 @@
 
   <corners android:radius="3.0dip" />
 
-  <solid android:color="@color/signup_blue" />
+  <solid android:color="@color/logo_orange" />
 
 </shape>

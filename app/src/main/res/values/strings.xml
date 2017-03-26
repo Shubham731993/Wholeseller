@@ -81,6 +81,8 @@
   <string name="you_paid">YOU PAID</string>
   <string name="name">Name</string>
   <string name="checkin">CheckIn</string>
+  <string name="whole_mart">WHOLEMART</string>
+  <string name="home">Home</string>
 
 
 </resources>

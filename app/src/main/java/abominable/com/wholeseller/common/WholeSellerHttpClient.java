@@ -19,14 +19,14 @@ import abominable.com.wholeseller.WholeMartApplication;
 /**
  * Created by shubham.srivastava on 10/07/16.
  */
-public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
+public class WholeSellerHttpClient extends AsyncTask<Void,Void,String> {
 
 
-  private static final String TAG = WholesellerHttpClient.class.getSimpleName();
+  private static final String TAG = WholeSellerHttpClient.class.getSimpleName();
   private final String mBaseUrl;
   private final RequestMethod mRequestMethod;
   private String mData;
-  private WholesellerHttpClient mlastRequest;
+  private WholeSellerHttpClient mlastRequest;
   private String mHttpProtocol= Constants.HTTP;
   private String mHttpHost= BuildConfig.APP_ENGINE_HOST;
 
@@ -44,7 +44,7 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
   private String mEmail;
   private int mStatus;
 
-  public WholesellerHttpClient(final String url, final RequestMethod rm) {
+  public WholeSellerHttpClient(final String url, final RequestMethod rm) {
     super();
     mBaseUrl = url;
     mRequestMethod = rm;
@@ -55,7 +55,7 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
    * @param params
    * @param rm
    */
-  public WholesellerHttpClient(final String url, final String params, final RequestMethod rm) {
+  public WholeSellerHttpClient(final String url, final String params, final RequestMethod rm) {
     super();
     mBaseUrl = url;
     mData = params;
@@ -64,9 +64,9 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
   @Override
   protected String doInBackground(Void... params) {
     mlastRequest = this;
-      Log.i(WholesellerHttpClient.TAG, "Request URL: " + mHttpProtocol + mHttpHost + mBaseUrl);
-      Log.i(WholesellerHttpClient.TAG, "Request Method: " + mRequestMethod);
-      Log.i(WholesellerHttpClient.TAG, "Request Data: " + mData);
+      Log.i(WholeSellerHttpClient.TAG, "Request URL: " + mHttpProtocol + mHttpHost + mBaseUrl);
+      Log.i(WholeSellerHttpClient.TAG, "Request Method: " + mRequestMethod);
+      Log.i(WholeSellerHttpClient.TAG, "Request Data: " + mData);
 
     String result = "";
     switch (mRequestMethod) {
@@ -93,8 +93,8 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
   @Override
   protected void onPostExecute(final String result) {
     super.onPostExecute(result);
-    if (mStatus == WholesellerHttpClient.HTTP_AUTHENTICATE) {
-      if (WholesellerHttpClient.loginRetryCount <= WholesellerHttpClient.LOGIN_RETRY_LIMIT) {
+    if (mStatus == WholeSellerHttpClient.HTTP_AUTHENTICATE) {
+      if (WholeSellerHttpClient.loginRetryCount <= WholeSellerHttpClient.LOGIN_RETRY_LIMIT) {
         //loginIntoReviewsSystem();
       } else {
         if (mListner != null) {
@@ -131,8 +131,8 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
 
       return processAndSendResponse(status,in);
     } catch (final Exception e) {
-      mStatus = WholesellerHttpClient.HTTP_ERROR;
-      return WholesellerHttpClient.NETWORK_ERROR_MESSAGE;
+      mStatus = WholeSellerHttpClient.HTTP_ERROR;
+      return WholeSellerHttpClient.NETWORK_ERROR_MESSAGE;
     }
   }
 
@@ -170,8 +170,8 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
       return processAndSendResponse(status,in);
 
     } catch (final Exception e) {
-      mStatus = WholesellerHttpClient.HTTP_ERROR;
-      return WholesellerHttpClient.NETWORK_ERROR_MESSAGE;
+      mStatus = WholeSellerHttpClient.HTTP_ERROR;
+      return WholeSellerHttpClient.NETWORK_ERROR_MESSAGE;
     }
   }
 
@@ -210,8 +210,8 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
 
       return processAndSendResponse(status,in);
     } catch (final Exception e) {
-      mStatus = WholesellerHttpClient.HTTP_ERROR;
-      return WholesellerHttpClient.NETWORK_ERROR_MESSAGE;
+      mStatus = WholeSellerHttpClient.HTTP_ERROR;
+      return WholeSellerHttpClient.NETWORK_ERROR_MESSAGE;
     }
   }
 
@@ -245,16 +245,16 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
 
       return processAndSendResponse(status,in);
     } catch (final Exception e) {
-      mStatus = WholesellerHttpClient.HTTP_ERROR;
-      return WholesellerHttpClient.NETWORK_ERROR_MESSAGE;
+      mStatus = WholeSellerHttpClient.HTTP_ERROR;
+      return WholeSellerHttpClient.NETWORK_ERROR_MESSAGE;
     }
   }
 
   private void setHeaders(final HttpURLConnection connection) {
     connection.addRequestProperty("Content-type", "application/json");
-    connection.setRequestProperty(WholesellerHttpClient.ACCEPT_HEADER, "application/json");
-    connection.setRequestProperty(WholesellerHttpClient.ACCEPT_ENCODING, "gzip");
-    connection.setRequestProperty(WholesellerHttpClient.AUTH_HEADER, WholeMartApplication.getValue(Constants.AUTH_KEY,""));
+    connection.setRequestProperty(WholeSellerHttpClient.ACCEPT_HEADER, "application/json");
+    connection.setRequestProperty(WholeSellerHttpClient.ACCEPT_ENCODING, "gzip");
+    connection.setRequestProperty(WholeSellerHttpClient.AUTH_HEADER, WholeMartApplication.getValue(Constants.AUTH_KEY,""));
   }
 
 
@@ -262,11 +262,11 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
 
     try {
       mStatus = statusCode;
-      Log.i(WholesellerHttpClient.TAG, "Reponse Code" + mStatus);
+      Log.i(WholeSellerHttpClient.TAG, "Reponse Code" + mStatus);
       return Util.getStringFromInputStream(in);
     } catch (final Exception e) {
-      mStatus = WholesellerHttpClient.HTTP_ERROR;
-      return WholesellerHttpClient.NETWORK_ERROR_MESSAGE;
+      mStatus = WholeSellerHttpClient.HTTP_ERROR;
+      return WholeSellerHttpClient.NETWORK_ERROR_MESSAGE;
     }
   }
 
@@ -299,7 +299,7 @@ public class WholesellerHttpClient extends AsyncTask<Void,Void,String> {
 
   @Override
   public String toString() {
-    return "WholesellerHttpClient{" +
+    return "WholeSellerHttpClient{" +
         "mBaseUrl='" + mBaseUrl + '\'' +
         ", mRequestMethod=" + mRequestMethod +
         ", mHttpHost='" + mHttpHost + '\'' +

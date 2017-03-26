@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorPrimary">#dc8744</color>
+  <color name="colorPrimaryDark">#e56353</color>
   <color name="colorAccent">#FF4081</color>
   <color name="l_grey">#d8dede</color>
   <color name="flight_review_black">#de000000</color>
   <color name="shade_grey">#8a000000</color>
   <color name="transparent">#00000000</color>
-  <color name="signup_blue">#2f68ad</color>
+  <color name="logo_orange">#ea8953</color>
   <color name="otp_edtbox_hint_color">#c7c7cd</color>
   <color name="grey">#999999</color>
   <color name="flight_home_grey">#8a8a8a</color>

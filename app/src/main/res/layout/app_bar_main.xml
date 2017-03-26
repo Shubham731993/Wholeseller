@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/otp_edtbox_hint_color"
+  android:background="@color/white"
   android:fitsSystemWindows="true"
   tools:context=".home.HomeActivity">
 
@@ -18,8 +18,8 @@
     <FrameLayout
       android:id="@+id/view_pager_layout"
       android:layout_width="match_parent"
-      android:layout_below="@+id/toolbar"
-      android:layout_height="200dp">
+      android:layout_height="200dp"
+      android:layout_below="@+id/toolbar">
 
       <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
@@ -39,14 +39,34 @@
 
     </FrameLayout>
 
+    <ImageView
+      android:layout_marginTop="20dp"
+      android:id="@+id/quick_order_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/view_pager_layout"
+      android:layout_centerHorizontal="true"
+      android:src="@drawable/quick_order"/>
 
+    <abominable.com.wholeseller.common.WMTextView
+      android:id="@+id/quick_order_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/quick_order_icon"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="10dp"
+      android:tag="@string/regular"
+      android:text="Quick Order"
+      android:textColor="@color/flight_review_black"
+      android:textSize="15sp"/>
 
 
     <android.support.v7.widget.RecyclerView
       android:id="@+id/item_list"
+      android:layout_marginTop="20dp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/view_pager_layout"
+      android:layout_below="@+id/quick_order_text"
       android:padding="5dp"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 

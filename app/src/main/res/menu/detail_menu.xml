@@ -5,8 +5,8 @@
     <item
       android:id="@+id/add_to_cart"
       app:showAsAction="ifRoom"
-      android:icon="@drawable/shopping_cart"
-      android:title="Add to cart"/>
+      android:icon="@drawable/shop_white"
+      android:title="@string/add_to_cart"/>
 
 
 </menu>

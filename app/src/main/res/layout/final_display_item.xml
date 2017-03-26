@@ -20,7 +20,7 @@
       android:layout_height="wrap_content"
       android:fontFamily="sans-serif-smallcaps"
       android:text="25 kgs"
-      android:textColor="@color/signup_blue"
+      android:textColor="@color/logo_orange"
       android:textSize="15sp"/>
 
     <TextView
@@ -32,7 +32,7 @@
       android:layout_toRightOf="@+id/item_quantity"
       android:fontFamily="sans-serif-smallcaps"
       android:text="X"
-      android:textColor="@color/signup_blue"
+      android:textColor="@color/logo_orange"
       android:textSize="15sp"/>
 
     <TextView
@@ -44,7 +44,7 @@
       android:layout_toRightOf="@+id/multiply"
       android:fontFamily="sans-serif-smallcaps"
       android:text="\u20B9144"
-      android:textColor="@color/signup_blue"
+      android:textColor="@color/logo_orange"
       android:textSize="15sp"/>
 
   </RelativeLayout>
@@ -59,7 +59,7 @@
     android:layout_toLeftOf="@+id/quantity_layout"
     android:fontFamily="sans-serif-smallcaps"
     android:text="Masoor Dal"
-    android:textColor="@color/signup_blue"
+    android:textColor="@color/logo_orange"
     android:textSize="20sp"/>
 
 </RelativeLayout>

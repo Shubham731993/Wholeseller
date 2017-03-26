@@ -168,7 +168,7 @@
                 android:padding="10dp"
                 android:tag="@string/condensed_light"
                 android:text="09654887711"
-                android:textColor="@color/signup_blue"
+                android:textColor="@color/logo_orange"
                 android:textSize="15sp"/>
 
 
@@ -217,7 +217,7 @@
             android:paddingLeft="@dimen/order_content_text_margin"
             android:paddingRight="@dimen/order_content_text_margin"
             android:tag="@string/condensed_regular"
-            android:textColor="@color/signup_blue"
+            android:textColor="@color/logo_orange"
             android:textSize="17sp"
             android:textStyle="bold"/>
         </LinearLayout>
@@ -254,7 +254,7 @@
               android:layout_height="wrap_content"
               android:tag="@string/condensed_bold"
               android:text="\u20B91227"
-              android:textColor="@color/signup_blue"
+              android:textColor="@color/logo_orange"
               android:textSize="17sp"/>
           </LinearLayout>
 

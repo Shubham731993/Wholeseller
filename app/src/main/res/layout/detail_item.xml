@@ -126,7 +126,7 @@
               android:text="Click to add to cart"
               android:textStyle="bold"
               android:fontFamily="sans-serif-smallcaps"
-              android:textColor="@color/signup_blue"
+              android:textColor="@color/logo_orange"
               android:textSize="14sp"/>
 
 

@@ -121,7 +121,7 @@
               android:layout_height="wrap_content"
               android:fontFamily="sans-serif-smallcaps"
               android:text="Quantity : 100kgs"
-              android:textColor="@color/signup_blue"
+              android:textColor="@color/logo_orange"
               android:textSize="14sp"/>
 
             <TextView
@@ -132,7 +132,7 @@
               android:fontFamily="sans-serif-smallcaps"
               android:layout_height="wrap_content"
               android:text="\u20B91300/kg"
-              android:textColor="@color/signup_blue"
+              android:textColor="@color/logo_orange"
               android:textSize="14sp"/>
 
 
