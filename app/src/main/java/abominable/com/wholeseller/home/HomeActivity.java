@@ -7,10 +7,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
@@ -64,6 +66,13 @@ public class HomeActivity extends BaseActivity
     recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
     mVwPager = (ViewPager) findViewById(R.id.view_pager);
     CirclePageIndicator mPageIndicator = (CirclePageIndicator) findViewById(R.id.pager_indicator);
+    final CardView searchCard = (CardView) findViewById(R.id.search_card);
+    searchCard.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        callSearchScreen();
+      }
+    });
     mVwPager.setAdapter(new CarousalImageAdapter(this));
     mPageIndicator.setViewPager(mVwPager);
     callHomeApi();
@@ -119,8 +128,7 @@ public class HomeActivity extends BaseActivity
     } else if (id == R.id.nav_gallery) {
       callOrderActivity();
 
-    }
-    else if (id == R.id.shop) {
+    } else if (id == R.id.shop) {
       callDetailActivity();
 
     }
@@ -131,12 +139,17 @@ public class HomeActivity extends BaseActivity
   }
 
   private void callDetailActivity() {
-    Intent intent=new Intent(this, DetailActivity.class);
+    Intent intent = new Intent(this, DetailActivity.class);
     startActivity(intent);
   }
 
   private void callOrderActivity() {
     Intent intent = new Intent(HomeActivity.this, YourOrderActivity.class);
+    startActivity(intent);
+  }
+
+  private void callSearchScreen() {
+    Intent intent = new Intent(this, SearchScreen.class);
     startActivity(intent);
   }
 

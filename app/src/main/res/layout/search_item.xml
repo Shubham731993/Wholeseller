@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="vertical">
+
+  <RelativeLayout
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <abominable.com.wholeseller.common.WMTextView
+      android:textSize="20sp"
+      android:layout_marginTop="10dp"
+      android:layout_marginLeft="10dp"
+      android:layout_marginBottom="10dp"
+      android:textColor="@color/logo_orange"
+      android:id="@+id/name"
+      android:tag="@string/condensed_light"
+      android:text="Arhar dal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+    <abominable.com.wholeseller.common.WMTextView
+      android:layout_marginLeft="10dp"
+      android:layout_marginBottom="10dp"
+      android:text="Dal"
+      android:tag="@string/regular"
+      android:textColor="@color/text_color"
+      android:id="@+id/category"
+      android:layout_below="@+id/name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+  </RelativeLayout>
+
+  <View
+    android:layout_below="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="0.6dp"
+    android:background="@color/tabTheme"
+    />
+
+</RelativeLayout>

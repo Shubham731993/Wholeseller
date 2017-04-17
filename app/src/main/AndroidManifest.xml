@@ -76,6 +76,12 @@
 
 
     <activity
+      android:name=".home.SearchScreen"
+      android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
+      android:windowSoftInputMode="stateHidden"/>
+
+
+    <activity
       android:name=".address.FetchAddressActivity"
       android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
       android:windowSoftInputMode="stateHidden"/>
