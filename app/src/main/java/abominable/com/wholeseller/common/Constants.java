@@ -92,4 +92,10 @@ public class Constants {
 
   }
 
+
+  public interface HomeTyoe{
+    String HOME_API="home_api";
+    String LOGOUT_API="logout_api";
+  }
+
 }

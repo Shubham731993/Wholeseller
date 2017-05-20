@@ -1,11 +1,10 @@
 package abominable.com.wholeseller;
 
-import android.app.Application;
 import android.content.Context;
-
 import android.content.SharedPreferences;
-
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -15,7 +14,7 @@ import io.fabric.sdk.android.Fabric;
 /**
  * Created by shubham.srivastava on 06/08/16.
  */
-public class WholeMartApplication extends Application {
+public class WholeMartApplication extends MultiDexApplication {
   private static Context context;
   private static SharedPreferences prefs;
   public static WholeMartApplication instance;
@@ -27,6 +26,7 @@ public class WholeMartApplication extends Application {
   public static Context getAppContext() {
     return WholeMartApplication.context;
   }
+
 
   /**
    * @param k
@@ -130,5 +130,11 @@ public class WholeMartApplication extends Application {
     WholeMartApplication.prefs = PreferenceManager.getDefaultSharedPreferences(WholeMartApplication.context.getApplicationContext());
     instance = this;
     Fabric.with(this, new Crashlytics());
+  }
+
+  @Override
+  protected void attachBaseContext(Context base) {
+    super.attachBaseContext(base);
+    MultiDex.install(this);
   }
 }

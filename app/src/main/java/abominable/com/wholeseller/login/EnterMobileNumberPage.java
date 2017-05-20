@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import abominable.com.wholeseller.BuildConfig;
+import abominable.com.wholeseller.MainActivity;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
 import abominable.com.wholeseller.common.BaseActivity;
@@ -23,7 +24,6 @@ import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholeSellerHttpClient;
-import abominable.com.wholeseller.home.HomeActivity;
 
 /**
  * Created by shubham.srivastava on 14/08/16.
@@ -116,7 +116,7 @@ public class EnterMobileNumberPage extends BaseActivity {
             JSONObject jsonObject = new JSONObject(response);
             if (jsonObject.has(Constants.AUTH_KEY)) {
               WholeMartApplication.setValue(Constants.UserConstants.AUTH_KEY, jsonObject.get(Constants.AUTH_KEY).toString());
-              Intent intent = new Intent(EnterMobileNumberPage.this, HomeActivity.class);
+              Intent intent = new Intent(EnterMobileNumberPage.this, MainActivity.class);
               startActivity(intent);
               finish();
             } else {

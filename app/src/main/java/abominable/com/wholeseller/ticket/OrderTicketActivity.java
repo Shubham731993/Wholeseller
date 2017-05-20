@@ -10,12 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import abominable.com.wholeseller.MainActivity;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.SpacesItemDecoration;
 import abominable.com.wholeseller.common.WMTextView;
-import abominable.com.wholeseller.home.HomeActivity;
 
 /**
  * Created by shubham.srivastava on 17/03/17.
@@ -43,7 +43,7 @@ public class OrderTicketActivity extends BaseActivity {
     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent=new Intent(OrderTicketActivity.this, HomeActivity.class);
+        Intent intent=new Intent(OrderTicketActivity.this, MainActivity.class);
         startActivity(intent);
       }
     });
@@ -97,7 +97,7 @@ public class OrderTicketActivity extends BaseActivity {
   @Override
   public void onBackPressed() {
     super.onBackPressed();
-    Intent intent=new Intent(OrderTicketActivity.this, HomeActivity.class);
+    Intent intent=new Intent(OrderTicketActivity.this, MainActivity.class);
     startActivity(intent);
   }
 }

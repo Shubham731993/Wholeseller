@@ -1,27 +1,33 @@
 {
   "project_info": {
-    "project_number": "148829012767",
-    "firebase_url": "https://wholemart-inc.firebaseio.com",
-    "project_id": "wholemart-inc",
-    "storage_bucket": "wholemart-inc.appspot.com"
+    "project_number": "849763543984",
+    "project_id": "wholemart-1470437007087"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:148829012767:android:5cfd8b37c1c3ad91",
+        "mobilesdk_app_id": "1:849763543984:android:5cfd8b37c1c3ad91",
         "android_client_info": {
           "package_name": "abominable.com.wholeseller"
         }
       },
       "oauth_client": [
         {
-          "client_id": "148829012767-s9lhc3i2c9554cpva0cs4c4p8diff7uh.apps.googleusercontent.com",
+          "client_id": "849763543984-h1lj6df6n8t4ahg58hagslo8228vguqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "abominable.com.wholeseller",
+            "certificate_hash": "6d6b5c67059995879f7bcfbd91b9b4b9ba1593cc"
+          }
+        },
+        {
+          "client_id": "849763543984-s8g14u63hmnl6ctog2kvv43dc4hv585h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmOhWjyU2R1EM4il04DRu_0Ms9Q34yDvI"
+          "current_key": "AIzaSyCB_GHvNzPI4EBo0GGunL-6NlUmQAxrukk"
         }
       ],
       "services": {
@@ -33,7 +39,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

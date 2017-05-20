@@ -13,6 +13,7 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import abominable.com.wholeseller.MainActivity;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.detail.DetailActivity;
@@ -62,7 +63,7 @@ public class HomeRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
       public void onClick(View v) {
         final Intent homeIntent = new Intent(context, DetailActivity.class);
         context.startActivity(homeIntent);
-        ((HomeActivity) context).overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
+        ((MainActivity) context).overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
       }
     });
   }

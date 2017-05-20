@@ -10,8 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
+import abominable.com.wholeseller.checkout.CheckOutItem;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 
@@ -22,6 +25,7 @@ public class FetchAddressActivity extends BaseActivity implements View.OnClickLi
   private EditText city, flat, apartment, company;
   private String flow;
   private String orderId;
+  private ArrayList<CheckOutItem> checkOutItemArrayList;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class FetchAddressActivity extends BaseActivity implements View.OnClickLi
     if(getIntent().hasExtra(Constants.ORDER_ID)) {
       orderId = getIntent().getStringExtra(Constants.ORDER_ID);
     }
+    checkOutItemArrayList = getIntent().getParcelableArrayListExtra(Constants.DETAIL_OBJECT);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setHomeButtonEnabled(true);
@@ -77,7 +82,7 @@ public class FetchAddressActivity extends BaseActivity implements View.OnClickLi
               Intent intent = new Intent(FetchAddressActivity.this, FinalAddressActivity.class);
               intent.putExtra(Constants.AddressConstants.ADDRESS, builder.toString());
               intent.putExtra(Constants.ORDER_ID, orderId);
-              intent.putExtra(Constants.DETAIL_OBJECT,getIntent().getParcelableArrayExtra(Constants.DETAIL_OBJECT));
+              intent.putExtra(Constants.DETAIL_OBJECT,checkOutItemArrayList);
               intent.putExtra(Constants.TOTAL_PRICE,getIntent().getStringExtra(Constants.TOTAL_PRICE));
               startActivity(intent);
               break;

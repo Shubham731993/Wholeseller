@@ -2,7 +2,7 @@
 <manifest package="abominable.com.wholeseller"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 
@@ -14,7 +14,9 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
 
-    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+    <meta-data
+      android:name="com.google.android.gms.version"
+      android:value="@integer/google_play_services_version"/>
 
     <activity
       android:name=".SplashScreen">
@@ -29,11 +31,7 @@
       android:name=".home.HomeActivity">
 
 
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
 
-        <category android:name="android.intent.category.DEFAULT"/>
-      </intent-filter>
     </activity>
 
     <activity
@@ -74,7 +72,16 @@
       android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
       android:windowSoftInputMode="stateHidden"/>
 
+    <activity
+      android:name=".MainActivity"
+      android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
+      android:windowSoftInputMode="stateHidden">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
 
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
     <activity
       android:name=".home.SearchScreen"
       android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
@@ -91,32 +98,32 @@
       android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
       android:windowSoftInputMode="stateHidden"/>
     <activity
-    android:name=".ticket.OrderTicketActivity"
-    android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
-    android:windowSoftInputMode="stateHidden"/>
+      android:name=".ticket.OrderTicketActivity"
+      android:configChanges="orientation|keyboardHidden|screenSize|screenSize"
+      android:windowSoftInputMode="stateHidden"/>
 
     <service
       android:name=".location.FetchAddressIntentService"
       android:exported="false"/>
-      <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="7da1d997e850df36ebb3d183be0bc9ea6df2c5d4" />
+    <meta-data
+      android:name="io.fabric.ApiKey"
+      android:value="7da1d997e850df36ebb3d183be0bc9ea6df2c5d4"/>
 
     <service android:name=".notification.service.MyFirebaseMessagingService">
       <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
       </intent-filter>
     </service>
 
     <service android:name=".notification.service.MyFirebaseInstanceIDService">
       <intent-filter>
-        <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+        <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
       </intent-filter>
     </service>
 
 
-    </application>
+  </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 </manifest>

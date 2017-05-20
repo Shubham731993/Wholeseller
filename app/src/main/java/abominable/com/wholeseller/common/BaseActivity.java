@@ -2,11 +2,16 @@ package abominable.com.wholeseller.common;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import abominable.com.wholeseller.R;
@@ -93,6 +98,27 @@ public class BaseActivity extends AppCompatActivity{
       });
       alertDialog.show();
     }
+  }
+
+
+
+  public void showSnackBar(Context context,CoordinatorLayout coordinatorLayout, String message) {
+    if (!isFinishing()) {
+      Snackbar snackbar = Snackbar
+          .make(coordinatorLayout, message, Snackbar.LENGTH_INDEFINITE)
+          .setAction("RETRY", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              retry();
+            }
+          });
+      snackbar.setActionTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+      snackbar.show();
+    }
+  }
+
+  public void retry() {
+    //Do nothing
   }
 
   @Override

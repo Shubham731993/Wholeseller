@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import abominable.com.wholeseller.BuildConfig;
+import abominable.com.wholeseller.MainActivity;
 import abominable.com.wholeseller.R;
 import abominable.com.wholeseller.WholeMartApplication;
 import abominable.com.wholeseller.common.BaseActivity;
@@ -33,12 +35,11 @@ import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholeSellerHttpClient;
-import abominable.com.wholeseller.home.HomeActivity;
 
 /**
  * Created by shubham.srivastava on 06/08/16.
  */
-public class WholeMartLoginActivity extends BaseActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class WholeMartLoginActivity extends BaseActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
 
   private GoogleApiClient mGoogleApiClient;
   private int RC_SIGN_IN = 100;
@@ -55,25 +56,22 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
     password = (EditText) findViewById(R.id.old_pass);
     loginButton.setOnClickListener(this);
     signUpButton.setOnClickListener(this);
-
-    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestScopes(new Scope(Scopes.PLUS_LOGIN))
-        .requestEmail()
-        .build();
-
     SignInButton signInButton = (SignInButton) findViewById(R.id.gmail_login);
     signInButton.setSize(SignInButton.SIZE_WIDE);
+    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestScopes(new Scope(Scopes.PLUS_LOGIN))
+        .requestServerAuthCode("849763543984-1isdesa9gdi6js980u2it3s0apqh693t.apps.googleusercontent.com")
+        .requestEmail()
+        .build();
     signInButton.setScopes(gso.getScopeArray());
     setGooglePlusButtonText(signInButton, "LOGIN WITH GOOGLE");
-
     mGoogleApiClient = new GoogleApiClient.Builder(this)
-        .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+        .enableAutoManage(this, this)
+        .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+        .addConnectionCallbacks(this)
+        .addOnConnectionFailedListener(this)
         .build();
-
     signInButton.setOnClickListener(this);
-
-
   }
 
   @Override
@@ -142,7 +140,7 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
                 WholeMartApplication.setValue(Constants.UserConstants.PHONE,jsonObject.getString(Constants.AddressConstants.PHONE));
               if (jsonObject.has(Constants.AUTH_KEY)) {
                 WholeMartApplication.setValue(Constants.UserConstants.AUTH_KEY, jsonObject.get(Constants.AUTH_KEY).toString());
-                Intent intent = new Intent(WholeMartLoginActivity.this, HomeActivity.class);
+                Intent intent = new Intent(WholeMartLoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
               } else {
@@ -155,7 +153,15 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
               showInfoDialog(null, getResources().getString(R.string.error));
             }
           } else {
-            hideBlockingProgress();
+            try {
+              hideBlockingProgress();
+              JSONObject jsonObject = new JSONObject(response);
+              if (jsonObject.has(Constants.MESSAGE)) {
+                showInfoDialog(null, jsonObject.getString(Constants.MESSAGE));
+              }
+            } catch (Exception e) {
+              Utility.reportException(e);
+            }
             showInfoDialog(null, getResources().getString(R.string.error));
           }
         }
@@ -192,12 +198,13 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
   }
 
   private void handleSignInResult(GoogleSignInResult result) {
+    Log.i("Google Login","handleSignInResult");
     if (result.isSuccess()) {
       hideBlockingProgress();
       GoogleSignInAccount acct = result.getSignInAccount();
       if (acct != null) {
         Intent intent = new Intent(WholeMartLoginActivity.this, EnterMobileNumberPage.class);
-        intent.putExtra(Constants.ENTER_NUMBER_FLOW,Constants.EnterNumberFlow.CREATE_ACCOUNT_FLOW);
+        intent.putExtra(Constants.ENTER_NUMBER_FLOW, Constants.EnterNumberFlow.CREATE_ACCOUNT_FLOW);
         WholeMartApplication.setValue(Constants.UserConstants.USERNAME, acct.getDisplayName());
         WholeMartApplication.setValue(Constants.UserConstants.USER_EMAIL, acct.getEmail());
         if (acct.getPhotoUrl() != null) {
@@ -224,5 +231,15 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
         return;
       }
     }
+  }
+
+  @Override
+  public void onConnected(@Nullable Bundle bundle) {
+    Log.i("Google Login","onConnected");
+  }
+
+  @Override
+  public void onConnectionSuspended(int i) {
+    Log.i("Google Login","onConnectionSuspended");
   }
 }

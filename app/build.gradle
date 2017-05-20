@@ -15,9 +15,16 @@ repositories {
 
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'androidKey'
+            keyPassword 'Shub@7393'
+            storeFile file('/Users/shubham.srivastava/Android Projects/WholeSeller/keystore.jks')
+            storePassword 'Shub@7393'
+        }
+    }
     compileSdkVersion Integer.parseInt(project.MOBILE_SDK_VERSION)
     buildToolsVersion project.MOBILE_BUILD_TOOLS_VERSION
-
     defaultConfig {
         applicationId "abominable.com.wholeseller"
         minSdkVersion Integer.parseInt(project.MOBILE_MIN_SDK_VERSION)
@@ -28,10 +35,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "APP_ENGINE_HOST", "\"52.35.72.19:8080/wholemart-1367/webapi\""
             buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://52.35.72.19:8080/wholemart-1367/webapi/imagebucket/\""
+            signingConfig signingConfigs.config
         }
         debug {
             minifyEnabled false
@@ -40,17 +49,20 @@ android {
             buildConfigField "String", "IMAGE_BUCKET_HOST", "\"http://52.35.72.19:8080/wholemart-1367/webapi/imagebucket/\""
         }
     }
+    buildToolsVersion '25.0.2'
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
     compile "com.android.support:support-v4:${MOBILE_SUPPORT_LIBRARY_VERSION}"
     compile "com.android.support:appcompat-v7:${MOBILE_SUPPORT_LIBRARY_VERSION}"
     compile "com.android.support:design:${MOBILE_SUPPORT_LIBRARY_VERSION}"
     compile "com.android.support:cardview-v7:${MOBILE_SUPPORT_LIBRARY_VERSION}"
     compile "com.android.support:recyclerview-v7:${MOBILE_SUPPORT_LIBRARY_VERSION}"
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar')
+    {
         transitive = true;
     }
     compile "com.google.android.gms:play-services-base:${MOBILE_GMS_LIBRARY_VERSION}"
@@ -60,9 +72,10 @@ dependencies {
     compile "com.google.android.gms:play-services-auth:${MOBILE_GMS_LIBRARY_VERSION}"
     compile "com.google.android.gms:play-services-gcm:${MOBILE_GMS_LIBRARY_VERSION}"
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
-    compile 'com.google.firebase:firebase-core:10.2.0'
-    compile 'com.google.firebase:firebase-messaging:10.2.0'
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-messaging:10.2.1'
     compile 'com.google.code.gson:gson:2.7'
+    compile 'de.hdodenhof:circleimageview:1.3.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

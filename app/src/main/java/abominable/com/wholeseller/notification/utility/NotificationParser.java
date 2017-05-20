@@ -3,10 +3,10 @@ package abominable.com.wholeseller.notification.utility;
 import android.content.Intent;
 import android.os.Bundle;
 
+import abominable.com.wholeseller.MainActivity;
 import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.detail.DetailActivity;
-import abominable.com.wholeseller.home.HomeActivity;
 
 
 /**
@@ -37,7 +37,7 @@ public class NotificationParser extends BaseActivity {
     }
 
     private void callHomeActivity() {
-        Intent intent = new Intent(NotificationParser.this, HomeActivity.class);
+        Intent intent = new Intent(NotificationParser.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -54,11 +54,11 @@ public class NotificationParser extends BaseActivity {
             if (intent != null) {
                 return intent;
             } else {
-                return new Intent(NotificationParser.this, HomeActivity.class);
+                return new Intent(NotificationParser.this, MainActivity.class);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new Intent(NotificationParser.this, HomeActivity.class);
+            return new Intent(NotificationParser.this, MainActivity.class);
         }
     }
 

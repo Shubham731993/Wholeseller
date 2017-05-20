@@ -1,6 +1,5 @@
 package abominable.com.wholeseller;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,15 +14,15 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import abominable.com.wholeseller.common.BaseActivity;
 import abominable.com.wholeseller.common.Constants;
-import abominable.com.wholeseller.home.HomeActivity;
 import abominable.com.wholeseller.location.WholeMartFetchLocationActivity;
 import abominable.com.wholeseller.login.WholeMartLoginActivity;
 
 /**
  * Created by shubham.srivastava on 24/07/16.
  */
-public class SplashScreen extends Activity {
+public class SplashScreen extends BaseActivity {
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,7 +101,7 @@ public class SplashScreen extends Activity {
       overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
       finish();
     } else {
-      final Intent homeIntent = new Intent(SplashScreen.this, HomeActivity.class);
+      final Intent homeIntent = new Intent(SplashScreen.this, MainActivity.class);
       homeIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(homeIntent);
       overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);

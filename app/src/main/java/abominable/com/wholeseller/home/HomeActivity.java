@@ -2,6 +2,7 @@ package abominable.com.wholeseller.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -39,6 +40,7 @@ public class HomeActivity extends BaseActivity
 
   private RecyclerView recyclerView;
   private ViewPager mVwPager;
+  private CoordinatorLayout coordinatorLayout;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class HomeActivity extends BaseActivity
 
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
-
+    coordinatorLayout= (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
     recyclerView = (RecyclerView) findViewById(R.id.item_list);
     GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
     layoutManager.setOrientation(GridLayoutManager.VERTICAL);
@@ -79,32 +81,36 @@ public class HomeActivity extends BaseActivity
   }
 
   private void callHomeApi() {
-    showProgress("Please Wait", false);
-    WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/get_all_genres", RequestMethod.GET);
-    wholeSellerHttpClient.setResponseListner(new ResponseListener() {
-      @Override
-      public void onResponse(int status, String response) {
-        if (status == 200) {
-          hideBlockingProgress();
-          try {
-            JSONArray jsonArray = new JSONArray(response);
-            HomeRecyclerView homeRecyclerView = new HomeRecyclerView(HomeActivity.this, jsonArray);
-            recyclerView.setAdapter(homeRecyclerView);
-          } catch (JSONException e) {
-            e.printStackTrace();
+    if(Utility.internetConnected()) {
+      showProgress("Please Wait", false);
+      WholeSellerHttpClient wholeSellerHttpClient = new WholeSellerHttpClient("/get_all_genres", RequestMethod.GET);
+      wholeSellerHttpClient.setResponseListner(new ResponseListener() {
+        @Override
+        public void onResponse(int status, String response) {
+          if (status == 200) {
             hideBlockingProgress();
-            showErrorDialog(null, getResources().getString(R.string.error));
-          }
+            try {
+              JSONArray jsonArray = new JSONArray(response);
+              HomeRecyclerView homeRecyclerView = new HomeRecyclerView(HomeActivity.this, jsonArray);
+              recyclerView.setAdapter(homeRecyclerView);
+            } catch (JSONException e) {
+              e.printStackTrace();
+              hideBlockingProgress();
+              showSnackBar(HomeActivity.this,coordinatorLayout,getString(R.string.error));
+            }
 
-        } else {
-          hideBlockingProgress();
-          showErrorDialog(null, getResources().getString(R.string.error));
+          } else {
+            hideBlockingProgress();
+            showSnackBar(HomeActivity.this,coordinatorLayout,getString(R.string.error));
+          }
         }
-      }
-    });
-    wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
-    wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
-    wholeSellerHttpClient.executeAsync();
+      });
+      wholeSellerHttpClient.setmHttpProtocol(Constants.HTTP);
+      wholeSellerHttpClient.setmHttpHost(BuildConfig.APP_ENGINE_HOST);
+      wholeSellerHttpClient.executeAsync();
+    }else {
+      showSnackBar(this,coordinatorLayout,getString(R.string.internet_connected));
+    }
   }
 
   @Override
@@ -196,4 +202,9 @@ public class HomeActivity extends BaseActivity
     }
   }
 
+  @Override
+  public void retry() {
+    super.retry();
+    callHomeApi();
+  }
 }

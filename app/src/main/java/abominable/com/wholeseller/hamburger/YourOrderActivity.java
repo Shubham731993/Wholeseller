@@ -19,6 +19,7 @@ import abominable.com.wholeseller.common.RequestMethod;
 import abominable.com.wholeseller.common.ResponseListener;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.common.WholeSellerHttpClient;
+import abominable.com.wholeseller.ticket.DisplayOrder;
 
 /**
  * Created by shubham.srivastava on 22/02/17.
@@ -29,7 +30,7 @@ public class YourOrderActivity extends BaseActivity {
   private RecyclerView recyclerView;
   private ProgressBar progressBar;
   private YourOrderAdapter yourOrderAdapter;
-  private ArrayList<HamburgerOrderItem> hamburgerOrderItems;
+  private ArrayList<DisplayOrder> displayOrders;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,9 +38,9 @@ public class YourOrderActivity extends BaseActivity {
     setContentView(R.layout.your_order);
     recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
     progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-    hamburgerOrderItems=new ArrayList<>();
+    displayOrders=new ArrayList<>();
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    yourOrderAdapter=new YourOrderAdapter(YourOrderActivity.this,hamburgerOrderItems);
+    yourOrderAdapter=new YourOrderAdapter(YourOrderActivity.this,displayOrders);
     recyclerView.setAdapter(yourOrderAdapter);
     showProgress();
     callOrderApi();
@@ -58,8 +59,8 @@ public class YourOrderActivity extends BaseActivity {
               hideProgress();
               JSONArray jsonArray = new JSONArray(response);
               for (int i=0;i<jsonArray.length();i++) {
-                HamburgerOrderItem hamburgerOrderItem = new HamburgerOrderItem(jsonArray.getJSONObject(i));
-                hamburgerOrderItems.add(hamburgerOrderItem);
+                DisplayOrder displayOrder = new DisplayOrder(jsonArray.getJSONObject(i));
+                displayOrders.add(displayOrder);
               }
               yourOrderAdapter.notifyDataSetChanged();
 
