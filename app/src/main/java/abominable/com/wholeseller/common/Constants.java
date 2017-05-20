@@ -54,6 +54,7 @@ public class Constants {
   public static final String REGISTRATION_COMPLETE = "reg_complete" ;
   public static final String SHARED_PREF = "shared_pref";
   public static final String PUSH_NOTIFICATION = "push";
+  public static final String GENRE_NAME = "genre_name";
 
   public static class DetailContants{
     public static final String GENRES="genres";

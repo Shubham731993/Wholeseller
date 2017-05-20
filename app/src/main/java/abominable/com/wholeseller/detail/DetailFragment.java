@@ -73,6 +73,9 @@ public class DetailFragment extends Fragment {
   }
 
   private void callGenresApi(String id) {
+    if(id.contains("+")){
+      id=id.replace("+","%20");
+    }
     ((DetailActivity)context).showProgress("Please Wait",false);
     WholeSellerHttpClient wholeSellerHttpClient =new WholeSellerHttpClient("/get_all_genres/"+id, RequestMethod.GET);
     wholeSellerHttpClient.setResponseListner(new ResponseListener() {

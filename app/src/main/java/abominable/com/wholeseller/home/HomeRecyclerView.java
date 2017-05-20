@@ -15,6 +15,7 @@ import org.json.JSONException;
 
 import abominable.com.wholeseller.MainActivity;
 import abominable.com.wholeseller.R;
+import abominable.com.wholeseller.common.Constants;
 import abominable.com.wholeseller.common.Utility;
 import abominable.com.wholeseller.detail.DetailActivity;
 
@@ -38,7 +39,7 @@ public class HomeRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
   }
 
   @Override
-  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+  public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
     HomeItemHolder homeItemHolder = (HomeItemHolder) holder;
     try {
       homeItemHolder.itemName.setText(genresList.getString(position));
@@ -62,6 +63,11 @@ public class HomeRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHold
       @Override
       public void onClick(View v) {
         final Intent homeIntent = new Intent(context, DetailActivity.class);
+        try {
+          homeIntent.putExtra(Constants.GENRE_NAME,genresList.getString(position));
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
         context.startActivity(homeIntent);
         ((MainActivity) context).overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
       }

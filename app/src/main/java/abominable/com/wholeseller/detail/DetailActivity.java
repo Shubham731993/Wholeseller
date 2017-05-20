@@ -49,6 +49,8 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
   private int currentItemPosition;
   private int checkOutCounterValue=0;
   private HashMap<String,Boolean> itemIds;
+  private String genreName="";
+  private int selectedPagerItem =0;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +60,9 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     tabLayout = (TabLayout) findViewById(R.id.tab_layout);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     checkOut = (Button) findViewById(R.id.checkout_button);
+    if(getIntent().hasExtra(Constants.GENRE_NAME)){
+      genreName=getIntent().getStringExtra(Constants.GENRE_NAME);
+    }
     orderId=WholeMartApplication.getValue(Constants.CURRENT_ORDER_ID,"");
     itemIds=new HashMap<>();
     checkOut.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +102,7 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
             tabsList = new JSONArray(response);
             setTabNames(tabsList);
             viewPager.setOffscreenPageLimit(tabsList.length());
+            viewPager.setCurrentItem(selectedPagerItem);
           } catch (JSONException e) {
             Utility.reportException(e);
             hideBlockingProgress();
@@ -118,6 +124,11 @@ public class DetailActivity extends BaseActivity implements AddToCartFragment.Pa
     for(int i=0;i<tabsList.length();i++){
       try {
         tabLayout.addTab(tabLayout.newTab().setText(tabsList.getString(i)));
+        if(!TextUtils.isEmpty(genreName)){
+          if(tabsList.getString(i).equalsIgnoreCase(genreName)){
+            selectedPagerItem =i;
+          }
+        }
       } catch (JSONException e) {
         e.printStackTrace();
       }
