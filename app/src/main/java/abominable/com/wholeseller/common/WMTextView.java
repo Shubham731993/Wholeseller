@@ -51,16 +51,16 @@ public class WMTextView extends TextView {
   private void init() {
     if (getTag() != null) {
       if (getTag().equals(getResources().getString(R.string.medium))) {
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Medium.ttf");
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/avenir-medium.ttf");
         setTypeface(tf);
       } else if (getTag().equals(getResources().getString(R.string.bold))) {
         final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Bold.ttf");
         setTypeface(tf);
       } else if (getTag().equals(getResources().getString(R.string.thin))) {
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Light.ttf");
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/avenir-light.ttf");
         setTypeface(tf);
       } else if (getTag().equals(getResources().getString(R.string.regular))) {
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Regular.ttf");
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/avenir-regular.otf");
         setTypeface(tf);
       } else if (getTag().equals(getResources().getString(R.string.light))) {
         final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), Constants.FONT_ROBOTO_LIGHT_TTF);
@@ -73,20 +73,20 @@ public class WMTextView extends TextView {
         setTypeface(tf);
         setPaintFlags(getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
       } else if (getTag().equals(getResources().getString(R.string.condensed_regular))) {
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Regular.ttf");
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/avenir-regular.otf");
         setTypeface(tf);
       } else if (getTag().equals(getResources().getString(R.string.condensed_light))) {
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Light.ttf");
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/avenir-light.ttf");
         setTypeface(tf);
       } else if (getTag().equals(getResources().getString(R.string.condensed_bold))) {
         final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Bold.ttf");
         setTypeface(tf);
       } else {
-        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Medium.ttf");
+        final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/avenir-medium.ttf");
         setTypeface(tf);
       }
     } else {
-      final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/Roboto-Medium.ttf");
+      final Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "font/avenir-medium.ttf");
       setTypeface(tf);
     }
   }

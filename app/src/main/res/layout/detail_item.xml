@@ -73,27 +73,24 @@
 
           </RelativeLayout>
 
-          <TextView
+          <abominable.com.wholeseller.common.WMTextView
             android:id="@+id/hotel_type_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:textStyle="bold"
             android:text="Pulses"
-            android:fontFamily="sans-serif-smallcaps"
+            android:tag="@string/regular"
             android:textColor="#8a000000"
             android:textSize="10sp"
             android:visibility="visible"/>
 
 
-          <TextView
+          <abominable.com.wholeseller.common.WMTextView
             android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-smallcaps"
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textStyle="bold"
+            android:tag="@string/medium"
             android:text="@string/dummy_resource_name"
             android:textColor="@color/flight_review_black"
             android:textSize="16sp"/>
@@ -105,12 +102,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <abominable.com.wholeseller.common.WMTextView
               android:id="@+id/market_price"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textStyle="bold"
-              android:fontFamily="sans-serif-smallcaps"
+              android:tag="@string/medium"
               android:layout_alignParentRight="true"
               android:layout_gravity="end"
               android:text="\u20B9140"
@@ -118,28 +114,26 @@
               android:textSize="14sp"/>
 
 
-            <TextView
+            <abominable.com.wholeseller.common.WMTextView
               android:layout_below="@+id/market_price"
               android:id="@+id/item_number"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="Click to add to cart"
-              android:textStyle="bold"
-              android:fontFamily="sans-serif-smallcaps"
+              android:tag="@string/regular"
               android:textColor="@color/logo_orange"
               android:textSize="14sp"/>
 
 
-            <TextView
+            <abominable.com.wholeseller.common.WMTextView
               android:layout_below="@+id/market_price"
               android:id="@+id/scratched_price"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textStyle="bold"
-              android:fontFamily="sans-serif-smallcaps"
               android:layout_alignParentRight="true"
               android:layout_gravity="end"
               android:text="\u20B9140"
+              android:tag="@string/medium"
               android:textColor="#000000"
               android:textSize="14sp"/>
           </RelativeLayout>

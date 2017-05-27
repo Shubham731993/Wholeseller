@@ -162,7 +162,6 @@ public class WholeMartLoginActivity extends BaseActivity implements View.OnClick
             } catch (Exception e) {
               Utility.reportException(e);
             }
-            showInfoDialog(null, getResources().getString(R.string.error));
           }
         }
       });

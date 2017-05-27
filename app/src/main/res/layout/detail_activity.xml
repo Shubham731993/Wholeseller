@@ -1,9 +1,9 @@
 <android.support.design.widget.CoordinatorLayout
   android:id="@+id/coordinatorLayout"
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  android:layout_height="match_parent">
 
   <android.support.design.widget.AppBarLayout
     android:id="@+id/appBarLayout"
@@ -14,29 +14,30 @@
 
     <android.support.design.widget.TabLayout
       android:id="@+id/tab_layout"
+      style="@style/Widget.Goibibo.HotelHomeTabLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/logo_orange"
+      android:minHeight="?attr/actionBarSize"
       app:tabGravity="center"
-      app:tabMode="fixed"
-      style="@style/Widget.Goibibo.HotelHomeTabLayout"
-      android:minHeight="?attr/actionBarSize"/>
+      app:tabMode="fixed"/>
   </android.support.design.widget.AppBarLayout>
 
-  <android.support.v4.view.ViewPager
-    android:id="@+id/view_pager"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+   <android.support.v4.view.ViewPager
+      android:id="@+id/view_pager"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-  <Button
-    android:id="@+id/checkout_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/white"
-    android:layout_gravity="bottom"
-    android:text="Checkout(0)"
-    android:background="@color/logo_orange"
-    android:layout_alignParentBottom="true"/>
+    <Button
+      android:id="@+id/checkout_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      android:background="@color/logo_orange"
+      android:text="Checkout(0)"
+      android:textColor="@color/white"/>
+
+
 
 </android.support.design.widget.CoordinatorLayout>

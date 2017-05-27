@@ -18,12 +18,11 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="@string/email"
-      android:textStyle="bold"
       android:imeOptions="actionNext"
       android:inputType="textEmailAddress"
       android:selectAllOnFocus="true"
       android:textColor="@color/flight_review_black"
-      android:typeface="monospace"/>
+      android:textStyle="bold"/>
   </android.support.design.widget.TextInputLayout>
 
   <android.support.design.widget.TextInputLayout
@@ -36,16 +35,15 @@
 
     <EditText
       android:id="@+id/old_pass"
-      android:textStyle="bold"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="@string/password"
       android:imeOptions="actionNext"
       android:inputType="textPassword"
-      android:typeface="monospace"/>
+      android:textStyle="bold"/>
   </android.support.design.widget.TextInputLayout>
 
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/login_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -54,35 +52,20 @@
     android:background="@drawable/translucent_ripple"
     android:gravity="center"
     android:padding="10dp"
+    android:tag="@string/medium"
     android:text="@string/login"
-    android:textColor="@color/white"
-    android:typeface="monospace"/>
+    android:textColor="@color/white"/>
 
 
   <com.google.android.gms.common.SignInButton
     android:id="@+id/gmail_login"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_below="@id/login_button"
-    android:layout_marginTop="20dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal" />
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="20dp"/>
 
-
-<!--  <TextView
-    android:id="@+id/facebook_login"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/gmail_login"
-    android:layout_marginTop="20dp"
-    android:background="@drawable/translucent_ripple"
-    android:gravity="center"
-    android:padding="10dp"
-    android:text="@string/login_with_facebook"
-    android:textColor="@color/white"
-    android:textSize="20sp"
-    android:typeface="monospace"/>-->
-
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/need_an_account"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -90,12 +73,12 @@
     android:layout_marginTop="60dp"
     android:gravity="center"
     android:padding="10dp"
+    android:tag="@string/regular"
     android:text="@string/need_an_account"
     android:textColor="@color/logo_orange"
-    android:textSize="20sp"
-    android:typeface="monospace"/>
+    android:textSize="20sp"/>
 
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/sign_up"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -104,9 +87,9 @@
     android:background="@drawable/translucent_ripple"
     android:gravity="center"
     android:padding="10dp"
+    android:tag="@string/medium"
     android:text="@string/sign_up_now"
-    android:textColor="@color/white"
-    android:typeface="monospace"/>
+    android:textColor="@color/white"/>
 
 
 </RelativeLayout>

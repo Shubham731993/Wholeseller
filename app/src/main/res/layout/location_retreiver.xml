@@ -50,7 +50,7 @@
     android:padding="10dp"
     android:text="@string/use_current_location"
     android:textColor="@color/white"
-    android:tag="@string/light"/>
+    android:tag="@string/medium"/>
   <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/or_text"
     android:layout_centerHorizontal="true"
@@ -75,7 +75,7 @@
     android:padding="10dp"
     android:text="@string/enter_location_manually"
     android:textColor="@color/white"
-    android:tag="@string/light"/>
+    android:tag="@string/medium"/>
 
   <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/skip"
@@ -85,7 +85,7 @@
     android:layout_height="wrap_content"
     android:textColor="@color/logo_orange"
     android:text="@string/skip_for_now"
-    android:tag="@string/bold"
+    android:tag="@string/regular"
     android:layout_marginTop="30dp"
     />
 
