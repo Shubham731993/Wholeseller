@@ -20,7 +20,7 @@
       android:layout_height="wrap_content"
       android:fontFamily="sans-serif-smallcaps"
       android:text="Your order id :"
-      android:textColor="@color/flight_review_black"
+      android:textColor="@color/review_black"
       android:textSize="10sp"/>
 
     <TextView
@@ -30,7 +30,7 @@
       android:layout_toEndOf="@+id/order_text"
       android:layout_toRightOf="@+id/order_text"
       android:text="100283092743972409"
-      android:textColor="@color/flight_review_black"
+      android:textColor="@color/review_black"
       android:textSize="10sp"/>
 
     <TextView
@@ -64,6 +64,6 @@
     android:layout_width="match_parent"
     android:layout_height="0.5dp"
     android:layout_below="@+id/layout"
-    android:background="@color/flight_review_black"/>
+    android:background="@color/review_black"/>
 
 </RelativeLayout>

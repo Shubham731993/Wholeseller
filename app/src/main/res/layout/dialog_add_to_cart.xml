@@ -55,7 +55,7 @@
       android:maxLength="10"
       android:paddingRight="40dp"
       android:singleLine="true"
-      android:textColor="@color/flight_review_black"
+      android:textColor="@color/review_black"
       android:textColorHint="@color/otp_edtbox_hint_color"
       android:textSize="20sp"/>
 

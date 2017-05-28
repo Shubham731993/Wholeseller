@@ -4,13 +4,13 @@
   <color name="colorPrimaryDark">#10163a</color>
   <color name="colorAccent">#2f68ad</color>
   <color name="l_grey">#d8dede</color>
-  <color name="flight_review_black">#de000000</color>
+  <color name="review_black">#de000000</color>
   <color name="shade_grey">#8a000000</color>
   <color name="transparent">#00000000</color>
   <color name="logo_orange">#2f68ad</color>
   <color name="otp_edtbox_hint_color">#c7c7cd</color>
   <color name="grey">#999999</color>
-  <color name="flight_home_grey">#8a8a8a</color>
+  <color name="home_grey">#8a8a8a</color>
   <color name="white">#fff</color>
   <color name="toolbar_color">#2f68ad</color>
   <color name="google">#dd4b39</color>
@@ -42,5 +42,6 @@
   <color name="tabTheme">#10163a</color>
   <color name="separator">#334b4d52</color>
   <color name="circle_image_border">#e3e3e3</color>
+  <color name="yellow">#fff59d</color>
 
 </resources>

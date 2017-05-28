@@ -3,6 +3,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
                 android:padding="40dp"
                 tools:context=".SplashScreen">
@@ -16,7 +17,7 @@
       android:id="@+id/logo"
       android:layout_width="100dp"
       android:layout_height="100dp"
-      android:src="@drawable/wholemart_logo"/>
+      app:srcCompat="@drawable/wholemart_logo"/>
 
     <abominable.com.wholeseller.common.WMTextView
       android:layout_alignParentBottom="true"

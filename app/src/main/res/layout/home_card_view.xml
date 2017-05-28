@@ -34,7 +34,7 @@
     android:maxWidth="64dp"
     android:maxLines="2"
     android:text="Dry Fruits"
-    android:textColor="@color/flight_review_black"
+    android:textColor="@color/review_black"
     android:textSize="12sp"/>
 </RelativeLayout>
 

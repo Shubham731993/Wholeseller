@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:tag="@string/medium"
             android:text="@string/dummy_resource_name"
-            android:textColor="@color/flight_review_black"
+            android:textColor="@color/review_black"
             android:textSize="16sp"/>
 
 
@@ -110,7 +110,7 @@
               android:layout_alignParentRight="true"
               android:layout_gravity="end"
               android:text="\u20B9140"
-              android:textColor="@color/flight_home_grey"
+              android:textColor="@color/home_grey"
               android:textSize="14sp"/>
 
 

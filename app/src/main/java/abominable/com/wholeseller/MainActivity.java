@@ -7,10 +7,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
-import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.HomeData,
   private HomeFragment homeFragment;
   private YourOrderFragment yourOrderFragment;
   private ProfileFragment profileFragment;
-  private JSONArray homeData;
+  private JSONObject homeData;
   private ArrayList<DisplayOrder> displayOrders;
   private CoordinatorLayout coordinatorLayout;
 
@@ -97,13 +97,13 @@ public class MainActivity extends BaseActivity implements HomeFragment.HomeData,
   }
 
   @Override
-  public JSONArray getHomeData() {
+  public JSONObject getHomeData() {
     return homeData;
   }
 
   @Override
-  public void setHomeData(JSONArray jsonArray) {
-    homeData = jsonArray;
+  public void setHomeData(JSONObject jsonObject) {
+    homeData = jsonObject;
   }
 
   @Override

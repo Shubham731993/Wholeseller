@@ -87,7 +87,7 @@
           android:padding="8dp"
           android:selectAllOnFocus="true"
           android:singleLine="true"
-          android:textColor="@color/flight_review_black"
+          android:textColor="@color/review_black"
           android:textColorHint="@color/shade_grey"
           android:textSize="16sp"/>
       </android.support.design.widget.TextInputLayout>
@@ -115,7 +115,7 @@
             android:typeface="monospace"
             android:padding="8dp"
             android:singleLine="true"
-            android:textColor="@color/flight_review_black"
+            android:textColor="@color/review_black"
             android:textColorHint="@color/shade_grey"
             android:textSize="16sp"/>
         </android.support.design.widget.TextInputLayout>
@@ -139,7 +139,7 @@
           android:padding="8dp"
           android:singleLine="true"
           android:typeface="monospace"
-          android:textColor="@color/flight_review_black"
+          android:textColor="@color/review_black"
           android:textColorHint="@color/shade_grey"
           android:textSize="16sp"/>
       </android.support.design.widget.TextInputLayout>
@@ -161,7 +161,7 @@
           android:padding="8dp"
           android:singleLine="true"
           android:typeface="monospace"
-          android:textColor="@color/flight_review_black"
+          android:textColor="@color/review_black"
           android:textColorHint="@color/shade_grey"
           android:textSize="16sp"/>
       </android.support.design.widget.TextInputLayout>

@@ -21,7 +21,7 @@
       android:imeOptions="actionNext"
       android:inputType="textEmailAddress"
       android:selectAllOnFocus="true"
-      android:textColor="@color/flight_review_black"
+      android:textColor="@color/review_black"
       android:textStyle="bold"/>
   </android.support.design.widget.TextInputLayout>
 

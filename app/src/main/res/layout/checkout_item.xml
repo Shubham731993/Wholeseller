@@ -103,7 +103,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="@string/dummy_resource_name"
-            android:textColor="@color/flight_review_black"
+            android:textColor="@color/review_black"
             android:textSize="16sp"/>
 
 

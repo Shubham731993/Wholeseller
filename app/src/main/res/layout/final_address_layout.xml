@@ -133,7 +133,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text=""
-            android:textColor="@color/flight_review_black"
+            android:textColor="@color/review_black"
             android:textSize="12sp"/>
 
         </RelativeLayout>
@@ -237,7 +237,7 @@
             android:fontFamily="sans-serif-smallcaps"
             android:padding="10dp"
             android:text="9654887711"
-            android:textColor="@color/flight_review_black"
+            android:textColor="@color/review_black"
             android:textSize="12sp"/>
 
         </RelativeLayout>
@@ -299,7 +299,7 @@
       <TextView
         android:id="@+id/header"
         android:text="Select Payment Modes"
-        android:textColor="@color/flight_review_black"
+        android:textColor="@color/review_black"
         android:textSize="20sp"
         android:fontFamily="sans-serif-smallcaps"
         android:layout_width="wrap_content"
