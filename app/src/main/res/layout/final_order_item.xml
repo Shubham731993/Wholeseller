@@ -32,16 +32,16 @@
       android:layout_height="wrap_content">
 
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:id="@+id/item_quantity"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="25 kgs"
       android:textColor="@color/black"
       android:textSize="15sp"
-      android:fontFamily="sans-serif-smallcaps"/>
+      android:tag="@string/light"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:layout_toRightOf="@+id/item_quantity"
       android:layout_toEndOf="@+id/item_quantity"
       android:layout_width="wrap_content"
@@ -51,9 +51,9 @@
       android:id="@+id/multiply"
       android:textColor="@color/black"
       android:textSize="15sp"
-      android:fontFamily="sans-serif-smallcaps"/>
+      android:tag="@string/light"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:layout_toRightOf="@+id/multiply"
       android:layout_toEndOf="@+id/multiply"
       android:id="@+id/item_price"
@@ -63,16 +63,16 @@
       android:text="\u20B9144"
       android:textColor="@color/black"
       android:textSize="15sp"
-      android:fontFamily="sans-serif-smallcaps"/>
+      android:tag="@string/light"/>
 
     </RelativeLayout>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:layout_centerVertical="true"
       android:id="@+id/item_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:fontFamily="sans-serif-smallcaps"
+     android:tag="@string/regular"
       android:text="Masoor Dal"
       android:layout_alignParentLeft="true"
       android:layout_alignParentStart="true"

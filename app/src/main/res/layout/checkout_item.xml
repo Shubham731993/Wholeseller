@@ -83,25 +83,25 @@
 
           </RelativeLayout>
 
-          <TextView
+          <abominable.com.wholeseller.common.WMTextView
             android:id="@+id/hotel_type_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:text="PULSES"
-            android:fontFamily="sans-serif-smallcaps"
+            android:tag="@string/regular"
             android:textColor="#8a000000"
             android:textSize="10sp"
             android:visibility="visible"/>
 
 
-          <TextView
+          <abominable.com.wholeseller.common.WMTextView
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-smallcaps"
+            android:tag="@string/regular"
             android:text="@string/dummy_resource_name"
             android:textColor="@color/review_black"
             android:textSize="16sp"/>
@@ -114,23 +114,23 @@
             android:layout_height="wrap_content">
 
 
-            <TextView
+            <abominable.com.wholeseller.common.WMTextView
               android:id="@+id/item_number"
               android:layout_width="wrap_content"
               android:layout_marginTop="5dp"
               android:layout_height="wrap_content"
-              android:fontFamily="sans-serif-smallcaps"
               android:text="Quantity : 100kgs"
+              android:tag="@string/regular"
               android:textColor="@color/logo_orange"
               android:textSize="14sp"/>
 
-            <TextView
+            <abominable.com.wholeseller.common.WMTextView
               android:layout_alignParentRight="true"
               android:id="@+id/item_price"
               android:layout_width="wrap_content"
               android:layout_marginTop="5dp"
-              android:fontFamily="sans-serif-smallcaps"
               android:layout_height="wrap_content"
+              android:tag="@string/medium"
               android:text="\u20B91300/kg"
               android:textColor="@color/logo_orange"
               android:textSize="14sp"/>
