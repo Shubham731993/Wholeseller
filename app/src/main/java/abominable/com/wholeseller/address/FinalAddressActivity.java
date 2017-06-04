@@ -218,6 +218,7 @@ public class FinalAddressActivity extends BaseActivity implements View.OnClickLi
             DisplayOrder displayOrder = new DisplayOrder(new JSONObject(response));
             Intent intent=new Intent(FinalAddressActivity.this, OrderTicketActivity.class);
             intent.putExtra(Constants.ORDER,displayOrder);
+            intent.putExtra(Constants.ORDER_FLOW,Constants.OrderFlow.ORDER_POST);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             Toast.makeText(FinalAddressActivity.this, "Your order has been generated", Toast.LENGTH_SHORT).show();

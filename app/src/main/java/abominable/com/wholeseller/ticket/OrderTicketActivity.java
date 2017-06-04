@@ -25,6 +25,7 @@ public class OrderTicketActivity extends BaseActivity {
 
   private DisplayOrder displayOrder;
   private RecyclerView recyclerView;
+  private String orderFlow;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class OrderTicketActivity extends BaseActivity {
     setContentView(R.layout.final_order);
     if (getIntent() != null) {
       displayOrder = getIntent().getParcelableExtra(Constants.ORDER);
+      orderFlow = getIntent().getStringExtra(Constants.ORDER_FLOW);
     } else {
       showErrorDialog(null, getString(R.string.error));
     }
@@ -97,7 +99,9 @@ public class OrderTicketActivity extends BaseActivity {
   @Override
   public void onBackPressed() {
     super.onBackPressed();
-    Intent intent=new Intent(OrderTicketActivity.this, MainActivity.class);
-    startActivity(intent);
+    if(orderFlow.equalsIgnoreCase(Constants.OrderFlow.ORDER_POST)) {
+      Intent intent = new Intent(OrderTicketActivity.this, MainActivity.class);
+      startActivity(intent);
+    }
   }
 }

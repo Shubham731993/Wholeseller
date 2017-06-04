@@ -55,6 +55,7 @@ public class Constants {
   public static final String SHARED_PREF = "shared_pref";
   public static final String PUSH_NOTIFICATION = "push";
   public static final String GENRE_NAME = "genre_name";
+  public static final String ORDER_FLOW = "orderFlow";
 
   public static class DetailContants{
     public static final String GENRES="genres";
@@ -90,6 +91,12 @@ public class Constants {
   public static class EnterNumberFlow{
     public static final String CREATE_ACCOUNT_FLOW="createAccountFlow";
     public static final String CHANGE_NUMBER_FLOW="changeNumberFlow";
+
+  }
+
+  public static class OrderFlow{
+    public static final String ORDER_POST="post";
+    public static final String ORDER_SHOW="show";
 
   }
 

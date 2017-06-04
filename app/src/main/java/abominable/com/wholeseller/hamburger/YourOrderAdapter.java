@@ -47,6 +47,7 @@ public class YourOrderAdapter extends RecyclerView.Adapter {
       public void onClick(View v) {
         Intent intent=new Intent(context, OrderTicketActivity.class);
         intent.putExtra(Constants.ORDER,displayOrderItems.get(position));
+        intent.putExtra(Constants.ORDER_FLOW,Constants.OrderFlow.ORDER_SHOW);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intent);
       }

@@ -46,7 +46,8 @@ public class DisplayOrder implements Parcelable{
         date = jsonObject.getString(Constants.DATE);
       }
       if (jsonObject.has(Constants.ITEMS_ORDER)) {
-        jsonArray = jsonObject.getJSONArray(Constants.ITEMS_ORDER);
+        JSONObject jsonObject2 = jsonObject.getJSONObject(Constants.ITEMS_ORDER);
+        jsonArray = jsonObject2.getJSONArray(Constants.ITEMS_ORDER);
         for (int i = 0; i < jsonArray.length(); i++) {
           JSONObject jsonObject1 = jsonArray.getJSONObject(i);
           CheckOutItem checkOutItem = new CheckOutItem(jsonObject1);
