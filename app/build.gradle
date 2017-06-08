@@ -29,8 +29,8 @@ android {
         applicationId "abominable.com.wholeseller"
         minSdkVersion Integer.parseInt(project.MOBILE_MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(project.MOBILE_SDK_VERSION)
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(project.MOBILE_VERSION_CODE)
+        versionName project.MOBILE_VERSION_NAME
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
