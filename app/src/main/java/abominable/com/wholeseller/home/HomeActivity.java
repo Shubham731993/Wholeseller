@@ -50,7 +50,7 @@ public class HomeActivity extends BaseActivity
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setTitle(R.string.home);
-
+    getSupportActionBar().setSubtitle(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""));
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -60,7 +60,7 @@ public class HomeActivity extends BaseActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
     coordinatorLayout= (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-    recyclerView = (RecyclerView) findViewById(R.id.item_list);
+    //recyclerView = (RecyclerView) findViewById(R.id.item_list);
     GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
     layoutManager.setOrientation(GridLayoutManager.VERTICAL);
     recyclerView.setLayoutManager(layoutManager);
@@ -75,7 +75,7 @@ public class HomeActivity extends BaseActivity
         callSearchScreen();
       }
     });
-    mVwPager.setAdapter(new CarousalImageAdapter(this));
+    //mVwPager.setAdapter(new CarousalImageAdapter(this));
     mPageIndicator.setViewPager(mVwPager);
     callHomeApi();
   }

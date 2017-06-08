@@ -27,22 +27,22 @@
     android:orientation="vertical"
     android:visibility="visible">
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:id="@+id/toolbar_custom_title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:maxLines="1"
       android:singleLine="true"
-      android:fontFamily="sans-serif-smallcaps"
+      android:tag="@string/medium"
       android:textColor="@android:color/white"
       android:textSize="16sp"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:id="@+id/toolbar_custom_sub_title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:maxLines="1"
-      android:fontFamily="sans-serif-smallcaps"
+      android:tag="@string/regular"
       android:singleLine="true"
       android:textColor="@color/base_toolbar_subtitle"
       android:textSize="12sp"/>

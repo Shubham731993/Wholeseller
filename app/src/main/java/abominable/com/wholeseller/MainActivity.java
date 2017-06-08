@@ -18,6 +18,8 @@ import abominable.com.wholeseller.botttomNavigation.HomeFragment;
 import abominable.com.wholeseller.botttomNavigation.ProfileFragment;
 import abominable.com.wholeseller.botttomNavigation.YourOrderFragment;
 import abominable.com.wholeseller.common.BaseActivity;
+import abominable.com.wholeseller.common.Constants;
+import abominable.com.wholeseller.common.WMTextView;
 import abominable.com.wholeseller.ticket.DisplayOrder;
 
 /**
@@ -42,7 +44,9 @@ public class MainActivity extends BaseActivity implements HomeFragment.HomeData,
     coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
     final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-    getSupportActionBar().setTitle(R.string.home);
+    getSupportActionBar().setTitle("");
+    final WMTextView title= (WMTextView) toolbar.findViewById(R.id.toolbar_custom_title);
+    final WMTextView subtitle= (WMTextView) toolbar.findViewById(R.id.toolbar_custom_sub_title);
     bottomNavigationView.setOnNavigationItemSelectedListener
         (new BottomNavigationView.OnNavigationItemSelectedListener() {
           @Override
@@ -55,7 +59,8 @@ public class MainActivity extends BaseActivity implements HomeFragment.HomeData,
                 }
                 selectedFragment = homeFragment;
                 currentPosition = 0;
-                toolbar.setTitle("Home");
+                title.setText("Home");
+                subtitle.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""));
                 break;
               case R.id.orders:
                 if (yourOrderFragment == null) {
@@ -63,7 +68,12 @@ public class MainActivity extends BaseActivity implements HomeFragment.HomeData,
                 }
                 selectedFragment = yourOrderFragment;
                 currentPosition = 1;
-                toolbar.setTitle("Orders");
+                title.setText("Orders");
+                if(displayOrders!=null) {
+                  subtitle.setText(displayOrders.size()+" Orders");
+                }else {
+                  subtitle.setText("");
+                }
                 break;
               case R.id.profile:
                 if (profileFragment == null) {
@@ -71,7 +81,8 @@ public class MainActivity extends BaseActivity implements HomeFragment.HomeData,
                 }
                 selectedFragment = profileFragment;
                 currentPosition = 2;
-                toolbar.setTitle("Profile");
+                title.setText("Profile");
+                subtitle.setText("");
                 break;
             }
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -84,12 +95,22 @@ public class MainActivity extends BaseActivity implements HomeFragment.HomeData,
     switch (currentPosition) {
       case 2:
         transaction.replace(R.id.frame_layout, ProfileFragment.newInstance());
+        title.setText("Profile");
+        subtitle.setText("");
         break;
       case 1:
         transaction.replace(R.id.frame_layout, YourOrderFragment.newInstance());
+        title.setText("Orders");
+        if(displayOrders!=null) {
+          subtitle.setText(displayOrders.size()+" Orders");
+        }else {
+          subtitle.setText("");
+        }
         break;
       case 0:
         transaction.replace(R.id.frame_layout, HomeFragment.newInstance());
+        title.setText("Home");
+        subtitle.setText(WholeMartApplication.getValue(Constants.UserConstants.USER_LOCATION,""));
         break;
     }
     bottomNavigationView.getMenu().getItem(currentPosition).setChecked(true);

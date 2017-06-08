@@ -43,17 +43,18 @@ import abominable.com.wholeseller.home.SearchScreen;
 
 public class HomeFragment extends BaseFragment {
 
-  //private RecyclerView recyclerView;
   private ViewPager mVwPager;
   private CoordinatorLayout coordinatorLayout;
   private HomeData homeData;
   private ProgressBar progressBar;
-  private JSONArray homeItems;
-
+  private JSONArray genreItems;
+  private List<String> carouselItems=new ArrayList<>();
   ExpandableListAdapter listAdapter;
   ExpandableListView expListView;
   List<String> listDataHeader;
   HashMap<String, List<ChildData>> listDataChild;
+  private CirclePageIndicator mPageIndicator;
+  private CarousalImageAdapter carousalImageAdapter;
 
   public static HomeFragment newInstance() {
     HomeFragment fragment = new HomeFragment();
@@ -69,7 +70,6 @@ public class HomeFragment extends BaseFragment {
 
   public interface HomeData {
     JSONObject getHomeData();
-
     void setHomeData(JSONObject jsonObject);
   }
 
@@ -91,9 +91,22 @@ public class HomeFragment extends BaseFragment {
             try {
               JSONObject jsonObject = new JSONObject(response);
               homeData.setHomeData(jsonObject);
+              if (jsonObject.has("carouselImage")) {
+                mVwPager.setVisibility(View.VISIBLE);
+                mPageIndicator.setVisibility(View.VISIBLE);
+                JSONArray jsonArray=jsonObject.getJSONArray("carouselImage");
+                for (int i=0;i<jsonArray.length();i++) {
+                  carouselItems.add(jsonArray.getJSONObject(i).getString("imagePath"));
+                }
+                carousalImageAdapter.notifyDataSetChanged();
+              }else {
+                mVwPager.setVisibility(View.GONE);
+                mPageIndicator.setVisibility(View.GONE);
+
+              }
               if (jsonObject.has("homeItems")) {
-                homeItems=jsonObject.getJSONArray("homeItems");
-                prepareListData(homeItems);
+                genreItems =jsonObject.getJSONArray("homeItems");
+                prepareGenreData(genreItems);
               }
             } catch (JSONException e) {
               e.printStackTrace();
@@ -180,7 +193,7 @@ public class HomeFragment extends BaseFragment {
     layoutManager.setOrientation(GridLayoutManager.VERTICAL);
     recyclerView.setLayoutManager(layoutManager);*/
     mVwPager = (ViewPager) view.findViewById(R.id.view_pager);
-    CirclePageIndicator mPageIndicator = (CirclePageIndicator) view.findViewById(R.id.pager_indicator);
+    mPageIndicator = (CirclePageIndicator) view.findViewById(R.id.pager_indicator);
     final CardView searchCard = (CardView) view.findViewById(R.id.search_card);
     searchCard.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -188,14 +201,16 @@ public class HomeFragment extends BaseFragment {
         callSearchScreen();
       }
     });
-    mVwPager.setAdapter(new CarousalImageAdapter(mContext));
-    mPageIndicator.setViewPager(mVwPager);
     JSONObject jsonObject = homeData.getHomeData();
     try {
-      if (jsonObject != null && jsonObject.has("homeItems")) {
-        homeItems=jsonObject.getJSONArray("homeItems");
-        prepareListData(homeItems);
+      if (jsonObject != null && jsonObject.has("genreItems")) {
+        genreItems =jsonObject.getJSONArray("genreItems");
+        prepareGenreData(genreItems);
       } else {
+          carouselItems.clear();
+          carousalImageAdapter = new CarousalImageAdapter(carouselItems, mContext);
+          mVwPager.setAdapter(carousalImageAdapter);
+          mPageIndicator.setViewPager(mVwPager);
         callHomeApi();
       }
     } catch (JSONException e) {
@@ -206,8 +221,8 @@ public class HomeFragment extends BaseFragment {
   private void callDetailActivity(int groupPosition) {
     try {
       final Intent intent = new Intent(mContext, DetailActivity.class);
-      if(homeItems!=null && homeItems.getJSONObject(groupPosition)!=null && homeItems.getJSONObject(groupPosition).has("title"))
-        intent.putExtra(Constants.GENRE_NAME,homeItems.getJSONObject(groupPosition).getString("title"));
+      if(genreItems !=null && genreItems.getJSONObject(groupPosition)!=null && genreItems.getJSONObject(groupPosition).has("title"))
+        intent.putExtra(Constants.GENRE_NAME, genreItems.getJSONObject(groupPosition).getString("title"));
       mContext.startActivity(intent);
       ((MainActivity) mContext).overridePendingTransition(R.anim.fragment_slide_in_right, R.anim.fragment_slide_out_left);
     } catch (JSONException e) {
@@ -226,7 +241,7 @@ public class HomeFragment extends BaseFragment {
   }
 
 
-  private void prepareListData(JSONArray jsonArray) {
+  private void prepareGenreData(JSONArray jsonArray) {
     try {
       listDataHeader = new ArrayList<>();
       listDataChild = new HashMap<>();

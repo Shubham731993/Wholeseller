@@ -43,5 +43,6 @@
   <color name="separator">#334b4d52</color>
   <color name="circle_image_border">#e3e3e3</color>
   <color name="yellow">#fff59d</color>
+  <color name="light_yellow">#fff9c4</color>
 
 </resources>

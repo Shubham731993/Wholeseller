@@ -14,37 +14,39 @@
     android:padding="16dp">
 
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:id="@+id/order_text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:fontFamily="sans-serif-smallcaps"
+      android:tag="@string/medium"
       android:text="Your order id :"
       android:textColor="@color/review_black"
-      android:textSize="10sp"/>
+      android:textSize="12sp"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:id="@+id/order_id"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_toEndOf="@+id/order_text"
       android:layout_toRightOf="@+id/order_text"
       android:text="100283092743972409"
+      android:tag="@string/regular"
       android:textColor="@color/review_black"
+      android:layout_marginTop="2dp"
       android:textSize="10sp"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:id="@+id/date"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/order_text"
       android:layout_marginTop="20dp"
       android:text="20/07/2017"
-      android:textColor="@color/logo_orange"
-      android:textSize="16sp"
-      android:textStyle="bold"/>
+      android:tag="@string/regular"
+      android:textColor="@color/sky_blue"
+      android:textSize="16sp"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:id="@+id/price"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -53,9 +55,9 @@
       android:layout_below="@+id/order_text"
       android:layout_marginTop="20dp"
       android:text="\u20B91500"
-      android:textColor="@color/logo_orange"
-      android:textSize="16sp"
-      android:textStyle="bold"/>
+      android:tag="@string/regular"
+      android:textColor="@color/sky_blue"
+      android:textSize="16sp"/>
 
 
   </RelativeLayout>
