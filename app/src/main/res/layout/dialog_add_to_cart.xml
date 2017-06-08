@@ -10,30 +10,28 @@
   android:padding="20dp">
 
 
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:fontFamily="sans-serif-medium"
     android:gravity="left"
     android:padding="10dp"
+    android:tag="@string/medium"
     android:text="Arhar ki Daal"
     android:textColor="@color/logo_orange"
-    android:textSize="20sp"
-    android:textStyle="bold"/>
+    android:textSize="20sp"/>
 
-  <TextView
+  <abominable.com.wholeseller.common.WMTextView
     android:id="@+id/price"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:fontFamily="sans-serif-medium"
     android:gravity="right"
     android:padding="10dp"
     android:text="\u20b9120"
+    android:tag="@string/medium"
     android:textColor="@color/logo_orange"
-    android:textSize="20sp"
-    android:textStyle="bold"/>
+    android:textSize="20sp"/>
 
 
   <RelativeLayout
@@ -59,12 +57,13 @@
       android:textColorHint="@color/otp_edtbox_hint_color"
       android:textSize="20sp"/>
 
-    <TextView
+    <abominable.com.wholeseller.common.WMTextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:layout_marginTop="20dp"
       android:text="kgs"
+      android:tag="@string/regular"
       android:textColor="@color/otp_edtbox_hint_color"
       android:textSize="18sp"/>
 
